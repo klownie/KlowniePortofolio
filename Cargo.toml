@@ -1,0 +1,15 @@
+[package]
+name = "AxumHtmxAskamaPortofolioWebsite"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7.7"
+axum-htmx = "0.6.0"
+askama = "0.12.1"
+askama_axum = "0.4.0"
+tokio = { version = "1.0", features = ["full"] }
+tracing-subscriber = "0.3.18"
+tracing = "0.1.40"
+turf = "0.9.3"
+log = "0.4.22"
