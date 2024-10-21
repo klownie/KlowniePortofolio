@@ -1,0 +1,70 @@
+@import "Twilight";
+
+@font-face {
+  font-family: "Mononoki";
+  font-weight: 400;
+  src: url("/assets/fonts/mononoki-Regular.woff2") format("woff2"),
+  url("/assets/fonts/mononoki-Regular.woff") format("woff");
+}
+
+pre {
+  color: hsl(48, 100%, 50%);
+}
+
+body {
+  background-color: $background;
+  font-family: "Mononoki", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: $color_12;
+}
+
+.socials {
+  text-align: center;
+  color: $color_07;
+}
+
+.masonry {
+  --gap: clamp(1rem, 5vmin, 1rem);
+  columns: 300px;
+  max-width: 960px;
+  margin: 5rem auto;
+}
+
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: var(--gap);
+}
+
+.frame {
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+.bio {
+  background: rgba($color_09 ,20%);
+  padding: 20px;
+  color: $color_08;
+  margin: 30px 70px;
+  font-family: "Mononoki", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+
+a {
+  &:link {
+    color: $color_12
+  };
+  &:visited {
+    color: $color_02;
+  }
+  &:hover {
+    color: $color_10;
+  }
+  &:active {
+    color: $color_12;
+  }
+}

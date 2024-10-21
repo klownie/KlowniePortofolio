@@ -4,12 +4,34 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
 axum = "0.7.7"
 axum-htmx = "0.6.0"
-askama = "0.12.1"
+
+askama = { version = "0.12.1", features = ["with-axum"] }
 askama_axum = "0.4.0"
+
 tokio = { version = "1.0", features = ["full"] }
+tower = { version = "0.5.1", features = ["util"] }
+tower-http = { version = "0.6.1", features = ["fs", "trace"] }
+
 tracing-subscriber = "0.3.18"
 tracing = "0.1.40"
-turf = "0.9.3"
 log = "0.4.22"
+
+turf = "0.9.3"
+
+[package.metadata.turf]
+load_paths = ["colorschemes"]
+minify = false
+
+[package.metadata.turf.class_names]
+template = "klownie-portofolio_<original_name>_<id>"
+
+[package.metadata.turf.browser_targets]
+chrome = [80, 1, 2]
+firefox = 65
+safari = [12, 3]
+
+[profile.dev.package.askama_derive]
+opt-level = 3

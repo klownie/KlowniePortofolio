@@ -1,11 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Audrick Yeu Portofolio</title>
-    <meta charset="UTF-8">
-    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
-</head>
-<body>
-<h1>Hi Mom</h1>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+{% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
+
+<style>
+    {{ style_sheet }}
+</style>
+
+<h1> Audrick Yeu </h1>
+
+<p class={{class_name.bio}}>
+    19 years old – French/Taiwanese<br />
+    Concept Artist Student<br />
+    Curious & passionate, I am open for freelance positions.<br />
+    audrickyeu@proton.me
+</p>
+
+<div class={{class_name.masonry}}>
+    <img class={{class_name.frame}} src="/assets/gallery/sketch_854.jpg" alt="SAMU" />
+    <img class={{class_name.frame}} src="/assets/gallery/model_03.jpg" alt="INTRU" />
+    <img class={{class_name.frame}} src="/assets/gallery/model_006.jpg" alt="HERO" />
+    <img class={{class_name.frame}} src="/assets/gallery/sketch_741.jpg" alt="TEAM BLUE" />
+    <img class={{class_name.frame}} src="/assets/gallery/sketch_831_05.jpg" alt="SAINT-JOHN" />
+    <img class={{class_name.frame}} src="/assets/gallery/sketch_830_15.jpg" alt="CARBONIX EXOSUIT" />
+    <img class={{class_name.frame}} src="/assets/gallery/sketch_836_06.jpg" alt="ATLANTIC ASSOCIATION" />
+</div>
+
+{% include "testcounter.html" %}
+
+{% endblock %}
