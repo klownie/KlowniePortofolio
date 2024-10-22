@@ -3,11 +3,11 @@
     {{ style_sheet }}
 </style>
 <div
-        class="class_name.clickable"
-        hx-swap="outerHTML "
+        class={{class_name.clickable}}
+        hx-swap="outerHTML"
         hx-get="/name/{{ name }}"
 >
     <h1>
-        {{ name }}
+        {{ "{:}"|format(name)|trimclean }}
     </h1>
 </div>
