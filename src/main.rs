@@ -25,7 +25,7 @@ async fn main() {
         .route("/", get(handle_main))
         .route("/counter/:count", get(handle_counter))  // Added counter route
         .route("/name/:name", get(toggle_name_handler))  // Added name route
-        .route("/_assets/*path", get(handle_assets));
+        .nest_service("/assets", ServeDir::new("assets"));
 
     let listen_addr: SocketAddr = format!("{}:{}", IP, PORT).parse().unwrap();
 
@@ -34,8 +34,6 @@ async fn main() {
     let listener = tokio::net::TcpListener::bind(listen_addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
-
-static FAVICON: &str = include_str!("../assets/favicon.svg");
 
 #[debug_handler]
 async fn handle_main() -> impl IntoResponse {
@@ -71,14 +69,4 @@ async fn toggle_name_handler(Path(name): Path<ToggleName>) -> impl IntoResponse 
 
     let reply_html = template.render().unwrap();
     (StatusCode::OK, Html(reply_html).into_response())
-}
-#[debug_handler]
-async fn handle_assets(Path(path): Path<String>) -> impl IntoResponse {
-    let mut headers = HeaderMap::new();
-
-    if path == "favicon.svg" {
-        (StatusCode::OK, headers, FAVICON)
-    } else {
-        (StatusCode::NOT_FOUND, headers, "")
-    }
 }
