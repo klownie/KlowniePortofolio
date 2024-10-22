@@ -1,0 +1,13 @@
+{% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
+<style>
+    {{ style_sheet }}
+</style>
+<div
+        class="class_name.clickable"
+        hx-swap="outerHTML "
+        hx-get="/name/{{ name }}"
+>
+    <h1>
+        {{ name }}
+    </h1>
+</div>

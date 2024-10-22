@@ -1,11 +1,9 @@
 {% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
 
 <div
-        hx-target="this"
         hx-swap="outerHTML"
         hx-get="/counter/{{ count + 1 }}"
 >
-    <style>{{ style_sheet }}</style>
     <button>
         Click me:
         {{ count }}
