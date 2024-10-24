@@ -1,0 +1,11 @@
+{% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
+<style>
+    {{ style_sheet }}
+</style>
+<div
+        class={{class_name.togglename}}
+        hx-swap="outerHTML"
+        hx-get="/name/{{ state }}"
+>
+    <img class={{class_name.state}} src="/assets/gallery/sketch_854.jpg" alt="SAMU" />
+</div>
