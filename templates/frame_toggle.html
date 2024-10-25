@@ -3,9 +3,8 @@
     {{ style_sheet }}
 </style>
 <div
-        class={{class_name.togglename}}
         hx-swap="outerHTML"
-        hx-get="/name/{{ state }}"
+        hx-get="/class/{{ class }}"
 >
-    <img class={{class_name.state}} src="/assets/gallery/sketch_854.jpg" alt="SAMU" />
+    <img class={{class}} src="/assets/gallery/sketch_854.jpg" alt="SAMU" />
 </div>

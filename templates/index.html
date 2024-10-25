@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Audrick Yeu | Portofolio{% endblock %}
+
 {% block content %}
 {% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
 
@@ -26,7 +28,5 @@
     <img class={{class_name.frame}} src="/assets/gallery/sketch_830_15.jpg" alt="CARBONIX EXOSUIT" />
     <img class={{class_name.frame}} src="/assets/gallery/sketch_836_06.jpg" alt="ATLANTIC ASSOCIATION" />
 </div>
-
-{% include "testcounter.html" %}
 
 {% endblock %}

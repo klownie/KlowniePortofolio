@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Audrick Yeu Portofolio</title>
+    <title>{% block title %}{{title}}{% endblock %}</title>
     <meta charset="UTF-8">
     <script src="/assets/htmx.min.js"></script>
-    <link rel="icon" type="image/x-icon" href="/_assets/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    {% block head %}{% endblock %}
+</head>
 <body>
     <div id="content">
         {% block content %}{% endblock %}

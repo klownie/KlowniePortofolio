@@ -3,11 +3,9 @@
     {{ style_sheet }}
 </style>
 <div
-        class={{class_name.clickable}}
-        hx-swap="outerHTML"
-        hx-get="/name/{{ name }}"
+        class={{class_name.togglename}}
+        hx-get="api/name"
+        hx-swap="innerHTML"
 >
-    <h1>
-        {{ "{:}"|format(name)|trimclean }}
-    </h1>
+    <pre>{{"Audrick YEU"|asciart}}</pre>
 </div>

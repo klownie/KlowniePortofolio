@@ -5,24 +5,35 @@ edition = "2021"
 
 [dependencies]
 
+#Backend
 axum = { version = "0.7.7", features = ["macros"]}
 axum-htmx = "0.6.0"
 
+#templating
 askama = { version = "0.12.1", features = ["with-axum"] }
 askama_axum = "0.4.0"
 
+#protocols
 tokio = { version = "1.0", features = ["full"] }
 tower = { version = "0.5.1", features = ["util"] }
 tower-http = { version = "0.6.1", features = ["fs", "trace"] }
 
+#serde
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 
+#debuging
 tracing-subscriber = "0.3.18"
 tracing = "0.1.40"
 log = "0.4.22"
 
+#Esthetics
 turf = "0.9.3"
+text-to-ascii-art="0.1.10"
+
+[dev-dependencies]
+anyhow = "1.0.91"
+httpc-test = "0.1.10"
 
 [package.metadata.turf]
 load_paths = ["colorschemes"]
