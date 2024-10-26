@@ -39,13 +39,12 @@ async fn main() {
 
     let app_state = Arc::new(AppState {
         names: vec![
-            String::from("Audrick Yeu"),
-            String::from("Portofolio"),
-            String::from("Universe"),
-            String::from("Pierre"),
-            String::from("is"),
-            String::from("very"),
-            String::from("retarded"),
+            String::from("CD"),
+            String::from("FUCK U RETARD"),
+            String::from("SUCK MY DICK"),
+            String::from("Fagot"),
+            String::from("I miss u papa"),
+            String::from("He went to get the milk"),
         ],
     });
 
@@ -92,7 +91,7 @@ async fn handle_main() -> impl IntoResponse {
 
     let template = Index {
         indexed: 0,
-        name: "Audrick Yeu".into(),
+        name: "DVD".into(),
         fullscreen: false,
         masonry: masonry_images,
         path: "".into(),
