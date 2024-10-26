@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{%- import "macro.html" as scope -%}
 
 {% block title %}Audrick Yeu | Portofolio{% endblock %}
 
@@ -12,6 +13,16 @@
 
 {% include "interactive_name.html" %}
 
+<div class=class_name.socials>
+    <a href="https://www.artstation.com/klownie">
+        artstation
+    </a>|
+    <a href="https://cara.app/klownie">cara</a>|
+    <a href="https://www.instagram.com/klownie_/">insta</a>|
+    <a href="https://pixelfed.social/i/web/profile/498090351461638323">pixelfed</a>|
+    <a href="https://lor.sh/@klownie">mastodon</a>
+</div>
+
 <p class={{class_name.bio}}>
     ░ 19 years old – French/Taiwanese<br />
     ░ Concept Artist Student<br />
@@ -19,14 +30,11 @@
     ░ audrickyeu@proton.me
 </p>
 
+
 <div class={{class_name.masonry}}>
-    <img class={{class_name.frame}} src="/assets/gallery/sketch_854.jpg" alt="SAMU" />
-    <img class={{class_name.frame}} src="/assets/gallery/model_03.jpg" alt="INTRU" />
-    <img class={{class_name.frame}} src="/assets/gallery/model_006.jpg" alt="HERO" />
-    <img class={{class_name.frame}} src="/assets/gallery/sketch_741.jpg" alt="TEAM BLUE" />
-    <img class={{class_name.frame}} src="/assets/gallery/sketch_831_05.jpg" alt="SAINT-JOHN" />
-    <img class={{class_name.frame}} src="/assets/gallery/sketch_830_15.jpg" alt="CARBONIX EXOSUIT" />
-    <img class={{class_name.frame}} src="/assets/gallery/sketch_836_06.jpg" alt="ATLANTIC ASSOCIATION" />
+    {% for path in masonry %}
+    {% call scope::toggle_image(path) %}
+    {% endfor %}
 </div>
 
 {% endblock %}

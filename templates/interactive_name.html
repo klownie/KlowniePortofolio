@@ -4,8 +4,8 @@
 </style>
 <div
         class={{class_name.togglename}}
-        hx-get="api/name"
-        hx-swap="innerHTML"
+        hx-get="/api/name?indexed={{indexed}}&name={{name}}"
+        hx-swap="outerHTML"
 >
-    <pre>{{"Audrick YEU"|asciart}}</pre>
+    <pre>{{name|asciart}}</pre>
 </div>

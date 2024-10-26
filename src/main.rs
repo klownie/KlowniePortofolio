@@ -1,29 +1,35 @@
 mod templates;
 
-use std::iter::Cycle;
 use askama_axum::Template;
-use axum::debug_handler;
 use axum::extract::{Path, Query, State};
+use axum::{debug_handler, Form};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
-    routing::get,Router,
+    routing::get,
+    Router,
 };
 use log::{debug, info};
+use serde_qs;
+use std::iter::Cycle;
 use std::net::SocketAddr;
+use std::ops::Not;
 use std::slice::Iter;
 use std::sync::{Arc, Mutex};
-use text_to_ascii_art::to_art;
+use std::fs;
+use std::path::PathBuf;
 use templates::*;
+use text_to_ascii_art::to_art;
 use tower_http::services::ServeDir;
+use tracing::field::debug;
 
 const IP: &'static str = "0.0.0.0";
-const PORT: &'static str = "8080";
+const PORT: &'static str = "3000";
 
 turf::style_sheet!("templates/index.scss");
 
 struct AppState {
-    names: Mutex<Cycle<std::vec::IntoIter<String>>>,
+    names: Vec<String>,
 }
 #[tokio::main]
 async fn main() {
@@ -32,15 +38,20 @@ async fn main() {
         .init();
 
     let app_state = Arc::new(AppState {
-        names: Mutex::new(vec![
+        names: vec![
+            String::from("Audrick Yeu"),
             String::from("Portofolio"),
             String::from("Universe"),
-            String::from("Audrick Yeu")
-        ].into_iter().cycle()),
+            String::from("Pierre"),
+            String::from("is"),
+            String::from("very"),
+            String::from("retarded"),
+        ],
     });
 
     let api_router = Router::new()
-        .route("/name", get(toggle_name_handler))
+        .route("/name", get(next_name_handler))
+        .route("/fullscreen", get(fullscreen_toggle_handler))
         .with_state(app_state);
 
     let app = Router::new()
@@ -59,28 +70,71 @@ async fn main() {
 #[debug_handler]
 async fn handle_main() -> impl IntoResponse {
 
-    let template = Index {};
-    let reply_html = template.render().unwrap();
-    (StatusCode::OK, Html(reply_html).into_response())
+    // Specify the path to your assets directory
+    let assets_dir = PathBuf::from("assets/gallery");
+
+    // Create a vector to hold the image paths
+    let mut masonry_images = Vec::new();
+
+    // Read the directory and generate paths
+    if let Ok(entries) = fs::read_dir(assets_dir) {
+        for entry in entries.filter_map(Result::ok) {
+            if let Some(path) = entry.path().to_str() {
+                // Filter for image files (you can expand this as needed)
+                if path.ends_with(".jpg") || path.ends_with(".png") {
+                    masonry_images.push(path.into());
+                }
+            }
+        }
+    }
+
+    debug!("{:?}",masonry_images);
+
+    let template = Index {
+        indexed: 0,
+        name: "Audrick Yeu".into(),
+        fullscreen: false,
+        masonry: masonry_images,
+        path: "".into(),
+    };
+    let reply = template.render().unwrap();
+    (StatusCode::OK, Html(reply).into_response())
 }
 
-
 #[debug_handler]
-async fn toggle_name_handler(
+async fn next_name_handler(
     State(state): State<Arc<AppState>>,
+    Query(mut template): Query<InteractiveName>,
 ) -> impl IntoResponse {
-    // Lock the mutex to get access to the iterator
-    let mut lock = state.names.lock().unwrap();
+    debug!("{:?}", template);
 
-    // Call `next` to get the next name from the iterator
-    let next_name = lock.next();
+    let index = (template.indexed + 1) % state.names.len();
 
-    // Format the result depending on whether there's a next value or not
-    let response = match next_name {
-        Some(name) => format!("<pre>{}</pre>", to_art(name,"",0,0,0).unwrap()),
-        None => unreachable!(),
+    let template = InteractiveName {
+        indexed: index,
+        name: state.names[index].clone(),
     };
 
+    let reply = template.render().unwrap();
+
     // Return the HTML response
-    (StatusCode::OK, Html(response))
+    (StatusCode::OK, Html(reply))
+}
+
+#[debug_handler]
+async fn fullscreen_toggle_handler(
+    State(state): State<Arc<AppState>>,
+    Query(mut template): Query<ToggleFullscreen>,
+) -> impl IntoResponse {
+    debug!("{:?}", template);
+
+    let template = ToggleFullscreen {
+        fullscreen: template.fullscreen.not(),
+        path: template.path,
+    };
+
+    let reply = template.render().unwrap();
+
+    // Return the HTML response
+    (StatusCode::OK, Html(reply))
 }

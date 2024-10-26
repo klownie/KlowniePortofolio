@@ -1,0 +1,20 @@
+{% macro toggle_image(path) %}
+
+{% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
+
+<style>
+    {{ style_sheet }}
+</style>
+<div
+        hx-get="api/fullscreen?fullscreen={{fullscreen}}&path={{path}}"
+        hx-swap="outerHTML"
+>
+    {% if fullscreen %}
+    <img class="{{class_name.fullscreenimage}}" src={{path}} alt="Fullscreen Image" />
+    {% else %}
+    <img class="{{class_name.frame}}" src={{path}} alt="SAMU" />
+    {% endif %}
+</div>
+
+
+{% endmacro %}

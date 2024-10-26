@@ -1,10 +1,17 @@
+
 {% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
+
 <style>
     {{ style_sheet }}
 </style>
 <div
+        hx-get="api/fullscreen?fullscreen={{fullscreen}}&path={{path}}"
         hx-swap="outerHTML"
-        hx-get="/class/{{ class }}"
 >
-    <img class={{class}} src="/assets/gallery/sketch_854.jpg" alt="SAMU" />
+    {% if fullscreen %}
+    <div class={{class_name.blur}}></div>
+    <img class="{{class_name.fullscreenimage}}" src={{path}} alt="Fullscreen Image" />
+    {% else %}
+    <img class="{{class_name.frame}}" src={{path}} alt="SAMU" />
+    {% endif %}
 </div>
