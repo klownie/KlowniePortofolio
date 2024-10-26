@@ -1,8 +1,9 @@
-@import "GruvboxDark";
+@import "Twilight";
 
 pre {
   text-align: center;
   color: $color_12;
+  margin: 50px;
 }
 
 body {
@@ -18,6 +19,7 @@ h1 {
 .socials {
   text-align: center;
   color: $color_12;
+  margin: 50px;
 }
 
 .masonry {
@@ -93,5 +95,5 @@ a {
 }
 
 span {
-  text-shadow: 1em 1em $color_07
+  text-shadow: 1em 1em $color_05
 }

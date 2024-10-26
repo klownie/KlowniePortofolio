@@ -5,7 +5,6 @@
 
 {% block content %}
 {% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
-
 <style>
     {{ style_sheet }}
 </style>
@@ -13,10 +12,8 @@
 
 {% include "interactive_name.html" %}
 
-<div class=class_name.socials>
-    <a href="https://www.artstation.com/klownie">
-        artstation
-    </a>|
+<div class={{class_name.socials}}>
+    <a href="https://www.artstation.com/klownie">artstation</a>|
     <a href="https://cara.app/klownie">cara</a>|
     <a href="https://www.instagram.com/klownie_/">insta</a>|
     <a href="https://pixelfed.social/i/web/profile/498090351461638323">pixelfed</a>|
