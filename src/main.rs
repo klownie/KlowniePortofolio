@@ -1,8 +1,8 @@
 mod templates;
 
 use askama_axum::Template;
-use axum::extract::{Path, Query, State};
-use axum::{debug_handler, Form};
+use axum::extract::{Query, State};
+use axum::debug_handler;
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
@@ -10,18 +10,13 @@ use axum::{
     Router,
 };
 use log::{debug, info};
-use serde_qs;
-use std::iter::Cycle;
 use std::net::SocketAddr;
 use std::ops::Not;
-use std::slice::Iter;
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
 use std::fs;
 use std::path::PathBuf;
 use templates::*;
-use text_to_ascii_art::to_art;
 use tower_http::services::ServeDir;
-use tracing::field::debug;
 
 const IP: &'static str = "0.0.0.0";
 const PORT: &'static str = "3000";
@@ -99,7 +94,7 @@ async fn handle_main() -> impl IntoResponse {
 #[debug_handler]
 async fn next_name_handler(
     State(state): State<Arc<AppState>>,
-    Query(mut template): Query<InteractiveName>,
+    Query(template): Query<InteractiveName>,
 ) -> impl IntoResponse {
     debug!("{:?}", template);
 
@@ -118,8 +113,7 @@ async fn next_name_handler(
 
 #[debug_handler]
 async fn fullscreen_toggle_handler(
-    State(state): State<Arc<AppState>>,
-    Query(mut template): Query<ToggleFullscreen>,
+    Query(template): Query<ToggleFullscreen>,
 ) -> impl IntoResponse {
     debug!("{:?}", template);
 
