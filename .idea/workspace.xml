@@ -7,27 +7,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_691_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_716.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_717.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_720.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_734.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_736.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_748.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_770_0.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/gallery/sketch_843_noise.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/macro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/frame_toggle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/frame_toggle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/interactive_name.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/interactive_name.html" afterDir="false" />
-    </list>
+    <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,7 +109,7 @@
       <workItem from="1729783466393" duration="451000" />
       <workItem from="1729801547486" duration="7227000" />
       <workItem from="1729851791814" duration="27095000" />
-      <workItem from="1729937666832" duration="17077000" />
+      <workItem from="1729937666832" duration="31915000" />
     </task>
     <servers />
   </component>
