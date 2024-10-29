@@ -8,17 +8,12 @@
 <style>
     {{ style_sheet }}
 </style>
+
 {% include "fonts.html" %}
 
 {% include "interactive_name.html" %}
 
-<div class={{class_name.socials}}>
-    <a href="https://www.artstation.com/klownie">artstation</a>|
-    <a href="https://cara.app/klownie">cara</a>|
-    <a href="https://www.instagram.com/klownie_/">insta</a>|
-    <a href="https://pixelfed.social/i/web/profile/498090351461638323">pixelfed</a>|
-    <a href="https://lor.sh/@klownie">mastodon</a>
-</div>
+{% include "socials.html" %}
 
 <p class={{class_name.bio}}>
     ░ 19 years old – French/Taiwanese<br />

@@ -9,7 +9,7 @@ pub struct Index {
     pub name: String,
     pub fullscreen: bool,
     pub masonry: Vec<String>,
-    pub path :String
+    pub path: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
@@ -23,7 +23,7 @@ pub struct InteractiveName {
 #[template(path = "frame_toggle.html")]
 pub struct ToggleFullscreen {
     pub fullscreen: bool,
-    pub path :String
+    pub path: String,
 }
 
 mod filters {

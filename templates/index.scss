@@ -5,11 +5,11 @@ pre {
   color: $color_12;
   font-size: 1.2rem;
   margin: 5rem;
+  transition: 0.25s;
   &:hover {
     -ms-transform: scale(1.1); /* IE 9 */
     -webkit-transform: scale(1.1); /* Safari 3-8 */
     transform: scale(1.1);
-    transition: 0.25s;
   }
 }
 
@@ -63,6 +63,9 @@ h1 {
 }
 
 a {
+  .icon{
+    text-decoration: none;
+  }
   &:link {
     color: $color_12
   };
@@ -103,13 +106,4 @@ a {
 
 span {
   text-shadow: 1em 1em $color_05
-}
-
-img{
-  &:hover {
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Safari 3-8 */
-    transform: scale(1.1);
-    transition: 0.25s;
-  }
 }

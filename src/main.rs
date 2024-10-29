@@ -1,24 +1,25 @@
 mod templates;
 
 use askama_axum::Template;
-use axum::extract::{Query, State};
 use axum::debug_handler;
+use axum::extract::{Query, State};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
     routing::get,
     Router,
 };
+use listenfd::ListenFd;
 use log::{debug, info};
-use std::net::SocketAddr;
-use std::ops::Not;
-use std::sync::Arc;
 use std::fs;
+use std::ops::Not;
 use std::path::PathBuf;
+use std::sync::Arc;
 use templates::*;
+use tokio::net::TcpListener;
 use tower_http::services::ServeDir;
 
-const IP: &'static str = "0.0.0.0";
+const IP: &'static str = "127.0.0.1";
 const PORT: &'static str = "3000";
 
 turf::style_sheet!("templates/index.scss");
@@ -26,6 +27,7 @@ turf::style_sheet!("templates/index.scss");
 struct AppState {
     names: Vec<String>,
 }
+
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
@@ -33,10 +35,7 @@ async fn main() {
         .init();
 
     let app_state = Arc::new(AppState {
-        names: vec![
-            String::from("Audrick Yeu"),
-            String::from("Portofolio"),
-        ],
+        names: vec![String::from("Audrick Yeu"), String::from("Portofolio")],
     });
 
     let api_router = Router::new()
@@ -49,17 +48,28 @@ async fn main() {
         .route("/", get(handle_main))
         .nest_service("/assets", ServeDir::new("assets"));
 
-    let listen_addr: SocketAddr = format!("{}:{}", IP, PORT).parse().unwrap();
+    let mut listenfd = ListenFd::from_env();
+    let listener = match listenfd.take_tcp_listener(0).unwrap() {
+        // if we are given a tcp listener on listen fd 0, we use that one
+        Some(listener) => {
+            listener.set_nonblocking(true).unwrap();
+            TcpListener::from_std(listener).unwrap()
+        }
+        // otherwise fall back to local listening
+        None => {
+            let ip = format!("{}:{}", IP, PORT);
+            TcpListener::bind(ip).await.unwrap()
+        }
+    };
 
-    info!("listening on : http://localhost:{}", PORT);
+    // run it
+    info!("listening on http://{}", listener.local_addr().unwrap());
 
-    let listener = tokio::net::TcpListener::bind(listen_addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
 
 #[debug_handler]
 async fn handle_main() -> impl IntoResponse {
-
     // Specify the path to your assets directory
     let assets_dir = PathBuf::from("assets/gallery");
 
@@ -78,7 +88,7 @@ async fn handle_main() -> impl IntoResponse {
         }
     }
 
-    debug!("{:?}",masonry_images);
+    debug!("{:?}", masonry_images);
 
     let template = Index {
         indexed: 0,
@@ -112,9 +122,7 @@ async fn next_name_handler(
 }
 
 #[debug_handler]
-async fn fullscreen_toggle_handler(
-    Query(template): Query<ToggleFullscreen>,
-) -> impl IntoResponse {
+async fn fullscreen_toggle_handler(Query(template): Query<ToggleFullscreen>) -> impl IntoResponse {
     debug!("{:?}", template);
 
     let template = ToggleFullscreen {
