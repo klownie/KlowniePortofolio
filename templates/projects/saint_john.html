@@ -1,0 +1,16 @@
+{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
+
+<style>
+    {{ style_sheet }}
+</style>
+
+<div class={{class_name.blur}}></div>
+<div class={{class_name.fullscreencontainer}}>
+<div class={{class_name.fullscreenblog}}>
+    <h1>Saint-John the glutinous sad demon</h1>
+</div>
+<div class="{{class_name.fullscreengallery}}">
+    <img src=/assets/projects/Saint-John/sketch_831_05.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+    <img src=/assets/projects/Saint-John/sketch_831.gif class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+</div>
+</div>

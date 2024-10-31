@@ -4,14 +4,17 @@
     {{ style_sheet }}
 </style>
 <div
-        hx-get="api/fullscreen?fullscreen={{fullscreen}}&path={{path}}"
+        hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
         hx-swap="outerHTML"
 >
+    <img class="{{class_name.frame}}" src=/assets/projects/{{project}}/thumbnail.jpg alt="FRAME" />
     {% if fullscreen %}
-    <div class={{class_name.blur}}></div>
-    <div class={{class_name.fullscreenblog}}></div>
-    <img class="{{class_name.fullscreenimage}}" src={{path}} alt="Fullscreen Image" />
+    <div
+            hx-get="api/projects/{{project}}"
+            hx-trigger="load"
+            hx-swap="outerHTML"
+    >
+    </div>
     {% else %}
-    <img class="{{class_name.frame}}" src={{path}} alt="SAMU" />
     {% endif %}
 </div>

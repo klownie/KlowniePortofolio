@@ -4,7 +4,7 @@ pre {
   text-align: center;
   color: $color_12;
   font-size: 1.2rem;
-  margin: 5rem;
+  margin: auto 5rem;
   transition: 0.25s;
   &:hover {
     -ms-transform: scale(1.1); /* IE 9 */
@@ -44,6 +44,12 @@ h1 {
 .frame {
   border-radius: 8px;
   max-width: 100%;
+  transition: 0.25s;
+  &:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5);
+  }
 }
 
 .bio {
@@ -80,30 +86,38 @@ a {
   }
 }
 
-.fullscreenimage {
+.fullscreencontainer {
+  display: flex;
   position: fixed;
-  margin: auto;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fullscreengallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 66%;
   height: 100%;
-  object-fit: contain;
-  z-index: 300;
+  overflow-y: scroll;
+  padding: 10px;
 }
 
-.fullscreenblog{
+.fullscreenimage {
+  height: 100vh;
+  max-width: 100%;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.fullscreenblog {
   background-color: $color_09;
-  position: fixed;
-  object-fit: contain;
-  top: 0;
-  right: 0;
-  width: 33%;
+  width: 34%;
   height: 100%;
+  padding: 20px;
   z-index: 700;
-}
-
-.fullscreen {
-  display: block;
 }
 
 .blur {
@@ -115,6 +129,15 @@ a {
   backdrop-filter: blur(10px);
 }
 
+p {
+  color: $color_08;
+}
+
 span {
   text-shadow: 1em 1em $color_05
+}
+
+img {
+  user-select: none;      // Prevent text/image selection
+  pointer-events: none;   // Prevent dragging/clicking
 }

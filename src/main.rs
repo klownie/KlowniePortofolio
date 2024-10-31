@@ -2,7 +2,7 @@ mod templates;
 
 use askama_axum::Template;
 use axum::debug_handler;
-use axum::extract::{Query, State};
+use axum::extract::{ConnectInfo, Path, Query};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
@@ -10,36 +10,31 @@ use axum::{
     Router,
 };
 use listenfd::ListenFd;
-use log::{debug, info};
-use std::fs;
+use log::{debug, error, info};
 use std::ops::Not;
-use std::path::PathBuf;
-use std::sync::Arc;
 use templates::*;
 use tokio::net::TcpListener;
 use tower_http::services::ServeDir;
+use std::net::SocketAddr;
 
 const IP: &'static str = "127.0.0.1";
 const PORT: &'static str = "3000";
 
-struct AppState {
-    title_names: Vec<String>,
-}
+const TITLE_NAMES: &[&str] = &["Audrick Yeu","Portofolio"];
+
+const PROJECTS: &[&str] = &["SamuConceptCharacter","Saint-John","HomardRojas","CarbonixWorkerSuit","ClimbingExoSuit","Intru","ClimbingExoSuit3d","TeamBlue","TribalYellowDemon","UrbanWhiteCrowMan"];
 
 #[tokio::main]
 async fn main() {
+
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::DEBUG)
         .init();
 
-    let app_state = Arc::new(AppState {
-        title_names: vec![String::from("Audrick Yeu"), String::from("Portofolio")],
-    });
-
     let api_router = Router::new()
         .route("/name", get(next_name_handler))
         .route("/fullscreen", get(fullscreen_toggle_handler))
-        .with_state(app_state);
+        .route("/projects/:project", get(project_request_handler));
 
     let app = Router::new()
         .nest("/api", api_router)
@@ -63,37 +58,21 @@ async fn main() {
     // run it
     info!("listening on http://{}", listener.local_addr().unwrap());
 
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>()).await.unwrap();
 }
 
 #[debug_handler]
-async fn handle_main() -> impl IntoResponse {
-    // Specify the path to your assets directory
-    let assets_dir = PathBuf::from("assets/gallery");
+async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl IntoResponse {
 
-    // Create a vector to hold the image paths
-    let mut masonry_images = Vec::new();
-
-    // Read the directory and generate paths
-    if let Ok(entries) = fs::read_dir(assets_dir) {
-        for entry in entries.filter_map(Result::ok) {
-            if let Some(path) = entry.path().to_str() {
-                // Filter for image files (you can expand this as needed)
-                if path.ends_with(".jpg") || path.ends_with(".png") {
-                    masonry_images.push(path.into());
-                }
-            }
-        }
-    }
-
-    debug!("{:?}", masonry_images);
+    info!("{addr} is visiting");
+    let masonry_projects = PROJECTS;
 
     let template = Index {
         indexed: 0,
-        name: "Audrick Yeu".into(),
+        name: TITLE_NAMES[0].into(),
         fullscreen: false,
-        masonry: masonry_images,
-        path: "".into(),
+        masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
+        project: "".into(),
     };
     let reply = template.render().unwrap();
     (StatusCode::OK, Html(reply).into_response())
@@ -101,16 +80,14 @@ async fn handle_main() -> impl IntoResponse {
 
 #[debug_handler]
 async fn next_name_handler(
-    State(state): State<Arc<AppState>>,
     Query(template): Query<InteractiveName>,
 ) -> impl IntoResponse {
-    debug!("{:?}", template);
 
-    let index = (template.indexed + 1) % state.title_names.len();
+    let index = (template.indexed + 1) % TITLE_NAMES.len();
 
     let template = InteractiveName {
         indexed: index,
-        name: state.title_names[index].clone(),
+        name: TITLE_NAMES[index].to_string(),
     };
 
     let reply = template.render().unwrap();
@@ -121,15 +98,77 @@ async fn next_name_handler(
 
 #[debug_handler]
 async fn fullscreen_toggle_handler(Query(template): Query<ToggleFullscreen>) -> impl IntoResponse {
-    debug!("{:?}", template);
 
-    let template = ToggleFullscreen {
+    let new_template = ToggleFullscreen {
         fullscreen: template.fullscreen.not(),
-        path: template.path,
+        project: template.project,
     };
 
-    let reply = template.render().unwrap();
+    let reply = new_template.render().unwrap();
 
     // Return the HTML response
+    (StatusCode::OK, Html(reply))
+}
+
+async fn project_request_handler(Path(project):Path<String>) -> impl IntoResponse {
+    debug!("loading project : {}",project);
+    let reply = match project.as_str()  {
+        "SamuConceptCharacter" => {
+            let reply_template = SamuConceptCharacter{};
+            debug!("loaded : {}","SamuConceptCharacter");
+            reply_template.render().unwrap()
+        }
+        "Saint-John" => {
+            let reply_template = SaintJohn{};
+            debug!("loaded : {}","Saint-John");
+            reply_template.render().unwrap()
+        }
+        "HomardRojas" => {
+            let reply_template = HomardRojas{};
+            debug!("loaded : {}","HomardRojas");
+            reply_template.render().unwrap()
+        }
+        "CarbonixWorkerSuit" => {
+            let reply_template = CarbonixWorkerSuit{};
+            debug!("loaded : {}","CarbonixWorkerSuit");
+            reply_template.render().unwrap()
+        }
+        "ClimbingExoSuit" => {
+            let reply_template = ClimbingExoSuit{};
+            debug!("loaded : {}","ClimbingExoSuit");
+            reply_template.render().unwrap()
+        }
+        "ClimbingExoSuit3d" => {
+            let reply_template = ClimbingExoSuit3d{};
+            debug!("loaded : {}","ClimbingExoSuit3d");
+            reply_template.render().unwrap()
+        }
+        "Intru" => {
+            let reply_template = Intru{};
+            debug!("loaded : {}","Intru");
+            reply_template.render().unwrap()
+        }
+        "TeamBlue" => {
+            let reply_template = TeamBlue{};
+            debug!("loaded : {}","TeamBlue");
+            reply_template.render().unwrap()
+        }
+        "TribalYellowDemon" => {
+            let reply_template = TribalYellowDemon{};
+            debug!("loaded : {}","TribalYellowDemon");
+            reply_template.render().unwrap()
+        }
+        "UrbanWhiteCrowMan" => {
+            let reply_template = UrbanWhiteCrowMan{};
+            debug!("loaded : {}","UrbanWhiteCrowMan");
+            reply_template.render().unwrap()
+        }
+        _ => {
+            let reply_template = MissingProject{};
+            error!("loaded : {}","MissingProject");
+            reply_template.render().unwrap()
+        }
+    };
+
     (StatusCode::OK, Html(reply))
 }

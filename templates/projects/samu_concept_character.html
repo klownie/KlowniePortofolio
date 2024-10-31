@@ -1,0 +1,19 @@
+{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
+
+<style>
+    {{ style_sheet }}
+</style>
+
+<div class={{class_name.blur}}></div>
+<div class={{class_name.fullscreencontainer}}>
+<div class={{class_name.fullscreenblog}}>
+    <h1>S.A.M.U Military Medical Intervention Team</h1>
+    <p>To aid injured soldiers and reduce casualties, a special division was created. This team of medical soldiers is trained to de-escalate situations and retrieve individuals in peril. Using advanced tear gas bombs and stealth balloon drones, these specialists have a significant impact on saving lives in the chaos of the battlefield. </p>
+</div>
+<div class="{{class_name.fullscreengallery}}">
+    <img src=/assets/projects/SamuConceptCharacter/sketch_849_08.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+    <img src=/assets/projects/SamuConceptCharacter/sketch_851.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+    <img src=/assets/projects/SamuConceptCharacter/sketch_852.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+    <img src=/assets/projects/SamuConceptCharacter/sketch_853.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+</div>
+</div>

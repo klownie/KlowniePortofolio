@@ -1,0 +1,17 @@
+{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
+
+<style>
+    {{ style_sheet }}
+</style>
+
+<div class={{class_name.blur}}></div>
+<div class={{class_name.fullscreencontainer}}>
+    <div class={{class_name.fullscreenblog}}>
+        <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+    </div>
+    <div class="{{class_name.fullscreengallery}}">
+        <img src=assets/projects/CarbonixWorkerSuit/sketch_830_15.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+        <img src=assets/projects/CarbonixWorkerSuit/sketch_829.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+        <img src=assets/projects/CarbonixWorkerSuit/sketch_830.gif class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
+    </div>
+</div>
