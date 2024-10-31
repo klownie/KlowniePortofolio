@@ -9,8 +9,17 @@
   <component name="ChangeListManager">
     <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colorschemes/Dracula.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/colorschemes/Dracula.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colorschemes/GruvboxDark.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/colorschemes/GruvboxDark.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colorschemes/SolarizedDark.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/colorschemes/SolarizedDark.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/colorschemes/Twilight.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/colorschemes/Twilight.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/frame_toggle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/frame_toggle.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/interactive_name.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/interactive_name.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/macro.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/macro.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +76,10 @@
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\colorschemes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets" />
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\scss" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite/scss" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets" />
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\src\Template" />
     </key>
   </component>
@@ -115,7 +126,9 @@
       <workItem from="1729851791814" duration="27095000" />
       <workItem from="1729937666832" duration="31915000" />
       <workItem from="1729989195077" duration="183000" />
-      <workItem from="1730021777592" duration="2800000" />
+      <workItem from="1730021777592" duration="3096000" />
+      <workItem from="1730315552607" duration="6615000" />
+      <workItem from="1730364072721" duration="423000" />
     </task>
     <servers />
   </component>

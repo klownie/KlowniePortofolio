@@ -82,13 +82,24 @@ a {
 
 .fullscreenimage {
   position: fixed;
-  margin: 30px auto;
+  margin: auto;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 66%;
   height: 100%;
   object-fit: contain;
-  z-index: 9999;
+  z-index: 300;
+}
+
+.fullscreenblog{
+  background-color: $color_09;
+  position: fixed;
+  object-fit: contain;
+  top: 0;
+  right: 0;
+  width: 33%;
+  height: 100%;
+  z-index: 700;
 }
 
 .fullscreen {

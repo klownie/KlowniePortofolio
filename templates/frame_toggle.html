@@ -1,4 +1,4 @@
-{% let (style_sheet, class_name) = turf::style_sheet_values!("templates/index.scss") %}
+{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
 
 <style>
     {{ style_sheet }}
@@ -9,6 +9,7 @@
 >
     {% if fullscreen %}
     <div class={{class_name.blur}}></div>
+    <div class={{class_name.fullscreenblog}}></div>
     <img class="{{class_name.fullscreenimage}}" src={{path}} alt="Fullscreen Image" />
     {% else %}
     <img class="{{class_name.frame}}" src={{path}} alt="SAMU" />

@@ -39,7 +39,7 @@ anyhow = "1.0.91"
 httpc-test = "0.1.10"
 
 [package.metadata.turf]
-load_paths = ["colorschemes"]
+load_paths = ["scss/colorschemes"]
 minify = false
 
 [package.metadata.turf.class_names]

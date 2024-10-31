@@ -22,10 +22,8 @@ use tower_http::services::ServeDir;
 const IP: &'static str = "127.0.0.1";
 const PORT: &'static str = "3000";
 
-turf::style_sheet!("templates/index.scss");
-
 struct AppState {
-    names: Vec<String>,
+    title_names: Vec<String>,
 }
 
 #[tokio::main]
@@ -35,7 +33,7 @@ async fn main() {
         .init();
 
     let app_state = Arc::new(AppState {
-        names: vec![String::from("Audrick Yeu"), String::from("Portofolio")],
+        title_names: vec![String::from("Audrick Yeu"), String::from("Portofolio")],
     });
 
     let api_router = Router::new()
@@ -108,11 +106,11 @@ async fn next_name_handler(
 ) -> impl IntoResponse {
     debug!("{:?}", template);
 
-    let index = (template.indexed + 1) % state.names.len();
+    let index = (template.indexed + 1) % state.title_names.len();
 
     let template = InteractiveName {
         indexed: index,
-        name: state.names[index].clone(),
+        name: state.title_names[index].clone(),
     };
 
     let reply = template.render().unwrap();
