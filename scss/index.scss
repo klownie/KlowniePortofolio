@@ -47,9 +47,9 @@ h1 {
   max-width: 100%;
   transition: 0.25s;
   &:hover {
-    -ms-transform: scale(1.5); /* IE 9 */
-    -webkit-transform: scale(1.5); /* Safari 3-8 */
-    transform: scale(1.5);
+    -ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.1);
   }
 }
 
@@ -139,8 +139,7 @@ span {
 }
 
 img {
-  user-select: none;      // Prevent text/image selection
-  pointer-events: none;   // Prevent dragging/clicking
+  user-select: none;
 }
 
 .errorlol {

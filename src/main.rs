@@ -27,6 +27,8 @@ const PROJECTS: &[&str] = &["SamuConceptCharacter","Saint-John","HomardRojas","C
 #[tokio::main]
 async fn main() {
 
+    turf::style_sheet_values!("scss/index.scss");
+
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::DEBUG)
         .init();

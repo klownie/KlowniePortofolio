@@ -40,7 +40,7 @@ httpc-test = "0.1.10"
 
 [package.metadata.turf]
 load_paths = ["scss/colorschemes"]
-minify = false
+minify = true
 
 [package.metadata.turf.class_names]
 template = "klownie-portofolio_<original_name>_<id>"
