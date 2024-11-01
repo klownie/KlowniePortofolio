@@ -12,6 +12,10 @@ pub struct Index {
     pub project: String,
 }
 
+#[derive(Debug, Template)]
+#[template(path = "error_404.html")]
+pub struct Error404 {}
+
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "interactive_name.html")]
 pub struct InteractiveName {

@@ -17,7 +17,7 @@ use tokio::net::TcpListener;
 use tower_http::services::ServeDir;
 use std::net::SocketAddr;
 
-const IP: &'static str = "127.0.0.1";
+const IP: &'static str = "0.0.0.0";
 const PORT: &'static str = "3000";
 
 const TITLE_NAMES: &[&str] = &["Audrick Yeu","Portofolio"];
@@ -41,6 +41,9 @@ async fn main() {
         .route("/", get(handle_main))
         .nest_service("/assets", ServeDir::new("assets"));
 
+    // add a fallback service for handling routes to unknown paths
+    let app = app.fallback(handler_404);
+
     let mut listenfd = ListenFd::from_env();
     let listener = match listenfd.take_tcp_listener(0).unwrap() {
         // if we are given a tcp listener on listen fd 0, we use that one
@@ -59,6 +62,14 @@ async fn main() {
     info!("listening on http://{}", listener.local_addr().unwrap());
 
     axum::serve(listener, app.into_make_service_with_connect_info::<SocketAddr>()).await.unwrap();
+}
+
+
+async fn handler_404() -> impl IntoResponse {
+
+    let template = Error404 {};
+    let reply = template.render().unwrap();
+    (StatusCode::NOT_FOUND, Html(reply))
 }
 
 #[debug_handler]

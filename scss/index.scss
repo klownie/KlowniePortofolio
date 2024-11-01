@@ -30,8 +30,9 @@ h1 {
 }
 
 .masonry {
-  --gap: clamp(1rem, 5vmin, 6rem);
+  --gap: clamp(1rem, 5vmin, 2rem);
   columns: 300px;
+  //gap: var(--gap);
   max-width: 960px;
   margin: 5rem auto;
 }
@@ -140,4 +141,9 @@ span {
 img {
   user-select: none;      // Prevent text/image selection
   pointer-events: none;   // Prevent dragging/clicking
+}
+
+.errorlol {
+  font-size: 7rem;
+  height: 70%;
 }

@@ -7,7 +7,7 @@
         hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
         hx-swap="outerHTML"
 >
-    <img class="{{class_name.frame}}" src=/assets/projects/{{project}}/thumbnail.jpg alt="FRAME" />
+    <img class="{{class_name.frame}}" src=/assets/projects/{{project}}/thumbnail.avif alt="FRAME" />
     {% if fullscreen %}
     <div
             hx-get="api/projects/{{project}}"

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{%- import "macro.html" as scope -%}
+
+{% block title %}Audrick Yeu | Portofolio{% endblock %}
+
+{% block content %}
+{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
+<style>
+    {{ style_sheet }}
+</style>
+
+{% include "fonts.html" %}
+
+<h1>Nothing to see here</h1>
+
+<pre>
+    {{"Error :: 404"|asciart}}
+</pre>
+
+<marquee direction="up" height="1000">
+<pre class="{{class_name.errorlol}}">
+    {{"LOL"|asciart}}
+</pre>
+</marquee>
+
+{% endblock %}
