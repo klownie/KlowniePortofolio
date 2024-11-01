@@ -74,15 +74,19 @@ a {
     text-decoration: none;
   }
   &:link {
-    color: $color_12
+    text-decoration: none;
+    color: $color_12;
   };
   &:visited {
+    text-decoration: none;
     color: $color_02;
   }
   &:hover {
+    text-decoration: none;
     color: $color_10;
   }
   &:active {
+    text-decoration: none;
     color: $color_12;
   }
 }
@@ -140,6 +144,7 @@ span {
 
 img {
   user-select: none;
+  transition: opacity 300ms ease-in;
 }
 
 .errorlol {
