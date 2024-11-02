@@ -45,7 +45,8 @@ async fn main() {
     let api_router = Router::new()
         .route("/name", get(next_name_handler))
         .route("/fullscreen", get(fullscreen_toggle_handler))
-        .route("/projects/:project", get(project_request_handler));
+        .route("/projects/:project", get(project_request_handler))
+        .route("/toggleres/:project_name/:high_res", get(resolution_request_handler));
 
     let app = Router::new()
         .nest("/api", api_router)
@@ -120,64 +121,98 @@ async fn fullscreen_toggle_handler(Query(template): Query<ToggleFullscreen>) -> 
 }
 
 async fn project_request_handler(Path(project): Path<String>) -> impl IntoResponse {
-    debug!("loading project : {}", project);
-    let reply = match project.as_str() {
+    let reply = render_project_template(&project, false);
+    (StatusCode::OK, Html(reply))
+}
+
+async fn resolution_request_handler(Path((project, high_res)): Path<(String, bool)>) -> impl IntoResponse {
+    let reply = render_project_template(&project, high_res.not());
+    (StatusCode::OK, Html(reply))
+}
+
+fn render_project_template(project: &str, high_res: bool) -> String {
+    match project {
         "SamuConceptCharacter" => {
-            let reply_template = SamuConceptCharacter {};
-            debug!("loaded : {}", "SamuConceptCharacter");
-            reply_template.render().unwrap()
+            debug!("loaded: SamuConceptCharacter");
+            SamuConceptCharacter {
+                project_name: project.into(),
+                high_res,
+            }.render().unwrap()
         }
         "Saint-John" => {
-            let reply_template = SaintJohn {};
-            debug!("loaded : {}", "Saint-John");
-            reply_template.render().unwrap()
+            debug!("loaded: Saint-John");
+            SaintJohn {
+                project_name: project.into(),
+                high_res,
+            }.render().unwrap()
         }
         "HomardRojas" => {
-            let reply_template = HomardRojas {};
-            debug!("loaded : {}", "HomardRojas");
-            reply_template.render().unwrap()
+            debug!("loaded: HomardRojas");
+            HomardRojas {
+                project_name: project.into(),
+                high_res,
+            }
+                .render()
+                .unwrap()
         }
         "CarbonixWorkerSuit" => {
-            let reply_template = CarbonixWorkerSuit {};
-            debug!("loaded : {}", "CarbonixWorkerSuit");
-            reply_template.render().unwrap()
+            debug!("loaded: CarbonixWorkerSuit");
+            CarbonixWorkerSuit {
+                project_name: project.into(),
+                high_res,
+            }
+                .render()
+                .unwrap()
         }
         "ClimbingExoSuit" => {
-            let reply_template = ClimbingExoSuit {};
-            debug!("loaded : {}", "ClimbingExoSuit");
-            reply_template.render().unwrap()
+            debug!("loaded: ClimbingExoSuit");
+            ClimbingExoSuit {
+                project_name: project.into(),
+                high_res,
+            }
+                .render()
+                .unwrap()
         }
         "ClimbingExoSuit3d" => {
-            let reply_template = ClimbingExoSuit3d {};
-            debug!("loaded : {}", "ClimbingExoSuit3d");
-            reply_template.render().unwrap()
+            debug!("loaded: ClimbingExoSuit3d");
+            ClimbingExoSuit3d {
+                project_name: project.into(),
+                high_res,
+            }.render().unwrap()
         }
         "Intru" => {
-            let reply_template = Intru {};
-            debug!("loaded : {}", "Intru");
-            reply_template.render().unwrap()
+            debug!("loaded: Intru");
+            Intru {
+                project_name: project.into(),
+                high_res,
+            }
+                .render()
+                .unwrap()
         }
         "TeamBlue" => {
-            let reply_template = TeamBlue {};
-            debug!("loaded : {}", "TeamBlue");
-            reply_template.render().unwrap()
+            debug!("loaded: TeamBlue");
+            TeamBlue {
+                project_name: project.into(),
+                high_res,
+            }.render().unwrap()
         }
         "TribalYellowDemon" => {
-            let reply_template = TribalYellowDemon {};
-            debug!("loaded : {}", "TribalYellowDemon");
-            reply_template.render().unwrap()
+            debug!("loaded: TribalYellowDemon");
+            TribalYellowDemon {
+                project_name: project.into(),
+                high_res,
+            }.render().unwrap()
         }
         "UrbanWhiteCrowMan" => {
-            let reply_template = UrbanWhiteCrowMan {};
-            debug!("loaded : {}", "UrbanWhiteCrowMan");
-            reply_template.render().unwrap()
+            debug!("loaded: UrbanWhiteCrowMan");
+            UrbanWhiteCrowMan {
+                project_name: project.into(),
+                high_res,
+            }.render().unwrap()
         }
         _ => {
-            let reply_template = MissingProject {};
-            error!("loaded : {}", "MissingProject");
-            reply_template.render().unwrap()
+            error!("loaded: MissingProject");
+            MissingProject {}.render().unwrap()
         }
-    };
-
-    (StatusCode::OK, Html(reply))
+    }
 }

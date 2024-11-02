@@ -4,7 +4,7 @@ pre {
   text-align: center;
   color: $color_12;
   font-size: 1.2rem;
-  margin: auto 5rem;
+  margin: auto;
   transition: 0.25s;
   &:hover {
     -ms-transform: scale(1.1); /* IE 9 */
@@ -150,4 +150,40 @@ img {
 .errorlol {
   font-size: 7rem;
   height: 70%;
+}
+
+.floating_button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: $color_13;
+  color: $color_08;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensures the button stays on top */
+  &:hover {
+    background-color: $color_10; /* Darker color on hover */
+  }
+}
+
+.floating_x_button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: $color_13;
+  color: $color_08;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensures the button stays on top */
+  &:hover {
+    background-color: $color_10; /* Darker color on hover */
+  }
 }

@@ -4,15 +4,42 @@
     {{ style_sheet }}
 </style>
 
-<div class={{class_name.blur}}></div>
-<div class={{class_name.fullscreencontainer}}>
-<div class={{class_name.fullscreenblog}}>
-    <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
-</div>
-<div class="{{class_name.fullscreengallery}}">
-    <img src=/assets/projects/ClimbingExoSuit/sketch_843_noise.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
-    <img src=/assets/projects/ClimbingExoSuit/sketch_843_color.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
-    <img src=/assets/projects/ClimbingExoSuit/sketch_842.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
-    <img src=/assets/projects/ClimbingExoSuit/sketch_843.gif class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
-</div>
+<div id="all">
+    <div class={{class_name.blur}}></div>
+
+    <div class={{class_name.fullscreencontainer}}>
+
+        <button
+                class="{{class_name.floating_button}}"
+                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-target="#all"
+                hx-swap="outerHTML"
+        >
+            {% if high_res %}
+            High Res
+            {% else %}
+            Low Res
+            {% endif %}
+        </button>
+
+        <div class={{class_name.fullscreenblog}}>
+            <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+        </div>
+
+        <div class="{{class_name.fullscreengallery}}">
+            {% if high_res %}
+                {% set (res,type) = ("HighRes","jpg") %}
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_noise.{{type}} class={{class_name.fullscreenimage}} />
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_color.{{type}} class={{class_name.fullscreenimage}} />
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_842.{{type}} class={{class_name.fullscreenimage}} />
+            {% else %}
+                {% set (res,type) = ("LowRes","avif") %}
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_noise.{{type}} class={{class_name.fullscreenimage}} />
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_color.{{type}} class={{class_name.fullscreenimage}} />
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_842.{{type}} class={{class_name.fullscreenimage}} />
+            {% endif %}
+            <img src=/assets/projects/{{project_name}}/sketch_843.gif class={{class_name.fullscreenimage}} />
+        </div>
+
+    </div>
 </div>

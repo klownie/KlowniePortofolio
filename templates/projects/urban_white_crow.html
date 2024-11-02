@@ -4,12 +4,37 @@
     {{ style_sheet }}
 </style>
 
-<div class={{class_name.blur}}></div>
-<div class={{class_name.fullscreencontainer}}>
-<div class={{class_name.fullscreenblog}}>
-    <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
-</div>
-<div class="{{class_name.fullscreengallery}}">
-    <img src=/assets/projects/UrbanWhiteCrowMan/sketch_717.jpg class={{class_name.fullscreenimage}} alt="Fullscreen Image" />
-</div>
+<div id="all">
+    <div class={{class_name.blur}}></div>
+
+    <div class={{class_name.fullscreencontainer}}>
+
+        <button
+                class="{{class_name.floating_button}}"
+                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-target="#all"
+                hx-swap="outerHTML"
+        >
+            {% if high_res %}
+            High Res
+            {% else %}
+            Low Res
+            {% endif %}
+        </button>
+
+        <div class={{class_name.fullscreenblog}}>
+            <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+        </div>
+
+        <div class="{{class_name.fullscreengallery}}">
+            {% if high_res %}
+            {% set (res,type) = ("HighRes","jpg") %}
+            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_717.{{type}} class={{class_name.fullscreenimage}} />
+            {% else %}
+            {% set (res,type) = ("LowRes","avif") %}
+            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_717.{{type}} class={{class_name.fullscreenimage}} />
+            {% endif %}
+        </div>
+
+    </div>
 </div>

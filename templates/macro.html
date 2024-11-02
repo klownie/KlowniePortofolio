@@ -5,23 +5,20 @@
 <style>
     {{ style_sheet }}
 </style>
-<div
+
+<img
+        class="{{class_name.frame}}"
+        src=/assets/projects/{{project}}/thumbnail.avif
+        alt="FRAME"
         hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
         hx-swap="outerHTML"
+        hx-target="#toggledcontainer"
+/>
+
+<div
+        id="toggledcontainer"
 >
-    <img class="{{class_name.frame}}" src=assets/projects/{{project}}/thumbnail.avif alt="FRAME" />
-    {% if fullscreen %}
-    <div
-            hx-get="api/projects/{{project}}"
-            hx-trigger="load"
-            hx-swap="outerHTML"
-    >
-    </div>
-    {% else %}
-    {% endif %}
 </div>
-
-
 
 {% endmacro %}
 

@@ -5,11 +5,17 @@
 </style>
 
 <div
-        hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
-        hx-swap="outerHTML"
+        id="toggledcontainer"
 >
-    <img class="{{class_name.frame}}" src=/assets/projects/{{project}}/thumbnail.avif alt="FRAME" />
     {% if fullscreen %}
+    <button
+            class="{{class_name.floating_x_button}}"
+            hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
+            hx-swap="outerHTML"
+            hx-target="#toggledcontainer"
+    >
+        X
+    </button>
     <div
             hx-get="api/projects/{{project}}"
             hx-trigger="load"
