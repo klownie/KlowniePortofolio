@@ -46,7 +46,10 @@ async fn main() {
         .route("/name", get(next_name_handler))
         .route("/fullscreen", get(fullscreen_toggle_handler))
         .route("/projects/:project", get(project_request_handler))
-        .route("/toggleres/:project_name/:high_res", get(resolution_request_handler));
+        .route(
+            "/toggleres/:project_name/:high_res",
+            get(resolution_request_handler),
+        );
 
     let app = Router::new()
         .nest("/api", api_router)
@@ -125,7 +128,9 @@ async fn project_request_handler(Path(project): Path<String>) -> impl IntoRespon
     (StatusCode::OK, Html(reply))
 }
 
-async fn resolution_request_handler(Path((project, high_res)): Path<(String, bool)>) -> impl IntoResponse {
+async fn resolution_request_handler(
+    Path((project, high_res)): Path<(String, bool)>,
+) -> impl IntoResponse {
     let reply = render_project_template(&project, high_res.not());
     (StatusCode::OK, Html(reply))
 }
@@ -137,14 +142,18 @@ fn render_project_template(project: &str, high_res: bool) -> String {
             SamuConceptCharacter {
                 project_name: project.into(),
                 high_res,
-            }.render().unwrap()
+            }
+            .render()
+            .unwrap()
         }
         "Saint-John" => {
             debug!("loaded: Saint-John");
             SaintJohn {
                 project_name: project.into(),
                 high_res,
-            }.render().unwrap()
+            }
+            .render()
+            .unwrap()
         }
         "HomardRojas" => {
             debug!("loaded: HomardRojas");
@@ -152,8 +161,8 @@ fn render_project_template(project: &str, high_res: bool) -> String {
                 project_name: project.into(),
                 high_res,
             }
-                .render()
-                .unwrap()
+            .render()
+            .unwrap()
         }
         "CarbonixWorkerSuit" => {
             debug!("loaded: CarbonixWorkerSuit");
@@ -161,8 +170,8 @@ fn render_project_template(project: &str, high_res: bool) -> String {
                 project_name: project.into(),
                 high_res,
             }
-                .render()
-                .unwrap()
+            .render()
+            .unwrap()
         }
         "ClimbingExoSuit" => {
             debug!("loaded: ClimbingExoSuit");
@@ -170,15 +179,17 @@ fn render_project_template(project: &str, high_res: bool) -> String {
                 project_name: project.into(),
                 high_res,
             }
-                .render()
-                .unwrap()
+            .render()
+            .unwrap()
         }
         "ClimbingExoSuit3d" => {
             debug!("loaded: ClimbingExoSuit3d");
             ClimbingExoSuit3d {
                 project_name: project.into(),
                 high_res,
-            }.render().unwrap()
+            }
+            .render()
+            .unwrap()
         }
         "Intru" => {
             debug!("loaded: Intru");
@@ -186,29 +197,35 @@ fn render_project_template(project: &str, high_res: bool) -> String {
                 project_name: project.into(),
                 high_res,
             }
-                .render()
-                .unwrap()
+            .render()
+            .unwrap()
         }
         "TeamBlue" => {
             debug!("loaded: TeamBlue");
             TeamBlue {
                 project_name: project.into(),
                 high_res,
-            }.render().unwrap()
+            }
+            .render()
+            .unwrap()
         }
         "TribalYellowDemon" => {
             debug!("loaded: TribalYellowDemon");
             TribalYellowDemon {
                 project_name: project.into(),
                 high_res,
-            }.render().unwrap()
+            }
+            .render()
+            .unwrap()
         }
         "UrbanWhiteCrowMan" => {
             debug!("loaded: UrbanWhiteCrowMan");
             UrbanWhiteCrowMan {
                 project_name: project.into(),
                 high_res,
-            }.render().unwrap()
+            }
+            .render()
+            .unwrap()
         }
         _ => {
             error!("loaded: MissingProject");

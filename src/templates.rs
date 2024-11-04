@@ -45,68 +45,68 @@ pub struct MissingProject {}
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/samu_concept_character.html")]
 pub struct SamuConceptCharacter {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/saint_john.html")]
 pub struct SaintJohn {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/homard_rojas.html")]
 pub struct HomardRojas {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/carbonix_worker_suit.html")]
 pub struct CarbonixWorkerSuit {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/climbing_exo_suit.html")]
 pub struct ClimbingExoSuit {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/intru.html")]
 pub struct Intru {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/climbing_exo_suit_3d.html")]
 pub struct ClimbingExoSuit3d {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/team_blue.html")]
 pub struct TeamBlue {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/tribal_yellow_demon.html")]
 pub struct TribalYellowDemon {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/urban_white_crow.html")]
 pub struct UrbanWhiteCrowMan {
-    pub project_name : String,
-    pub high_res : bool
+    pub project_name: String,
+    pub high_res: bool,
 }

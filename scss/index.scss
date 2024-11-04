@@ -1,8 +1,14 @@
 @import "Twilight";
 
-pre {
+.center {
+  display: flex;
   text-align: center;
+  justify-content: center;
+}
+pre {
+  display: inline-block;
   color: $color_12;
+  text-align: left;
   font-size: 1.2rem;
   margin: auto;
   transition: 0.25s;
@@ -30,26 +36,24 @@ h1 {
 }
 
 .masonry {
-  --gap: clamp(1rem, 5vmin, 2rem);
   columns: 300px;
-  //gap: var(--gap);
+  gap: 1rem;
   max-width: 960px;
   margin: 5rem auto;
 }
 
 .masonry > * {
   break-inside: avoid;
-  margin-bottom: var(--gap);
 }
 
 .frame {
-  border-radius: 8px;
+  border-radius: 1rem;
   max-width: 100%;
   transition: 0.25s;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
   &:hover {
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Safari 3-8 */
-    transform: scale(1.1);
+    border: 5px solid $color_10;
   }
 }
 
@@ -59,14 +63,15 @@ h1 {
   color: $color_08;
   margin: auto auto;
   max-width: 960px;
+  text-align: left;
   font-family: Mononoki, sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
 }
 
 .togglename {
+  user-select: none;
   cursor: pointer;
-  align-items: center;
 }
 
 a {
@@ -162,7 +167,7 @@ img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 3rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* Ensures the button stays on top */
   &:hover {
@@ -180,7 +185,7 @@ img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 3rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* Ensures the button stays on top */
   &:hover {

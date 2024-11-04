@@ -1,10 +1,10 @@
 {% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
 
-<style>
-    {{ style_sheet }}
-</style>
-
 <div id="all">
+    <style>
+        {{ style_sheet }}
+    </style>
+
     <div class={{class_name.blur}}></div>
 
     <div class={{class_name.fullscreencontainer}}>

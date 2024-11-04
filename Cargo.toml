@@ -31,7 +31,6 @@ log = "0.4.22"
 #Esthetics
 turf = "0.9.3"
 text-to-ascii-art="0.1.10"
-icondata = "0.4.0"
 
 [dev-dependencies]
 anyhow = "1.0.91"

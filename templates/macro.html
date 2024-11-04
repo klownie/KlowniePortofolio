@@ -9,16 +9,11 @@
 <img
         class="{{class_name.frame}}"
         src=/assets/projects/{{project}}/thumbnail.avif
-        alt="FRAME"
+        alt="{{project}}"
         hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
         hx-swap="outerHTML"
         hx-target="#toggledcontainer"
 />
-
-<div
-        id="toggledcontainer"
->
-</div>
 
 {% endmacro %}
 

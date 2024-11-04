@@ -1,18 +1,19 @@
 {% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
 
-<style>
-    {{ style_sheet }}
-</style>
-
 <div
         id="toggledcontainer"
 >
+    <style>
+        {{ style_sheet }}
+    </style>
+
     {% if fullscreen %}
     <button
             class="{{class_name.floating_x_button}}"
             hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
             hx-swap="outerHTML"
             hx-target="#toggledcontainer"
+            hx-trigger="click"
     >
         X
     </button>
