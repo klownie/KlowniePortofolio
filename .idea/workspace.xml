@@ -8,27 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/masonry.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scss/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/frame_toggle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/frame_toggle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/interactive_name.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/interactive_name.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/macro.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/macro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/carbonix_worker_suit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/carbonix_worker_suit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/climbing_exo_suit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/climbing_exo_suit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/climbing_exo_suit_3d.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/climbing_exo_suit_3d.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/homard_rojas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/homard_rojas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/intru.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/intru.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/saint_john.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/saint_john.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/samu_concept_character.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/samu_concept_character.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/team_blue.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/team_blue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/tribal_yellow_demon.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/tribal_yellow_demon.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/urban_white_crow.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/urban_white_crow.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +127,8 @@
       <workItem from="1730452439419" duration="15838000" />
       <workItem from="1730535352975" duration="23335000" />
       <workItem from="1730638545609" duration="7546000" />
-      <workItem from="1730670741680" duration="7619000" />
+      <workItem from="1730670741680" duration="7952000" />
+      <workItem from="1730712390373" duration="2545000" />
     </task>
     <servers />
   </component>
