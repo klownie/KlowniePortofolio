@@ -161,13 +161,13 @@ a {
   bottom: 20px;
   right: 20px;
   padding: 10px 20px;
-  background-color: $color_13;
-  color: $color_08;
+  font-weight: 700;
+  background-color: $color_08;
+  color: $color_01;
   border: none;
-  border-radius: 5px;
+  border-radius: 2%;
   cursor: pointer;
-  font-size: 3rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 2.5rem;
   z-index: 1000; /* Ensures the button stays on top */
   &:hover {
     background-color: $color_10; /* Darker color on hover */
@@ -178,16 +178,12 @@ a {
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 10px 20px;
-  background-color: $color_13;
   color: $color_08;
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 3rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* Ensures the button stays on top */
   &:hover {
-    background-color: $color_10; /* Darker color on hover */
+    color: $color_10; /* Darker color on hover */
   }
 }

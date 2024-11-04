@@ -11,26 +11,33 @@
         src=/assets/projects/{{project}}/thumbnail.avif
         alt="{{project}}"
         hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
+        hx-trigger="click"
         hx-swap="outerHTML"
         hx-target="#toggledcontainer"
 />
 
 {% endmacro %}
 
-{% macro svgicon16(pathd) %}
-<svg viewBox="0 0 16 16" fill="currentColor" height="1rem" width="1rem" role="graphics-symbol">
+{% macro svgicon16(pathd,size) %}
+<svg viewBox="0 0 16 16" fill="currentColor" height="{{size}}" width="{{size}}" role="graphics-symbol">
     <path d="{{pathd}}"></path>
 </svg>
 {% endmacro %}
 
-{% macro svgicon24(pathd) %}
-<svg viewBox="0 0 24 24" fill="currentColor" height="1rem" width="1rem" role="graphics-symbol">
+{% macro svgicon24(pathd,size) %}
+<svg viewBox="0 0 24 24" fill="currentColor" height="{{size}}" width="{{size}}" role="graphics-symbol">
     <path d="{{pathd}}"></path>
 </svg>
 {% endmacro %}
 
-{% macro svgicon512(pathd) %}
-<svg viewBox="0 0 512 512" fill="currentColor" height="1rem" width="1rem" role="graphics-symbol">
+{% macro svgicon512(pathd,size) %}
+<svg viewBox="0 0 512 512" fill="currentColor" height="{{size}}" width="{{size}}" role="graphics-symbol">
+    <path d="{{pathd}}"></path>
+</svg>
+{% endmacro %}
+
+{% macro svgicon1024(pathd,size) %}
+<svg viewBox="0 0 1024 1024" fill="currentColor" height="{{size}}" width="{{size}}" role="graphics-symbol">
     <path d="{{pathd}}"></path>
 </svg>
 {% endmacro %}

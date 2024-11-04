@@ -1,7 +1,6 @@
 {% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
 
 <div id="all">
-
     <style>
         {{ style_sheet }}
     </style>
@@ -17,9 +16,9 @@
                 hx-swap="outerHTML"
         >
             {% if high_res %}
-            High Res
+            HD
             {% else %}
-            Low Res
+            LD
             {% endif %}
         </button>
 
