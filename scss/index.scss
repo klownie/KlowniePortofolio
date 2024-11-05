@@ -22,6 +22,10 @@ pre {
 body {
   background-color: $background;
   font-family: Mononoki, sans-serif;
+  ::selection {
+    background-color: $color_12;
+    color: $color_01;
+  }
 }
 
 h1 {
@@ -31,10 +35,6 @@ h1 {
 
 p {
   color: $color_08;
-}
-
-span {
-  text-shadow: 1em 1em $color_05
 }
 
 img {
@@ -55,7 +55,7 @@ img {
   margin: 5rem auto;
 }
 
-.masonry > * {
+.masonry * {
   break-inside: avoid;
 }
 
@@ -80,12 +80,23 @@ img {
   font-family: Mononoki, sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
+  span {
+    color: $color_04;
+    font-weight: 700;
+  }
 }
 
-.togglename {
-  user-select: none;
-  cursor: pointer;
+#togglable_name_container {
+  .togglename {
+    user-select: none;
+    cursor: pointer;
+  }
+
+  span {
+    text-shadow: 1em 1em $color_05
+  }
 }
+
 
 a {
   .icon{
