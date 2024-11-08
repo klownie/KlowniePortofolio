@@ -7,7 +7,9 @@ edition = "2021"
 
 #Backend
 axum = { version = "0.7.7", features = ["macros"]}
+axum-extra = { version = "0.10.0-alpha.1", features = ["cookie", "typed-header"] }
 axum-htmx = "0.6.0"
+axum-server = { version = "0.6.0", features = ["tls-rustls"] }
 
 #templating
 askama = { version = "0.12.1", features = ["with-axum"] }
@@ -16,7 +18,7 @@ askama_axum = "0.4.0"
 #protocols
 tokio = { version = "1.0", features = ["full"] }
 tower = { version = "0.5.1", features = ["util"] }
-tower-http = { version = "0.6.1", features = ["fs", "trace"] }
+tower-http = { version = "0.6.1", features = ["fs", "set-header"] }
 
 #serde
 serde = { version = "1.0", features = ["derive","std","alloc"] }
@@ -31,6 +33,7 @@ log = "0.4.22"
 #Esthetics
 turf = "0.9.3"
 text-to-ascii-art="0.1.10"
+uuid = { version = "1.11.0", features = ["v4"] }
 
 [dev-dependencies]
 anyhow = "1.0.91"

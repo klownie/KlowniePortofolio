@@ -1,0 +1,45 @@
+{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
+
+<div id="all">
+    <style>
+        {{ style_sheet }}
+    </style>
+    <div class={{class_name.blur}}></div>
+
+    <div class={{class_name.fullscreencontainer}}>
+
+        <button
+                class="{{class_name.floating_button}}"
+                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-target="#all"
+                hx-swap="outerHTML"
+        >
+            {% if high_res %}
+                HD
+            {% else %}
+                LD
+            {% endif %}
+        </button>
+
+        <div class={{class_name.fullscreenblog}}>
+            <h1>Umbrella Knight</h1>
+        </div>
+
+        <div class="{{class_name.fullscreengallery}}">
+            {% if high_res %}
+                {% set (res,type) = ("HighRes","jpg") %}
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_837_04.{{type}} class={{class_name.fullscreenimage}} />
+            <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
+                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_837.webm" type="video/webm">
+            </video>
+            {% else %}
+                {% set (res,type) = ("LowRes","avif") %}
+                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_837_04.{{type}} class={{class_name.fullscreenimage}} />
+            <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
+                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_837.webm" type="video/webm">
+            </video>
+            {% endif %}
+        </div>
+
+    </div>
+</div>

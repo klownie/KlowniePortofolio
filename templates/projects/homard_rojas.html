@@ -30,11 +30,16 @@
             {% if high_res %}
                 {% set (res,type) = ("HighRes","jpg") %}
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_836_06.{{type}} class={{class_name.fullscreenimage}} />
+                <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
+                    <source src="/assets/projects/{{project_name}}/{{res}}/sketch_836.webm" type="video/webm">
+                </video>
             {% else %}
                 {% set (res,type) = ("LowRes","avif") %}
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_836_06.{{type}} class={{class_name.fullscreenimage}} />
+                <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
+                    <source src="/assets/projects/{{project_name}}/{{res}}/sketch_836.webm" type="video/webm">
+                </video>
             {% endif %}
-            <img src=/assets/projects/{{project_name}}/sketch_836.gif class={{class_name.fullscreenimage}} />
         </div>
 
     </div>

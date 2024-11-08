@@ -1,235 +1,111 @@
+mod handlers;
+mod middleware;
+mod routes;
 mod templates;
 
-use askama_axum::Template;
-use axum::debug_handler;
-use axum::extract::{ConnectInfo, Path, Query};
-use axum::{
-    http::StatusCode,
-    response::{Html, IntoResponse},
-    routing::get,
-    Router,
-};
-use log::{debug, error, info};
-use std::net::SocketAddr;
-use std::ops::Not;
-use templates::*;
-use tokio::net::TcpListener;
+use log::info;
+use routes::build_routes;
+use tower_http::set_header::SetResponseHeaderLayer;
+use tower::ServiceBuilder;
+use crate::middleware::{generate_expires_header};
+use axum::http::header;
 use tower_http::services::ServeDir;
+use axum_server::tls_rustls::RustlsConfig;
+use std::{net::SocketAddr, path::PathBuf};
+use axum::{
+    handler::HandlerWithoutStateExt,
+    http::{StatusCode, Uri},
+    response::Redirect,
+    BoxError,
+};
+use axum::extract::Host;
 
-const IP: &'static str = "0.0.0.0";
-const PORT: &'static str = "3000";
+pub const IP: &'static str = "0.0.0.0";
 
-const TITLE_NAMES: &[&str] = &["Audrick Yeu", "Portofolio"];
-
-const PROJECTS: &[&str] = &[
-    "SamuConceptCharacter",
-    "Saint-John",
-    "HomardRojas",
-    "CarbonixWorkerSuit",
-    "ClimbingExoSuit",
-    "Intru",
-    "ClimbingExoSuit3d",
-    "TeamBlue",
-    "TribalYellowDemon",
-    "UrbanWhiteCrowMan",
-];
+#[allow(dead_code)]
+#[derive(Clone, Copy)]
+struct Ports {
+    http: u16,
+    https: u16,
+}
 
 #[tokio::main]
 async fn main() {
     turf::style_sheet_values!("scss/index.scss");
 
     tracing_subscriber::fmt()
-        .with_max_level(tracing::Level::DEBUG)
+        .with_max_level(tracing::Level::INFO)
         .init();
 
-    let api_router = Router::new()
-        .route("/name", get(next_name_handler))
-        .route("/fullscreen", get(fullscreen_toggle_handler))
-        .route("/projects/:project", get(project_request_handler))
-        .route(
-            "/toggleres/:project_name/:high_res",
-            get(resolution_request_handler),
-        );
+    let ports = Ports {
+        http: 7878,
+        https: 3000,
+    };
+    // optional: spawn a second server to redirect http requests to this server
+    tokio::spawn(redirect_http_to_https(ports));
 
-    let app = Router::new()
-        .nest("/api", api_router)
-        .route("/", get(handle_main))
-        .nest_service("/assets", ServeDir::new("assets"));
-
-    // add a fallback service for handling routes to unknown paths
-    let app = app.fallback(handler_404);
-
-    let listen_addr: SocketAddr = format!("{}:{}", IP, PORT).parse().unwrap();
-
-    info!("Listening on http://{}", listen_addr);
-
-    let listener = TcpListener::bind(listen_addr).await.unwrap();
-
-    axum::serve(
-        listener,
-        app.into_make_service_with_connect_info::<SocketAddr>(),
+    // configure certificate and private key used by https
+    let config = RustlsConfig::from_pem_file(
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("self_signed_certs")
+            .join("cert.pem"),
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("self_signed_certs")
+            .join("key.pem"),
     )
-    .await
-    .unwrap();
+        .await
+        .unwrap();
+
+    let expires_layer = SetResponseHeaderLayer::if_not_present(
+        header::EXPIRES,
+        generate_expires_header(7),
+    );
+
+    let middleware = ServiceBuilder::new().layer(expires_layer);
+
+    //rotes & fallback
+    let app = build_routes().nest_service("/assets", ServeDir::new("assets"));
+
+    let addr = SocketAddr::from(([127, 0, 0, 1], ports.https));
+    tracing::info!("listening on https://{}", addr);
+    axum_server::bind_rustls(addr, config)
+        .serve(app.into_make_service_with_connect_info::<SocketAddr>())
+        .await
+        .unwrap();
 }
 
-async fn handler_404() -> impl IntoResponse {
-    let template = Error404 {};
-    let reply = template.render().unwrap();
-    (StatusCode::NOT_FOUND, Html(reply))
-}
 
-#[debug_handler]
-async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl IntoResponse {
-    info!("{addr} is visiting");
-    let masonry_projects = PROJECTS;
+#[allow(dead_code)]
+async fn redirect_http_to_https(ports: Ports) {
+    fn make_https(host: String, uri: Uri, ports: Ports) -> Result<Uri, BoxError> {
+        let mut parts = uri.into_parts();
 
-    let template = Index {
-        indexed: 0,
-        name: TITLE_NAMES[0].into(),
-        fullscreen: false,
-        masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
-        project: "".into(),
-    };
-    let reply = template.render().unwrap();
-    (StatusCode::OK, Html(reply).into_response())
-}
+        parts.scheme = Some(axum::http::uri::Scheme::HTTPS);
 
-#[debug_handler]
-async fn next_name_handler(Query(template): Query<InteractiveName>) -> impl IntoResponse {
-    let index = (template.indexed + 1) % TITLE_NAMES.len();
-
-    let template = InteractiveName {
-        indexed: index,
-        name: TITLE_NAMES[index].to_string(),
-    };
-
-    let reply = template.render().unwrap();
-
-    // Return the HTML response
-    (StatusCode::OK, Html(reply))
-}
-
-#[debug_handler]
-async fn fullscreen_toggle_handler(Query(template): Query<ToggleFullscreen>) -> impl IntoResponse {
-    let new_template = ToggleFullscreen {
-        fullscreen: template.fullscreen.not(),
-        project: template.project,
-    };
-
-    let reply = new_template.render().unwrap();
-
-    // Return the HTML response
-    (StatusCode::OK, Html(reply))
-}
-
-async fn project_request_handler(Path(project): Path<String>) -> impl IntoResponse {
-    let reply = render_project_template(&project, false);
-    (StatusCode::OK, Html(reply))
-}
-
-async fn resolution_request_handler(
-    Path((project, high_res)): Path<(String, bool)>,
-) -> impl IntoResponse {
-    let reply = render_project_template(&project, high_res.not());
-    (StatusCode::OK, Html(reply))
-}
-
-fn render_project_template(project: &str, high_res: bool) -> String {
-    match project {
-        "SamuConceptCharacter" => {
-            debug!("loaded: SamuConceptCharacter");
-            SamuConceptCharacter {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
+        if parts.path_and_query.is_none() {
+            parts.path_and_query = Some("/".parse().unwrap());
         }
-        "Saint-John" => {
-            debug!("loaded: Saint-John");
-            SaintJohn {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "HomardRojas" => {
-            debug!("loaded: HomardRojas");
-            HomardRojas {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "CarbonixWorkerSuit" => {
-            debug!("loaded: CarbonixWorkerSuit");
-            CarbonixWorkerSuit {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "ClimbingExoSuit" => {
-            debug!("loaded: ClimbingExoSuit");
-            ClimbingExoSuit {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "ClimbingExoSuit3d" => {
-            debug!("loaded: ClimbingExoSuit3d");
-            ClimbingExoSuit3d {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "Intru" => {
-            debug!("loaded: Intru");
-            Intru {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "TeamBlue" => {
-            debug!("loaded: TeamBlue");
-            TeamBlue {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "TribalYellowDemon" => {
-            debug!("loaded: TribalYellowDemon");
-            TribalYellowDemon {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        "UrbanWhiteCrowMan" => {
-            debug!("loaded: UrbanWhiteCrowMan");
-            UrbanWhiteCrowMan {
-                project_name: project.into(),
-                high_res,
-            }
-            .render()
-            .unwrap()
-        }
-        _ => {
-            error!("loaded: MissingProject");
-            MissingProject {}.render().unwrap()
-        }
+
+        let https_host = host.replace(&ports.http.to_string(), &ports.https.to_string());
+        parts.authority = Some(https_host.parse()?);
+
+        Ok(Uri::from_parts(parts)?)
     }
+
+    let redirect = move |Host(host): Host, uri: Uri| async move {
+        match make_https(host, uri, ports) {
+            Ok(uri) => Ok(Redirect::permanent(&uri.to_string())),
+            Err(error) => {
+                tracing::warn!(%error, "failed to convert URI to HTTPS");
+                Err(StatusCode::BAD_REQUEST)
+            }
+        }
+    };
+
+    let addr = SocketAddr::from(([127, 0, 0, 1], ports.http));
+    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
+    tracing::info!("listening on http://{}", listener.local_addr().unwrap());
+    axum::serve(listener, redirect.into_make_service())
+        .await
+        .unwrap();
 }

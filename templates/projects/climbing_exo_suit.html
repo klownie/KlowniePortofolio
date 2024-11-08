@@ -32,13 +32,18 @@
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_noise.{{type}} class={{class_name.fullscreenimage}} />
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_color.{{type}} class={{class_name.fullscreenimage}} />
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_842.{{type}} class={{class_name.fullscreenimage}} />
+                <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
+                    <source src="/assets/projects/{{project_name}}/{{res}}/sketch_843.webm" type="video/webm">
+                </video>
             {% else %}
                 {% set (res,type) = ("LowRes","avif") %}
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_noise.{{type}} class={{class_name.fullscreenimage}} />
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_color.{{type}} class={{class_name.fullscreenimage}} />
                 <img src=/assets/projects/{{project_name}}/{{res}}/sketch_842.{{type}} class={{class_name.fullscreenimage}} />
+                <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
+                    <source src="/assets/projects/{{project_name}}/{{res}}/sketch_843.webm" type="video/webm">
+                </video>
             {% endif %}
-            <img src=/assets/projects/{{project_name}}/sketch_843.gif class={{class_name.fullscreenimage}} />
         </div>
 
     </div>

@@ -8,9 +8,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/js/hyperscript.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/CarbonixWorkerSuit/HighRes/sketch_830.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/CarbonixWorkerSuit/LowRes/sketch_830.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/ClimbingExoSuit/HighRes/sketch_843.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/ClimbingExoSuit/LowRes/sketch_843.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/Saint-John/HighRes/sketch_831.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/Saint-John/LowRes/sketch_831.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/UmbrellaKnight/HighRes/sketch_837.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/UmbrellaKnight/HighRes/sketch_837_04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/UmbrellaKnight/LowRes/sketch_837.webm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/UmbrellaKnight/LowRes/sketch_837_04.avif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/projects/UmbrellaKnight/thumbnail.avif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/self_signed_certs/cert.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/self_signed_certs/key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/handlers.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middleware.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes.rs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/projects/umbrella_knight.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scss/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/htmx.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/htmx.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/CarbonixWorkerSuit/sketch_830.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/ClimbingExoSuit/sketch_843.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/HomardRojas/LowRes/sketch_836_06.avif" beforeDir="false" afterPath="$PROJECT_DIR$/assets/projects/HomardRojas/LowRes/sketch_836_06.avif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/projects/HomardRojas/sketch_836.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/carbonix_worker_suit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/carbonix_worker_suit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/climbing_exo_suit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/climbing_exo_suit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/homard_rojas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/homard_rojas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/saint_john.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/saint_john.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,30 +82,33 @@
     &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/assets/projects/UrbanWhiteCrowMan&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/assets/projects&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
     &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/handlers.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/middleware.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/routes.rs&quot;: &quot;true&quot;,
     &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\templates\projects" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\HomardRojas\LowRes" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\HomardRojas\HighRes" />
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\UrbanWhiteCrowMan" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\TribalYellowDemon" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\TeamBlue" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\SamuConceptCharacter" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\Saint-John" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\js" />
+      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\UmbrellaKnight\HighRes" />
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\HomardRojas\HighRes" />
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\TeamBlue" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\Intru" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\CimbingExoSuit" />
-      <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\CarbonixWorkerSuite" />
     </key>
   </component>
   <component name="RunManager">
@@ -129,7 +163,15 @@
       <workItem from="1730638545609" duration="7546000" />
       <workItem from="1730670741680" duration="7952000" />
       <workItem from="1730712390373" duration="22000000" />
-      <workItem from="1730789947343" duration="10296000" />
+      <workItem from="1730789947343" duration="10956000" />
+      <workItem from="1730895540783" duration="9399000" />
+      <workItem from="1730914582800" duration="4014000" />
+      <workItem from="1730929537931" duration="1053000" />
+      <workItem from="1730969536498" duration="150000" />
+      <workItem from="1730969694072" duration="17392000" />
+      <workItem from="1731006537188" duration="567000" />
+      <workItem from="1731008259008" duration="1816000" />
+      <workItem from="1731060976136" duration="14658000" />
     </task>
     <servers />
   </component>

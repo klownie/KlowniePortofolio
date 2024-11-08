@@ -3,7 +3,9 @@
 <head>
     <title>{% block title %}{{title}}{% endblock %}</title>
     <meta charset="UTF-8">
-    <script src="/assets/htmx.min.js"></script>
+    <script src="/assets/js/htmx.min.js"></script>
+    <script src="/assets/js/hyperscript.min.js"></script>
+    <link rel="preload" href="/assets/favicon.svg" as="image" type="image/svg+xml">
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     {% block head %}{% endblock %}
 </head>

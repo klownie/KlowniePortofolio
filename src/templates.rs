@@ -1,4 +1,3 @@
-#[allow(unused)]
 use askama_axum::Template;
 use serde::{Deserialize, Serialize};
 
@@ -80,6 +79,13 @@ pub struct ClimbingExoSuit {
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "projects/intru.html")]
 pub struct Intru {
+    pub project_name: String,
+    pub high_res: bool,
+}
+
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/umbrella_knight.html")]
+pub struct UmbrellaKnight {
     pub project_name: String,
     pub high_res: bool,
 }

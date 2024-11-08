@@ -1,0 +1,215 @@
+use crate::templates::*;
+use askama_axum::Template;
+use axum::debug_handler;
+use axum::extract::{ConnectInfo, Path, Query};
+use axum::{
+    http::StatusCode,
+    response::{Html, IntoResponse},
+};
+use log::{debug, error, info};
+use std::net::SocketAddr;
+use std::ops::Not;
+use std::sync::{Arc, LazyLock, Mutex};
+
+pub const TITLE_NAMES: &[&str] = &["Audrick Yeu", "Portofolio"];
+
+pub const PROJECTS: &[&str] = &[
+    "SamuConceptCharacter",
+    "Saint-John",
+    "HomardRojas",
+    "CarbonixWorkerSuit",
+    "ClimbingExoSuit",
+    "Intru",
+    "UmbrellaKnight",
+    "ClimbingExoSuit3d",
+    "TeamBlue",
+    "TribalYellowDemon",
+    "UrbanWhiteCrowMan",
+];
+
+pub static VISITORS: LazyLock<Arc<Mutex<Vec<String>>>> =
+    LazyLock::new(|| Arc::new(Mutex::new(Vec::new())));
+
+pub async fn handler_404() -> impl IntoResponse {
+    let template = Error404 {};
+    let reply = template.render().unwrap();
+    (StatusCode::NOT_FOUND, Html(reply))
+}
+
+#[debug_handler]
+pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl IntoResponse {
+    let visitors_clone = Arc::clone(&VISITORS);
+    let mut visitors = visitors_clone.lock().unwrap();
+    if visitors.contains(&addr.to_string()) {
+        debug!("{addr} refreshed the page")
+    } else {
+        visitors.push(addr.to_string());
+        info!("{addr} is visiting");
+    }
+
+    let masonry_projects = PROJECTS;
+
+    let template = Index {
+        indexed: 0,
+        name: TITLE_NAMES[0].into(),
+        fullscreen: false,
+        masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
+        project: "".into(),
+    };
+    let reply = template.render().unwrap();
+    (StatusCode::OK, Html(reply).into_response())
+}
+
+#[debug_handler]
+pub async fn next_name_handler(Query(template): Query<InteractiveName>) -> impl IntoResponse {
+    let index = (template.indexed + 1) % TITLE_NAMES.len();
+
+    let template = InteractiveName {
+        indexed: index,
+        name: TITLE_NAMES[index].to_string(),
+    };
+
+    let reply = template.render().unwrap();
+
+    // Return the HTML response
+    (StatusCode::OK, Html(reply))
+}
+
+#[debug_handler]
+pub async fn fullscreen_toggle_handler(
+    Query(template): Query<ToggleFullscreen>,
+) -> impl IntoResponse {
+    let new_template = ToggleFullscreen {
+        fullscreen: template.fullscreen.not(),
+        project: template.project,
+    };
+
+    let reply = new_template.render().unwrap();
+
+    // Return the HTML response
+    (StatusCode::OK, Html(reply))
+}
+
+pub async fn project_request_handler(
+    ConnectInfo(addr): ConnectInfo<SocketAddr>,
+    Path(project): Path<String>,
+) -> impl IntoResponse {
+    info!("{} has requested {}", addr, &project);
+    let reply = render_project_template(&project, false).await;
+    (StatusCode::OK, Html(reply))
+}
+
+pub async fn resolution_request_handler(
+    Path((project, high_res)): Path<(String, bool)>,
+) -> impl IntoResponse {
+    let reply = render_project_template(&project, high_res.not()).await;
+    (StatusCode::OK, Html(reply))
+}
+
+pub async fn render_project_template(project: &str, high_res: bool) -> String {
+    match project {
+        "SamuConceptCharacter" => {
+            info!("loaded: SamuConceptCharacter");
+            SamuConceptCharacter {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "Saint-John" => {
+            info!("loaded: Saint-John");
+            SaintJohn {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "HomardRojas" => {
+            info!("loaded: HomardRojas");
+            HomardRojas {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "CarbonixWorkerSuit" => {
+            info!("loaded: CarbonixWorkerSuit");
+            CarbonixWorkerSuit {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "ClimbingExoSuit" => {
+            info!("loaded: ClimbingExoSuit");
+            ClimbingExoSuit {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "ClimbingExoSuit3d" => {
+            info!("loaded: ClimbingExoSuit3d");
+            ClimbingExoSuit3d {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "Intru" => {
+            info!("loaded: Intru");
+            Intru {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "UmbrellaKnight" => {
+            info!("loaded: UmbrellaKnight");
+            UmbrellaKnight {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "TeamBlue" => {
+            info!("loaded: TeamBlue");
+            TeamBlue {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "TribalYellowDemon" => {
+            info!("loaded: TribalYellowDemon");
+            TribalYellowDemon {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        "UrbanWhiteCrowMan" => {
+            info!("loaded: UrbanWhiteCrowMan");
+            UrbanWhiteCrowMan {
+                project_name: project.into(),
+                high_res,
+            }
+            .render()
+            .unwrap()
+        }
+        _ => {
+            error!("loaded: MissingProject");
+            MissingProject {}.render().unwrap()
+        }
+    }
+}
