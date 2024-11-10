@@ -14,6 +14,9 @@
         hx-trigger="click"
         hx-swap="outerHTML"
         hx-target="#toggledcontainer"
+        _="on intersection(intersecting) having threshold 0.5
+         if intersecting transition opacity to 1
+         else transition opacity to 0 "
 />
 
 {% endmacro %}

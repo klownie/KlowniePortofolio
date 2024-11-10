@@ -5,23 +5,11 @@
   text-align: center;
   justify-content: center;
 }
-pre {
-  display: inline-block;
-  color: $color_12;
-  text-align: left;
-  font-size: 1.2rem;
-  margin: auto;
-  transition: 0.25s;
-  &:hover {
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Safari 3-8 */
-    transform: scale(1.1);
-  }
-}
 
 body {
   background-color: $background;
   font-family: Mononoki, sans-serif;
+
   ::selection {
     background-color: $color_12;
     color: $color_01;
@@ -65,13 +53,14 @@ img {
   transition: 0.25s;
   margin-bottom: 1rem;
   box-sizing: border-box;
+
   &:hover {
     border: 5px solid $color_10;
   }
 }
 
 .bio {
-  background: rgba($color_09 ,20%);
+  background: rgba($color_09, 20%);
   padding: 20px;
   color: $color_08;
   margin: auto auto;
@@ -80,6 +69,7 @@ img {
   font-family: Mononoki, sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
+
   span {
     color: $color_04;
     font-weight: 700;
@@ -87,9 +77,36 @@ img {
 }
 
 #togglable_name_container {
-  .togglename {
+  height: 75vh;
+  display: flex;
+  align-items: center; // Center items vertically
+  justify-content: center; // Center items horizontally
+
+  pre {
+    display: inline-block;
     user-select: none;
     cursor: pointer;
+    color: $color_12;
+    text-align: left;
+    font-size: 1.2rem;
+    margin: auto 20px;
+    transition: 0.25s;
+    max-width: 100vw; // Limit width to viewport width
+    word-wrap: break-word; // Break long lines
+    overflow-x: hidden;
+
+    &:hover {
+      -ms-transform: scale(1.1); /* IE 9 */
+      -webkit-transform: scale(1.1); /* Safari 3-8 */
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 1000px) {
+      font-size: 0.75rem; // Reduce the font size on smaller screens
+    }
+    @media (max-width: 480px) {
+      font-size: 0.5rem; // Further reduce the font size on very small screens
+    }
   }
 
   span {
@@ -99,21 +116,26 @@ img {
 
 
 a {
-  .icon{
+  .icon {
     text-decoration: none;
   }
+
   &:link {
     text-decoration: none;
     color: $color_12;
-  };
+  }
+;
+
   &:visited {
     text-decoration: none;
     color: $color_02;
   }
+
   &:hover {
     text-decoration: none;
     color: $color_10;
   }
+
   &:active {
     text-decoration: none;
     color: $color_12;
@@ -127,6 +149,7 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
+
   .fullscreengallery {
     display: flex;
     flex-direction: column;

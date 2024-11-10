@@ -11,8 +11,6 @@ use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::{Arc, LazyLock, Mutex};
 
-pub const TITLE_NAMES: &[&str] = &["Audrick Yeu", "Portofolio"];
-
 pub const PROJECTS: &[&str] = &[
     "SamuConceptCharacter",
     "Saint-John",
@@ -50,28 +48,16 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
     let masonry_projects = PROJECTS;
 
     let template = Index {
-        indexed: 0,
-        name: TITLE_NAMES[0].into(),
+        titles: Vec::from(["Audrick Yeu".into(), "Portofolio".into(), "Concept".into(), "Art".into()]),
         fullscreen: false,
         masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
         project: "".into(),
-    };
-    let reply = template.render().unwrap();
-    (StatusCode::OK, Html(reply).into_response())
-}
+    }
+    .render()
+    .unwrap();
 
-#[debug_handler]
-pub async fn next_name_handler(Query(template): Query<InteractiveName>) -> impl IntoResponse {
-    let index = (template.indexed + 1) % TITLE_NAMES.len();
+    let reply: String = template;
 
-    let template = InteractiveName {
-        indexed: index,
-        name: TITLE_NAMES[index].to_string(),
-    };
-
-    let reply = template.render().unwrap();
-
-    // Return the HTML response
     (StatusCode::OK, Html(reply))
 }
 

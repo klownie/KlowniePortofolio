@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <title>{% block title %}{{title}}{% endblock %}</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover">
     <script src="/assets/js/htmx.min.js"></script>
     <script src="/assets/js/hyperscript.min.js"></script>
-    <link rel="preload" href="/assets/favicon.svg" as="image" type="image/svg+xml">
+<!--    <link rel="preload" href="/assets/favicon.svg" as="image" type="image/svg+xml">-->
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     {% block head %}{% endblock %}
 </head>
 <body>
+
     <div id="content">
         {% block content %}{% endblock %}
     </div>

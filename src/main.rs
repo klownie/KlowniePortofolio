@@ -2,27 +2,24 @@ mod handlers;
 mod middleware;
 mod routes;
 mod templates;
+use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
 
-use log::info;
-use routes::build_routes;
-use tower_http::set_header::SetResponseHeaderLayer;
-use tower::ServiceBuilder;
-use crate::middleware::{generate_expires_header};
+use crate::middleware::generate_expires_header;
+use axum::extract::Host;
 use axum::http::header;
-use tower_http::services::ServeDir;
-use axum_server::tls_rustls::RustlsConfig;
-use std::{net::SocketAddr, path::PathBuf};
 use axum::{
     handler::HandlerWithoutStateExt,
     http::{StatusCode, Uri},
     response::Redirect,
     BoxError,
 };
-use axum::extract::Host;
+use axum_server::tls_rustls::RustlsConfig;
+use routes::build_routes;
+use std::{net::SocketAddr, path::PathBuf};
+use tower::ServiceBuilder;
+use tower_http::services::ServeDir;
+use tower_http::set_header::SetResponseHeaderLayer;
 
-pub const IP: &'static str = "0.0.0.0";
-
-#[allow(dead_code)]
 #[derive(Clone, Copy)]
 struct Ports {
     http: u16,
@@ -47,24 +44,39 @@ async fn main() {
     // configure certificate and private key used by https
     let config = RustlsConfig::from_pem_file(
         PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("self_signed_certs")
+            .join("private_certs")
             .join("cert.pem"),
         PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("self_signed_certs")
+            .join("private_certs")
             .join("key.pem"),
     )
-        .await
-        .unwrap();
+    .await
+    .unwrap();
 
-    let expires_layer = SetResponseHeaderLayer::if_not_present(
-        header::EXPIRES,
-        generate_expires_header(7),
-    );
-
-    let middleware = ServiceBuilder::new().layer(expires_layer);
+    let middleware = ServiceBuilder::new()
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::EXPIRES,
+            generate_expires_header(7),
+        ))
+        .layer(
+            RequestDecompressionLayer::new()
+                .br(true)
+                .deflate(true)
+                .gzip(true)
+                .zstd(true),
+        )
+        .layer(
+            CompressionLayer::new()
+                .br(true)
+                .deflate(true)
+                .gzip(true)
+                .zstd(true),
+        );
 
     //rotes & fallback
-    let app = build_routes().nest_service("/assets", ServeDir::new("assets"));
+    let app = build_routes()
+        .nest_service("/assets", ServeDir::new("assets"))
+        .layer(middleware);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], ports.https));
     tracing::info!("listening on https://{}", addr);
@@ -73,7 +85,6 @@ async fn main() {
         .await
         .unwrap();
 }
-
 
 #[allow(dead_code)]
 async fn redirect_http_to_https(ports: Ports) {

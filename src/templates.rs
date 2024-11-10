@@ -2,28 +2,26 @@ use askama_axum::Template;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Template)]
-#[template(path = "index.html")]
+#[template(path = "partials/index.html")]
 pub struct Index {
-    pub indexed: usize,
-    pub name: String,
+    pub titles: Vec<String>,
     pub fullscreen: bool,
     pub masonry: Vec<String>,
     pub project: String,
 }
 
 #[derive(Debug, Template)]
-#[template(path = "error_404.html")]
+#[template(path = "errors/error_404.html")]
 pub struct Error404 {}
 
 #[derive(Debug, Serialize, Deserialize, Template)]
-#[template(path = "interactive_name.html")]
+#[template(path = "partials/interactive_name.html")]
 pub struct InteractiveName {
-    pub indexed: usize,
-    pub name: String,
+    pub titles: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
-#[template(path = "frame_toggle.html")]
+#[template(path = "partials/frame_toggle.html")]
 pub struct ToggleFullscreen {
     pub fullscreen: bool,
     pub project: String,
