@@ -1,4 +1,3 @@
-
 use crate::templates::*;
 use askama_axum::Template;
 use axum::debug_handler;
@@ -36,7 +35,6 @@ pub async fn handler_404() -> impl IntoResponse {
 
 #[debug_handler]
 pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl IntoResponse {
-
     let visitors_clone = Arc::clone(&VISITORS);
     let mut visitors = visitors_clone.lock().unwrap();
     if visitors.contains(&addr.to_string()) {
@@ -49,7 +47,13 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
     let masonry_projects = PROJECTS;
 
     let template = Index {
-        titles: Vec::from(["Audrick".into(), "Yeu".into(), "Portofolio".into(), "Concept".into(), "Art".into()]),
+        titles: Vec::from([
+            "Audrick".into(),
+            "Yeu".into(),
+            "Portofolio".into(),
+            "Concept".into(),
+            "Art".into(),
+        ]),
         fullscreen: false,
         masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
         project: "".into(),
@@ -94,89 +98,59 @@ pub async fn resolution_request_handler(
 }
 
 pub async fn render_project_template(project: &str, high_res: bool) -> String {
-    let rendered_template = match project {
-        "SamuConceptCharacter" => {
-            info!("loaded: SamuConceptCharacter");
-            Project::SamuConceptCharacter {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "Saint-John" => {
-            info!("loaded: Saint-John");
-            Project::SaintJohn {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "HomardRojas" => {
-            info!("loaded: HomardRojas");
-            Project::HomardRojas {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "CarbonixWorkerSuit" => {
-            info!("loaded: CarbonixWorkerSuit");
-            Project::CarbonixWorkerSuit {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "ClimbingExoSuit" => {
-            info!("loaded: ClimbingExoSuit");
-            Project::ClimbingExoSuit {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "ClimbingExoSuit3d" => {
-            info!("loaded: ClimbingExoSuit3d");
-            Project::ClimbingExoSuit3d {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "Intru" => {
-            info!("loaded: Intru");
-            Project::Intru {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "UmbrellaKnight" => {
-            info!("loaded: UmbrellaKnight");
-            Project::UmbrellaKnight {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "TeamBlue" => {
-            info!("loaded: TeamBlue");
-            Project::TeamBlue {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "TribalYellowDemon" => {
-            info!("loaded: TribalYellowDemon");
-            Project::TribalYellowDemon {
-                project_name: project.into(),
-                high_res,
-            }
-        }
-        "UrbanWhiteCrowMan" => {
-            info!("loaded: UrbanWhiteCrowMan");
-            Project::UrbanWhiteCrowMan {
-                project_name: project.into(),
-                high_res,
-            }
-        }
+    use Project::*;
+
+    let template = match project {
+        "SamuConceptCharacter" => SamuConceptCharacter {
+            project_name: project.into(),
+            high_res,
+        },
+        "Saint-John" => SaintJohn {
+            project_name: project.into(),
+            high_res,
+        },
+        "HomardRojas" => HomardRojas {
+            project_name: project.into(),
+            high_res,
+        },
+        "CarbonixWorkerSuit" => CarbonixWorkerSuit {
+            project_name: project.into(),
+            high_res,
+        },
+        "ClimbingExoSuit" => ClimbingExoSuit {
+            project_name: project.into(),
+            high_res,
+        },
+        "ClimbingExoSuit3d" => ClimbingExoSuit3d {
+            project_name: project.into(),
+            high_res,
+        },
+        "Intru" => Intru {
+            project_name: project.into(),
+            high_res,
+        },
+        "UmbrellaKnight" => UmbrellaKnight {
+            project_name: project.into(),
+            high_res,
+        },
+        "TeamBlue" => TeamBlue {
+            project_name: project.into(),
+            high_res,
+        },
+        "TribalYellowDemon" => TribalYellowDemon {
+            project_name: project.into(),
+            high_res,
+        },
+        "UrbanWhiteCrowMan" => UrbanWhiteCrowMan {
+            project_name: project.into(),
+            high_res,
+        },
         _ => {
-            error!("loaded: MissingProject");
-            Project::MissingProject
+            error!("Project not found, rendering MissingProject");
+            MissingProject
         }
     };
 
-    rendered_template.render().unwrap()
+    info!("Rendering project: {}", project);
+    template.render().unwrap()
 }

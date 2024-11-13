@@ -1,7 +1,6 @@
 use askama_axum::Template;
-use serde::{Deserialize, Serialize};
 use askama_enum::EnumTemplate;
-
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/index.html")]
