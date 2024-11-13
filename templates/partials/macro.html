@@ -6,20 +6,23 @@
     {{ style_sheet }}
 </style>
 
-<img
-        id="frame"
-        class="{{class_name.frame}}"
-        src=/assets/projects/{{project}}/thumbnail.avif
-        alt="{{project}}"
-        hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
-        hx-trigger="click"
-        hx-swap="outerHTML"
-        hx-target="#toggledcontainer"
-        _="on intersection(intersecting) having threshold 0.5
-         if intersecting transition opacity to 1
-         else transition opacity to 0 end
-        "
-/>
+<div class="{{class_name.frame_container}}">
+    <img
+            id="frame"
+            class="{{class_name.frame}}"
+            src=/assets/projects/{{project}}/thumbnail.avif
+            alt="{{project}}"
+            hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
+            hx-trigger="click"
+            hx-swap="outerHTML"
+            hx-target="#toggledcontainer"
+            _="on intersection(intersecting) having threshold 0.3
+             if intersecting transition opacity to 1
+             else transition opacity to 0 end
+            "
+    />
+    <p>{{project}}</p>
+</div>
 
 {% endmacro %}
 

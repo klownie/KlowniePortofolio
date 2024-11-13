@@ -48,15 +48,38 @@ img {
   break-inside: avoid;
 }
 
-.frame {
-  border-radius: 1rem;
-  max-width: 100%;
-  transition: 0.25s;
-  margin-bottom: 1rem;
-  box-sizing: border-box;
+.frame_container {
+  margin-bottom: 0.5rem;
+  text-align: center;
 
-  &:hover {
-    border: 5px solid $color_10;
+  .frame {
+    border-radius: 1rem;
+    max-width: 100%;
+    transition: outline 0.25s ease;
+    box-sizing: border-box;
+    outline: 0 solid transparent; // Initial outline set to transparent
+
+    &:hover {
+      outline: 5px solid $color_10; // Outline color for hover state
+    }
+  }
+
+  // Project title paragraph
+  p {
+    color: $foreground;
+    font-size: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.4s ease, opacity 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
+  }
+
+  &:hover p {
+    font-size: 1rem;
+    max-height: 2rem;
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

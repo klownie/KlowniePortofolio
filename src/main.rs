@@ -54,7 +54,7 @@ async fn main() {
 
     let middleware = ServiceBuilder::new()
         .layer(SetResponseHeaderLayer::if_not_present(
-            header::EXPIRES,
+            header::CACHE_CONTROL,
             generate_expires_header(7),
         ))
         .layer(
