@@ -4,39 +4,46 @@
 </style>
 
 <div id="togglable_name_container">
-<div class="{{class_name.center}}" id="first"
-     _="on click set rand to Math.random() * 360
-     toggle the *display of the next .{{class_name.center}}
-     toggle the *display of me"
->
-    <span>
-        <pre>
-            {{ titles[0]|asciart}}
-        </pre>
-    </span>
-</div>
-<div style="display: none" class="{{class_name.center}}"
-     _="on click toggle the *display of the next .{{class_name.center}}
-     toggle the *display of me"
->
-    <span>
-        <pre>
-            {{ titles[1]|asciart}}
-        </pre>
-    </span>
-</div>
-<div style="display: none" class="{{class_name.center}}"
-     _="on click toggle the *display of #first
-     toggle the *display of me"
->
-    <span>
-        <pre>
-            {{ titles[2]|asciart}}
-        </pre>
-        <br>
-        <pre>
-            {{ titles[3]|asciart}}
-        </pre>
-    </span>
-</div>
+
+    <div class="{{class_name.center}}" id="first"
+         _="on click set rand to Math.random() * 360
+         toggle the *display of the next .{{class_name.center}}
+         toggle the *display of me"
+    >
+        <span>
+            <pre>
+                {{ titles[0]|asciart}}
+            </pre>
+            <br>
+            <pre>
+                {{ titles[1]|asciart}}
+            </pre>
+        </span>
+    </div>
+
+    <div style="display: none" class="{{class_name.center}}"
+         _="on click toggle the *display of the next .{{class_name.center}}
+         toggle the *display of me"
+    >
+        <span>
+            <pre>
+                {{ titles[2]|asciart}}
+            </pre>
+        </span>
+    </div>
+
+    <div style="display: none" class="{{class_name.center}}"
+         _="on click toggle the *display of #first
+         toggle the *display of me"
+    >
+        <span>
+            <pre>
+                {{ titles[3]|asciart}}
+            </pre>
+            <br>
+            <pre>
+                {{ titles[4]|asciart}}
+            </pre>
+        </span>
+    </div>
 </div>

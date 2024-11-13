@@ -8,26 +8,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/private_certs/cert.pem" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/private_certs/key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/sketch_846.avif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/assets/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scss/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handlers.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/error_404.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/errors/error_404.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/fonts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/fonts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/frame_toggle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/frame_toggle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/interactive_name.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/interactive_name.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/macro.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/macro.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/masonry.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/masonry.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/socials.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/socials.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/interactive_name.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/interactive_name.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/macro.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/macro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/carbonix_worker_suit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/CarbonixWorkerSuit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/climbing_exo_suit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/ClimbingExoSuit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/climbing_exo_suit_3d.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/ClimbingExoSuit3d.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/homard_rojas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/HomardRojas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/intru.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/Intru.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/missing_project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/MissingProject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/saint_john.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/SaintJohn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/samu_concept_character.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/SamuConceptCharacter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/team_blue.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/TeamBlue.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/tribal_yellow_demon.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/TribalYellowDemon.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/umbrella_knight.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/UmbrellaKnight.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/urban_white_crow.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/UrbanWhiteCrowMan.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,27 +64,27 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/assets/projects",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
-    "org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/handlers.rs": "true",
-    "org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/middleware.rs": "true",
-    "org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/routes.rs": "true",
-    "org.rust.first.attach.projects": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/assets/projects&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
+    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/handlers.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/middleware.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/routes.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects" />
@@ -159,12 +163,26 @@
       <workItem from="1731008259008" duration="1816000" />
       <workItem from="1731060976136" duration="14658000" />
       <workItem from="1731140920519" duration="13121000" />
-      <workItem from="1731234190171" duration="22492000" />
+      <workItem from="1731234190171" duration="23183000" />
+      <workItem from="1731317702118" duration="25460000" />
+      <workItem from="1731417202771" duration="1222000" />
+      <workItem from="1731489689630" duration="1788000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

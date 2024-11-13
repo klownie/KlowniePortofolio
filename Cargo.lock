@@ -8,6 +8,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "askama",
+ "askama-enum",
  "askama_axum",
  "axum",
  "axum-extra",
@@ -109,6 +110,16 @@ dependencies = [
  "humansize",
  "num-traits",
  "percent-encoding",
+]
+
+[[package]]
+name = "askama-enum"
+version = "0.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c8fbb1b5804aa2e207eb5f1e60ddf2138689d8dda283e85c43b8036d888aa96"
+dependencies = [
+ "quote",
+ "syn 1.0.109",
 ]
 
 [[package]]

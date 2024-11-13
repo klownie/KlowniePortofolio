@@ -10,6 +10,7 @@ body {
   background-color: $background;
   font-family: Mononoki, sans-serif;
 
+
   ::selection {
     background-color: $color_12;
     color: $color_01;
@@ -87,13 +88,14 @@ img {
     user-select: none;
     cursor: pointer;
     color: $color_12;
-    text-align: left;
+    text-align: center;
+    line-height: 1.375rem; // Reduce line spacing for ASCII alignment
     font-size: 1.2rem;
     margin: auto 20px;
     transition: 0.25s;
     max-width: 100vw; // Limit width to viewport width
-    word-wrap: break-word; // Break long lines
-    overflow-x: hidden;
+    overflow: hidden;
+
 
     &:hover {
       -ms-transform: scale(1.1); /* IE 9 */
@@ -101,11 +103,13 @@ img {
       transform: scale(1.1);
     }
 
-    @media (max-width: 1000px) {
-      font-size: 0.75rem; // Reduce the font size on smaller screens
+    @media (max-width: 1024px) and (orientation: landscape) {
+      font-size: 0.75rem;
+      line-height: 0.9rem;
     }
-    @media (max-width: 480px) {
-      font-size: 0.5rem; // Further reduce the font size on very small screens
+    @media (max-width: 480px) and (orientation: portrait) {
+      font-size: 0.5rem;
+      line-height: 0.6rem;
     }
   }
 
@@ -157,6 +161,7 @@ a {
     width: 66%;
     height: 100%;
     overflow-y: scroll;
+    overscroll-behavior: contain;
     padding: 10px;
   }
 
@@ -169,6 +174,7 @@ a {
 
   .fullscreenblog {
     background-color: $color_09;
+    overflow-y: scroll;
     width: 34%;
     height: 100%;
     padding: 20px;
@@ -221,3 +227,4 @@ a {
     color: $color_10; /* Darker color on hover */
   }
 }
+

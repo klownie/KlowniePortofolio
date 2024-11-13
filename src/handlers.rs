@@ -1,3 +1,4 @@
+
 use crate::templates::*;
 use askama_axum::Template;
 use axum::debug_handler;
@@ -24,7 +25,6 @@ pub const PROJECTS: &[&str] = &[
     "TribalYellowDemon",
     "UrbanWhiteCrowMan",
 ];
-
 pub static VISITORS: LazyLock<Arc<Mutex<Vec<String>>>> =
     LazyLock::new(|| Arc::new(Mutex::new(Vec::new())));
 
@@ -36,6 +36,7 @@ pub async fn handler_404() -> impl IntoResponse {
 
 #[debug_handler]
 pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl IntoResponse {
+
     let visitors_clone = Arc::clone(&VISITORS);
     let mut visitors = visitors_clone.lock().unwrap();
     if visitors.contains(&addr.to_string()) {
@@ -48,7 +49,7 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
     let masonry_projects = PROJECTS;
 
     let template = Index {
-        titles: Vec::from(["Audrick Yeu".into(), "Portofolio".into(), "Concept".into(), "Art".into()]),
+        titles: Vec::from(["Audrick".into(), "Yeu".into(), "Portofolio".into(), "Concept".into(), "Art".into()]),
         fullscreen: false,
         masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
         project: "".into(),
@@ -93,109 +94,89 @@ pub async fn resolution_request_handler(
 }
 
 pub async fn render_project_template(project: &str, high_res: bool) -> String {
-    match project {
+    let rendered_template = match project {
         "SamuConceptCharacter" => {
             info!("loaded: SamuConceptCharacter");
-            SamuConceptCharacter {
+            Project::SamuConceptCharacter {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "Saint-John" => {
             info!("loaded: Saint-John");
-            SaintJohn {
+            Project::SaintJohn {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "HomardRojas" => {
             info!("loaded: HomardRojas");
-            HomardRojas {
+            Project::HomardRojas {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "CarbonixWorkerSuit" => {
             info!("loaded: CarbonixWorkerSuit");
-            CarbonixWorkerSuit {
+            Project::CarbonixWorkerSuit {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "ClimbingExoSuit" => {
             info!("loaded: ClimbingExoSuit");
-            ClimbingExoSuit {
+            Project::ClimbingExoSuit {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "ClimbingExoSuit3d" => {
             info!("loaded: ClimbingExoSuit3d");
-            ClimbingExoSuit3d {
+            Project::ClimbingExoSuit3d {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "Intru" => {
             info!("loaded: Intru");
-            Intru {
+            Project::Intru {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "UmbrellaKnight" => {
             info!("loaded: UmbrellaKnight");
-            UmbrellaKnight {
+            Project::UmbrellaKnight {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "TeamBlue" => {
             info!("loaded: TeamBlue");
-            TeamBlue {
+            Project::TeamBlue {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "TribalYellowDemon" => {
             info!("loaded: TribalYellowDemon");
-            TribalYellowDemon {
+            Project::TribalYellowDemon {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         "UrbanWhiteCrowMan" => {
             info!("loaded: UrbanWhiteCrowMan");
-            UrbanWhiteCrowMan {
+            Project::UrbanWhiteCrowMan {
                 project_name: project.into(),
                 high_res,
             }
-            .render()
-            .unwrap()
         }
         _ => {
             error!("loaded: MissingProject");
-            MissingProject {}.render().unwrap()
+            Project::MissingProject
         }
-    }
+    };
+
+    rendered_template.render().unwrap()
 }
