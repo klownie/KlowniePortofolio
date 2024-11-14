@@ -167,7 +167,7 @@ img {
 
   .fullscreen_image {
     height: 100vh;
-    max-width: 100%;
+    width: 100%;
     object-fit: contain;
     margin-bottom: 10px;
   }
@@ -181,9 +181,6 @@ img {
     z-index: 700;
   }
 }
-
-
-
 .blur {
   position: fixed;
   top: 0;
