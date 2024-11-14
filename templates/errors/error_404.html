@@ -4,12 +4,10 @@
 {% block title %}Audrick Yeu | Portofolio{% endblock %}
 
 {% block content %}
-{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
-<style>
-    {{ style_sheet }}
-</style>
 
-{% include "partials/fonts.html" %}
+<style>
+    {{ crate::STYLE_SHEET }}
+</style>
 
 <h1>Nothing to see here</h1>
 
@@ -19,7 +17,7 @@
 <br>
 <br>
 <marquee direction="up" height="1000">
-<pre class="{{class_name.errorlol}}">
+<pre class="{{crate::ClassName::ERRORLOL}}">
     {{"LOL"|asciart}}
 </pre>
 </marquee>

@@ -35,8 +35,6 @@ log = "0.4.22"
 #Esthetics
 turf = "0.9.3"
 text-to-ascii-art="0.1.10"
-uuid = { version = "1.11.0", features = ["v4"] }
-clap = { version = "4.5.20", features = ["derive"] }
 
 [dev-dependencies]
 anyhow = "1.0.91"

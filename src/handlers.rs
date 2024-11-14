@@ -13,6 +13,7 @@ use std::sync::{Arc, LazyLock, Mutex};
 
 pub const PROJECTS: &[&str] = &[
     "SamuConceptCharacter",
+    "SamuConceptIllustration",
     "Saint-John",
     "HomardRojas",
     "CarbonixWorkerSuit",
@@ -24,6 +25,7 @@ pub const PROJECTS: &[&str] = &[
     "TribalYellowDemon",
     "UrbanWhiteCrowMan",
 ];
+
 pub static VISITORS: LazyLock<Arc<Mutex<Vec<String>>>> =
     LazyLock::new(|| Arc::new(Mutex::new(Vec::new())));
 
@@ -101,6 +103,10 @@ pub async fn render_project_template(project: &str, high_res: bool) -> String {
     use Project::*;
 
     let template = match project {
+        "SamuConceptIllustration" => SamuConceptIllustration {
+            project_name: project.into(),
+            high_res,
+        },
         "SamuConceptCharacter" => SamuConceptCharacter {
             project_name: project.into(),
             high_res,

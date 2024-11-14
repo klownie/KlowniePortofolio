@@ -47,6 +47,12 @@ pub enum Project {
         high_res: bool,
     },
 
+    #[template(path = "projects/SamuConceptIllustration.html")]
+    SamuConceptIllustration {
+        project_name: String,
+        high_res: bool,
+    },
+
     #[template(path = "projects/SaintJohn.html")]
     SaintJohn {
         project_name: String,

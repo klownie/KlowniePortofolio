@@ -1,0 +1,44 @@
+<div id="all">
+    <div class={{crate::ClassName::BLUR}}></div>
+
+    <div class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
+
+        <button
+                class="{{crate::ClassName::FLOATING_BUTTON}}"
+                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-target="#all"
+                hx-swap="outerHTML"
+        >
+            {% if high_res %}
+            HD
+            {% else %}
+            LD
+            {% endif %}
+        </button>
+
+        <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
+            <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+        </div>
+
+        <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
+            {% if high_res %}
+            {% set (res, type) = ("HighRes", "jpg") %}
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_859_final.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_859_compo.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_859_Gray.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
+                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_859.webm" type="video/webm">
+            </video>
+            {% else %}
+            {% set (res, type) = ("LowRes", "avif") %}
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_859_final.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_859_compo.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_859_Gray.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
+                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_859.webm" type="video/webm">
+            </video>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
