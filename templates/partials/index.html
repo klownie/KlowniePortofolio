@@ -22,6 +22,9 @@
 
 {% block content %}
 {% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
+<style>
+    {{ crate::STYLE_SHEET|safe}}
+</style>
 
 {% include "partials/fonts.html" %}
 
@@ -34,11 +37,7 @@
 
 {% include "socials.html" %}
 
-<style>
-    {{ style_sheet|safe}}
-</style>
-
-<p class={{class_name.bio}}>
+<p class={{crate::ClassName::BIO}}>
     <span>░</span> <br />
     <span>░</span> French/Taiwanese<br />
     <span>░</span><br />

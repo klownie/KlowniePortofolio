@@ -1,13 +1,8 @@
-{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
-<style>
-    {{ style_sheet  }}
-</style>
-
 <div id="togglable_name_container">
 
-    <div class="{{class_name.center}}" id="first"
+    <div class="{{crate::ClassName::CENTER}}" id="first"
          _="on click set rand to Math.random() * 360
-         toggle the *display of the next .{{class_name.center}}
+         toggle the *display of the next .{{crate::ClassName::CENTER}}
          toggle the *display of me"
     >
         <span>
@@ -21,8 +16,8 @@
         </span>
     </div>
 
-    <div style="display: none" class="{{class_name.center}}"
-         _="on click toggle the *display of the next .{{class_name.center}}
+    <div style="display: none" class="{{crate::ClassName::CENTER}}"
+         _="on click toggle the *display of the next .{{crate::ClassName::CENTER}}
          toggle the *display of me"
     >
         <span>
@@ -32,7 +27,7 @@
         </span>
     </div>
 
-    <div style="display: none" class="{{class_name.center}}"
+    <div style="display: none" class="{{crate::ClassName::CENTER}}"
          _="on click toggle the *display of #first
          toggle the *display of me"
     >

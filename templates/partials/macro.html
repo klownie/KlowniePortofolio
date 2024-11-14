@@ -1,15 +1,9 @@
 {% macro toggle_image(project) %}
 
-{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
-
-<style>
-    {{ style_sheet }}
-</style>
-
-<div class="{{class_name.frame_container}}">
+<div class="{{crate::ClassName::FRAME_CONTAINER}}">
     <img
             id="frame"
-            class="{{class_name.frame}}"
+            class="{{crate::ClassName::FRAME}}"
             src=/assets/projects/{{project}}/thumbnail.avif
             alt="{{project}}"
             hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"

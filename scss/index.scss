@@ -9,7 +9,7 @@
 body {
   background-color: $background;
   font-family: Mononoki, sans-serif;
-
+  scrollbar-gutter: stable both-edges;
 
   ::selection {
     background-color: $color_12;
@@ -37,52 +37,6 @@ img {
   margin: 50px;
 }
 
-.masonry {
-  columns: 300px;
-  gap: 1rem;
-  max-width: 960px;
-  margin: 5rem auto;
-}
-
-.masonry * {
-  break-inside: avoid;
-}
-
-.frame_container {
-  margin-bottom: 0.5rem;
-  text-align: center;
-
-  .frame {
-    border-radius: 1rem;
-    max-width: 100%;
-    transition: outline 0.25s ease;
-    box-sizing: border-box;
-    outline: 0 solid transparent; // Initial outline set to transparent
-
-    &:hover {
-      outline: 5px solid $color_10; // Outline color for hover state
-    }
-  }
-
-  // Project title paragraph
-  p {
-    color: $foreground;
-    font-size: 0;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transform: translateY(-10px);
-    transition: max-height 0.4s ease, opacity 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
-  }
-
-  &:hover p {
-    font-size: 1rem;
-    max-height: 2rem;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .bio {
   background: rgba($color_09, 20%);
   padding: 20px;
@@ -100,11 +54,62 @@ img {
   }
 }
 
+.masonry {
+  columns: 300px;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 5rem auto;
+}
+
+.masonry * {
+  break-inside: avoid;
+}
+
+.frame_container {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  outline: 0 solid transparent;
+  z-index: 1;
+
+  .frame {
+    border-radius: 1rem;
+    max-width: 100%;
+    transition: outline 0.25s ease;
+    outline: 0 solid transparent;
+
+    &:hover {
+      outline: 5px solid $color_10;
+    }
+  }
+
+  p {
+    color: $foreground;
+    font-size: 0;
+    max-height: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
+  }
+
+  &:hover {
+    p {
+      font-size: 1rem;
+      max-height: 2rem;
+      margin-bottom: 1rem;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 #togglable_name_container {
   height: 75vh;
   display: flex;
   align-items: center; // Center items vertically
   justify-content: center; // Center items horizontally
+  z-index: 100;
 
   pre {
     display: inline-block;
@@ -141,6 +146,57 @@ img {
   }
 }
 
+.fullscreen_container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .fullscreen_gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 66%;
+    height: 100%;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    padding: 10px;
+  }
+
+  .fullscreen_image {
+    height: 100vh;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .fullscreen_blog {
+    background-color: $color_09;
+    overflow-y: scroll;
+    width: 34%;
+    height: 100%;
+    padding: 20px;
+    z-index: 700;
+  }
+}
+
+
+
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.errorlol {
+  font-size: 7rem;
+  height: 70%;
+}
 
 a {
   .icon {
@@ -167,56 +223,6 @@ a {
     text-decoration: none;
     color: $color_12;
   }
-}
-
-.fullscreencontainer {
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  .fullscreengallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 66%;
-    height: 100%;
-    overflow-y: scroll;
-    overscroll-behavior: contain;
-    padding: 10px;
-  }
-
-  .fullscreenimage {
-    height: 100vh;
-    max-width: 100%;
-    object-fit: contain;
-    margin-bottom: 10px;
-  }
-
-  .fullscreenblog {
-    background-color: $color_09;
-    overflow-y: scroll;
-    width: 34%;
-    height: 100%;
-    padding: 20px;
-    z-index: 700;
-  }
-}
-
-.blur {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
-}
-
-.errorlol {
-  font-size: 7rem;
-  height: 70%;
 }
 
 .floating_button {

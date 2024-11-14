@@ -1,12 +1,6 @@
-{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
-
-<style>
-    {{ style_sheet }}
-</style>
-
 <div id="preload"></div>
 <div id="toggledcontainer"></div>
-<div class={{class_name.masonry}}>
+<div class={{crate::ClassName::MASONRY}}>
     {% for project in masonry %}
     {% call scope::toggle_image(project) %}
     {% endfor %}

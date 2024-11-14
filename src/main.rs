@@ -2,6 +2,7 @@ mod handlers;
 mod middleware;
 mod routes;
 mod templates;
+
 use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
 
 use crate::middleware::generate_expires_header;
@@ -19,6 +20,8 @@ use std::{net::SocketAddr, path::PathBuf};
 use tower::ServiceBuilder;
 use tower_http::services::ServeDir;
 use tower_http::set_header::SetResponseHeaderLayer;
+
+turf::style_sheet!("scss/index.scss");
 
 #[derive(Clone, Copy)]
 struct Ports {

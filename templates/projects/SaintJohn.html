@@ -1,15 +1,10 @@
-{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
-
 <div id="all">
-    <style>
-        {{ style_sheet }}
-    </style>
-    <div class={{class_name.blur}}></div>
+    <div class={{crate::ClassName::BLUR}}></div>
 
-    <div class={{class_name.fullscreencontainer}}>
+    <div class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
 
         <button
-                class="{{class_name.floating_button}}"
+                class="{{crate::ClassName::FLOATING_BUTTON}}"
                 hx-get="api/toggleres/{{project_name}}/{{high_res}}"
                 hx-target="#all"
                 hx-swap="outerHTML"
@@ -21,23 +16,23 @@
             {% endif %}
         </button>
 
-        <div class={{class_name.fullscreenblog}}>
+        <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
             <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
         </div>
 
-        <div class="{{class_name.fullscreengallery}}">
+        <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
             {% if high_res %}
-                {% set (res,type) = ("HighRes","jpg") %}
-                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_831_05.{{type}} class={{class_name.fullscreenimage}} />
-                <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
-                    <source src="/assets/projects/{{project_name}}/{{res}}/sketch_831.webm" type="video/webm">
-                </video>
+            {% set (res, type) = ("HighRes", "jpg") %}
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_831_05.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
+                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_831.webm" type="video/webm">
+            </video>
             {% else %}
-                {% set (res,type) = ("LowRes","avif") %}
-                <img src=/assets/projects/{{project_name}}/{{res}}/sketch_831_05.{{type}} class={{class_name.fullscreenimage}} />
-                <video autoplay loop muted playsinline class={{class_name.fullscreenimage}}>
-                    <source src="/assets/projects/{{project_name}}/{{res}}/sketch_831.webm" type="video/webm">
-                </video>
+            {% set (res, type) = ("LowRes", "avif") %}
+            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_831_05.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
+                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_831.webm" type="video/webm">
+            </video>
             {% endif %}
         </div>
 

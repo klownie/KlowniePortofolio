@@ -1,16 +1,11 @@
-{% let (style_sheet, class_name) = turf::style_sheet_values!("scss/index.scss") %}
 {%- import "macro.html" as scope -%}
 
 <div
         id="toggledcontainer"
 >
-    <style>
-        {{ style_sheet }}
-    </style>
-
     {% if fullscreen %}
     <button
-            class="{{class_name.floating_x_button}}"
+            class="{{crate::ClassName::FLOATING_X_BUTTON}}"
             hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
             hx-swap="outerHTML"
             hx-target="#toggledcontainer"

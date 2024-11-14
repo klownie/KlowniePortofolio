@@ -9,10 +9,22 @@
   <component name="ChangeListManager">
     <list default="true" id="5b1be9e0-1a1d-4128-824f-8f871ecaf427" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/projects/HomardRojas/LowRes/sketch_836.webm" beforeDir="false" afterPath="$PROJECT_DIR$/assets/projects/HomardRojas/LowRes/sketch_836.webm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scss/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/scss/index.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/frame_toggle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/frame_toggle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/interactive_name.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/interactive_name.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/partials/macro.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/macro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/masonry.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/masonry.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/socials.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/socials.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/CarbonixWorkerSuit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/CarbonixWorkerSuit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/ClimbingExoSuit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/ClimbingExoSuit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/ClimbingExoSuit3d.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/ClimbingExoSuit3d.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/HomardRojas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/HomardRojas.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/Intru.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/Intru.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/MissingProject.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/MissingProject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/SaintJohn.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/SaintJohn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects/SamuConceptCharacter.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/SamuConceptCharacter.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,27 +58,27 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/assets/projects/HomardRojas/LowRes",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
-    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
-    "org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/handlers.rs": "true",
-    "org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/middleware.rs": "true",
-    "org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/routes.rs": "true",
-    "org.rust.first.attach.projects": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/assets/projects/HomardRojas/LowRes&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
+    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/handlers.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/middleware.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.disableDetachedFileInspectionC:/Users/klownie/Documents/Art/PortofolioWebsite/AxumHtmxAskamaPortofolioWebsite/src/routes.rs&quot;: &quot;true&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\klownie\Documents\Art\PortofolioWebsite\AxumHtmxAskamaPortofolioWebsite\assets\projects\HomardRojas\LowRes" />
@@ -150,6 +162,7 @@
       <workItem from="1731417202771" duration="1222000" />
       <workItem from="1731489689630" duration="9838000" />
       <workItem from="1731521730868" duration="2825000" />
+      <workItem from="1731579159318" duration="2300000" />
     </task>
     <servers />
   </component>
