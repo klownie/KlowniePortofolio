@@ -1,3 +1,8 @@
+[ports]
+http = 7878
+https =  3000
+
+[project_order]
 projects = [
     "SamuConceptCharacter",
     "SamuConceptIllustration",

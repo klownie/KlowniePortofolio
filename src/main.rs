@@ -5,6 +5,8 @@ mod templates;
 
 use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
 
+use crate::handlers::Ports;
+use crate::handlers::CONFIG;
 use crate::middleware::generate_expires_header;
 use axum::extract::Host;
 use axum::http::header;
@@ -23,25 +25,14 @@ use tower_http::set_header::SetResponseHeaderLayer;
 
 turf::style_sheet!("scss/index.scss");
 
-#[derive(Clone, Copy)]
-struct Ports {
-    http: u16,
-    https: u16,
-}
-
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    let ports = Ports {
-        http: 7878,
-        https: 3000,
-    };
-
     // optional: spawn a second server to redirect http requests to this server
-    tokio::spawn(redirect_http_to_https(ports));
+    tokio::spawn(redirect_http_to_https(CONFIG.ports));
 
     // configure certificate and private key used by https
     let config = RustlsConfig::from_pem_file(
@@ -79,7 +70,7 @@ async fn main() {
         .nest_service("/assets", ServeDir::new("assets"))
         .layer(middleware);
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], ports.https));
+    let addr = SocketAddr::from(([127, 0, 0, 1], CONFIG.ports.https));
     tracing::info!("listening on https://{}", addr);
     axum_server::bind_rustls(addr, config)
         .serve(app.into_make_service_with_connect_info::<SocketAddr>())

@@ -1,31 +1,41 @@
 use crate::templates::*;
 use askama_axum::Template;
 use axum::debug_handler;
-use axum_extra::extract::Query;
 use axum::extract::{ConnectInfo, Path};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
+use axum_extra::extract::Query;
 use log::{debug, error, info};
+use serde::Deserialize;
+use std::fs;
 use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::{Arc, LazyLock, Mutex};
-use std::fs;
-use serde::Deserialize;
+
+#[derive(Clone, Copy, Debug, Deserialize)]
+pub struct Ports {
+    pub http: u16,
+    pub https: u16,
+}
 
 #[derive(Debug, Deserialize)]
-struct Config {
-    projects: Vec<String>,
+pub struct Config {
+    pub project_order: ProjectOrder,
+    pub ports: Ports,
 }
 
-pub static PROJECTS: LazyLock<Vec<String>> = LazyLock::new(|| load_projects());
+#[derive(Debug, Deserialize)]
+pub struct ProjectOrder {
+    pub projects: Vec<String>,
+}
 
-fn load_projects() -> Vec<String> {
+pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
     let content = fs::read_to_string("config.toml").expect("Failed to read TOML file");
     let config: Config = toml::from_str(&content).expect("Failed to parse TOML file");
-    config.projects
-}
+    config
+});
 
 pub static VISITORS: LazyLock<Arc<Mutex<Vec<String>>>> =
     LazyLock::new(|| Arc::new(Mutex::new(Vec::new())));
@@ -47,7 +57,6 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
         info!("{addr} is visiting");
     }
 
-
     let index = Index {}.render().unwrap();
 
     let interactive_name = InteractiveName {
@@ -65,7 +74,12 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
 
     let masonry = Masonry {
         fullscreen: false,
-        masonry: PROJECTS.iter().map(|s| s.to_string()).collect(),
+        masonry: CONFIG
+            .project_order
+            .projects
+            .iter()
+            .map(|s| s.to_string())
+            .collect(),
     };
 
     let reply = format!(
