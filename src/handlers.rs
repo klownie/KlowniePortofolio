@@ -11,21 +11,21 @@ use log::{debug, error, info};
 use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::{Arc, LazyLock, Mutex};
+use std::fs;
+use serde::Deserialize;
 
-pub const PROJECTS: &[&str] = &[
-    "SamuConceptCharacter",
-    "SamuConceptIllustration",
-    "Saint-John",
-    "HomardRojas",
-    "CarbonixWorkerSuit",
-    "ClimbingExoSuit",
-    "Intru",
-    "UmbrellaKnight",
-    "ClimbingExoSuit3d",
-    "TeamBlue",
-    "TribalYellowDemon",
-    "UrbanWhiteCrowMan",
-];
+#[derive(Debug, Deserialize)]
+struct Config {
+    projects: Vec<String>,
+}
+
+pub static PROJECTS: LazyLock<Vec<String>> = LazyLock::new(|| load_projects());
+
+fn load_projects() -> Vec<String> {
+    let content = fs::read_to_string("config.toml").expect("Failed to read TOML file");
+    let config: Config = toml::from_str(&content).expect("Failed to parse TOML file");
+    config.projects
+}
 
 pub static VISITORS: LazyLock<Arc<Mutex<Vec<String>>>> =
     LazyLock::new(|| Arc::new(Mutex::new(Vec::new())));
@@ -47,7 +47,6 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
         info!("{addr} is visiting");
     }
 
-    let masonry_projects = PROJECTS;
 
     let index = Index {}.render().unwrap();
 
@@ -66,7 +65,7 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
 
     let masonry = Masonry {
         fullscreen: false,
-        masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
+        masonry: PROJECTS.iter().map(|s| s.to_string()).collect(),
     };
 
     let reply = format!(

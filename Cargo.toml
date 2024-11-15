@@ -35,6 +35,9 @@ log = "0.4.22"
 turf = "0.9.3"
 text-to-ascii-art="0.1.10"
 
+#toml
+toml = "0.8.19"
+
 [dev-dependencies]
 anyhow = "1.0.91"
 httpc-test = "0.1.10"

@@ -20,6 +20,7 @@ dependencies = [
  "serde_json",
  "text-to-ascii-art",
  "tokio",
+ "toml",
  "tower 0.5.1",
  "tower-http",
  "tracing",
