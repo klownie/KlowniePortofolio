@@ -36,7 +36,6 @@ pub struct Bio {}
 pub struct Masonry {
     pub fullscreen: bool,
     pub masonry: Vec<String>,
-    pub project: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]

@@ -39,6 +39,7 @@ async fn main() {
         http: 7878,
         https: 3000,
     };
+
     // optional: spawn a second server to redirect http requests to this server
     tokio::spawn(redirect_http_to_https(ports));
 
@@ -56,7 +57,7 @@ async fn main() {
 
     let middleware = ServiceBuilder::new()
         .layer(SetResponseHeaderLayer::if_not_present(
-            header::CACHE_CONTROL,
+            header::EXPIRES,
             generate_expires_header(7),
         ))
         .layer(
@@ -74,7 +75,6 @@ async fn main() {
                 .zstd(true),
         );
 
-    //rotes & fallback
     let app = build_routes()
         .nest_service("/assets", ServeDir::new("assets"))
         .layer(middleware);

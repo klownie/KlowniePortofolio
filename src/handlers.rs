@@ -1,7 +1,8 @@
 use crate::templates::*;
 use askama_axum::Template;
 use axum::debug_handler;
-use axum::extract::{ConnectInfo, Path, Query};
+use axum_extra::extract::Query;
+use axum::extract::{ConnectInfo, Path};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
@@ -66,7 +67,6 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
     let masonry = Masonry {
         fullscreen: false,
         masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
-        project: "".into(),
     };
 
     let reply = format!(
