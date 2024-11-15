@@ -48,22 +48,36 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
 
     let masonry_projects = PROJECTS;
 
-    let template = Index {
-        titles: Vec::from([
-            "Audrick".into(),
-            "Yeu".into(),
-            "Portofolio".into(),
-            "Concept".into(),
-            "Art".into(),
-        ]),
-        fullscreen: false,
-        masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
-        project: "".into(),
+    let index = Index {}.render().unwrap();
+
+    let interactive_name = InteractiveName {
+        titles: Vec::from(["Audrick", "Yeu", "Portofolio", "Concept", "Art"])
+            .iter()
+            .map(|&s| s.to_string())
+            .collect(),
     }
     .render()
     .unwrap();
 
-    let reply: String = template;
+    let socials = Socials {};
+
+    let bio = Bio {};
+
+    let masonry = Masonry {
+        fullscreen: false,
+        masonry: masonry_projects.iter().map(|&s| s.to_string()).collect(),
+        project: "".into(),
+    };
+
+    let reply = format!(
+        "\
+    {index}\
+    {interactive_name}\
+    {socials}\
+    {bio}\
+    {masonry}\
+    "
+    );
 
     (StatusCode::OK, Html(reply))
 }

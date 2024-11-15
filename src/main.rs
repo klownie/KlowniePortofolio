@@ -31,7 +31,6 @@ struct Ports {
 
 #[tokio::main]
 async fn main() {
-
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::INFO)
         .init();
@@ -118,7 +117,10 @@ async fn redirect_http_to_https(ports: Ports) {
     let addr = SocketAddr::from(([127, 0, 0, 1], ports.http));
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     tracing::info!("listening on http://{}", listener.local_addr().unwrap());
-    axum::serve(listener, redirect.into_make_service_with_connect_info::<SocketAddr>())
-        .await
-        .unwrap();
+    axum::serve(
+        listener,
+        redirect.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .await
+    .unwrap();
 }

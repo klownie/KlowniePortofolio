@@ -45,7 +45,7 @@ load_paths = ["scss/colorschemes"]
 minify = true
 
 [package.metadata.turf.class_names]
-template = "klownie-portofolio_<original_name>_<id>"
+template = "klownie_portofolio_<original_name>_<id>"
 
 [package.metadata.turf.browser_targets]
 chrome = [80, 1, 2]

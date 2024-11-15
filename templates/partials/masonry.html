@@ -2,6 +2,29 @@
 <div id="toggledcontainer"></div>
 <div class={{crate::ClassName::MASONRY}}>
     {% for project in masonry %}
-    {% call scope::toggle_image(project) %}
+    {% call toggle_image(project) %}
     {% endfor %}
 </div>
+
+{% macro toggle_image(project) %}
+
+<div class="{{crate::ClassName::FRAME_CONTAINER}}">
+    <img
+            id="frame"
+            class="{{crate::ClassName::FRAME}}"
+            loading="lazy"
+            src=/assets/projects/{{project}}/thumbnail.avif
+            alt="{{project}}"
+            hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
+            hx-trigger="click"
+            hx-swap="innerHTML"
+            hx-target="#toggledcontainer"
+            _="on intersection(intersecting) having threshold 0.3
+             if intersecting transition opacity to 1
+             else transition opacity to 0 end
+            "
+    />
+    <p>{{project|clean_name}}</p>
+</div>
+
+{% endmacro %}

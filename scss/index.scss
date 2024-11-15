@@ -254,6 +254,9 @@ a {
   }
 }
 
-.no_scroll {
+[scrollable="true"] {
+  overflow: scroll;
+}
+[scrollable="false"] {
   overflow: hidden;
 }

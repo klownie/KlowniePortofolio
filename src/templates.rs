@@ -2,18 +2,13 @@ use askama_axum::Template;
 use askama_enum::EnumTemplate;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, Template)]
-#[template(path = "partials/index.html")]
-pub struct Index {
-    pub titles: Vec<String>,
-    pub fullscreen: bool,
-    pub masonry: Vec<String>,
-    pub project: String,
-}
-
 #[derive(Debug, Template)]
 #[template(path = "errors/error_404.html")]
 pub struct Error404 {}
+
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "partials/index.html")]
+pub struct Index {}
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/interactive_name.html")]
@@ -28,33 +23,20 @@ pub struct ToggleFullscreen {
     pub project: String,
 }
 
-mod filters {
-    use text_to_ascii_art::to_art;
-    pub fn asciart<T: std::fmt::Display>(s: T) -> askama::Result<String> {
-        let s: String = s.to_string();
-        Ok(to_art(s, "", 0, 0, 0).unwrap())
-    }
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "partials/socials.html")]
+pub struct Socials {}
 
-    pub fn clean_name<T: std::fmt::Display>(s: T) -> askama::Result<String> {
-        let s = s.to_string();
-        let mut result = String::new();
-        let mut chars = s.chars().peekable();
-        let mut last_char: Option<char> = None;
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "partials/bio.html")]
+pub struct Bio {}
 
-        while let Some(c) = chars.next() {
-            if c.is_uppercase() {
-                if let Some(prev_char) = last_char {
-                    if prev_char != '.' && prev_char != '-' {
-                        result.push(' ');
-                    }
-                }
-            }
-            result.push(c);
-            last_char = Some(c);
-        }
-
-        Ok(result)
-    }
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "partials/masonry.html")]
+pub struct Masonry {
+    pub fullscreen: bool,
+    pub masonry: Vec<String>,
+    pub project: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
@@ -133,4 +115,33 @@ pub enum Project {
         project_name: String,
         high_res: bool,
     },
+}
+
+mod filters {
+    use text_to_ascii_art::to_art;
+    pub fn asciart<T: std::fmt::Display>(s: T) -> askama::Result<String> {
+        let s: String = s.to_string();
+        Ok(to_art(s, "", 0, 0, 0).unwrap())
+    }
+
+    pub fn clean_name<T: std::fmt::Display>(s: T) -> askama::Result<String> {
+        let s = s.to_string();
+        let mut result = String::new();
+        let mut chars = s.chars().peekable();
+        let mut last_char: Option<char> = None;
+
+        while let Some(c) = chars.next() {
+            if c.is_uppercase() {
+                if let Some(prev_char) = last_char {
+                    if prev_char != '.' && prev_char != '-' {
+                        result.push(' ');
+                    }
+                }
+            }
+            result.push(c);
+            last_char = Some(c);
+        }
+
+        Ok(result)
+    }
 }
