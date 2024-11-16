@@ -11,6 +11,10 @@ pub struct Error404 {}
 pub struct Index {}
 
 #[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "partials/topper.html")]
+pub struct Topper {}
+
+#[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/interactive_name.html")]
 pub struct InteractiveName {
     pub titles: Vec<String>,
@@ -120,6 +124,17 @@ mod filters {
     pub fn asciart<T: std::fmt::Display>(s: T) -> askama::Result<String> {
         let s: String = s.to_string();
         Ok(to_art(s, "", 0, 0, 0).unwrap())
+    }
+
+    pub fn asciart_return_to_line<T: std::fmt::Display>(s: T) -> askama::Result<String> {
+        let s: String = s.to_string();
+
+        let r = s.split_whitespace()
+            .map(|part| to_art(part.into(), "", 0, 0, 0).unwrap())
+            .collect::<Vec<_>>()
+            .join("\n\n");
+
+        Ok(r)
     }
 
     pub fn clean_name<T: std::fmt::Display>(s: T) -> askama::Result<String> {

@@ -1,44 +1,38 @@
 <div id="togglable_name_container">
-
-    <div class="{{crate::ClassName::CENTER}}" id="first"
-         _="on click set rand to Math.random() * 360
-         toggle the *display of the next .{{crate::ClassName::CENTER}}
-         toggle the *display of me"
-    >
-        <span>
-            <pre>
-                {{ titles[0]|asciart}}
-            </pre>
-            <br>
-            <pre>
-                {{ titles[1]|asciart}}
-            </pre>
-        </span>
-    </div>
-
-    <div style="display: none" class="{{crate::ClassName::CENTER}}"
-         _="on click toggle the *display of the next .{{crate::ClassName::CENTER}}
-         toggle the *display of me"
-    >
-        <span>
-            <pre>
-                {{ titles[2]|asciart}}
-            </pre>
-        </span>
-    </div>
-
-    <div style="display: none" class="{{crate::ClassName::CENTER}}"
-         _="on click toggle the *display of #first
-         toggle the *display of me"
-    >
-        <span>
-            <pre>
-                {{ titles[3]|asciart}}
-            </pre>
-            <br>
-            <pre>
-                {{ titles[4]|asciart}}
-            </pre>
-        </span>
-    </div>
+    {% for title in titles %}
+        {% if title == titles.first().unwrap() %}
+            <div id="first"
+                 _="on click toggle *display of next <div/>
+                    toggle the *display of me"
+            >
+                <span>
+                    <pre>
+                        {{title|asciart_return_to_line}}
+                    </pre>
+                </span>
+            </div>
+        {% else if title == titles.last().unwrap() %}
+            <div style="display: none"
+                 _="on click toggle *display of #first
+                     toggle the *display of me"
+            >
+                <span>
+                    <pre>
+                        {{title|asciart_return_to_line}}
+                    </pre>
+                </span>
+            </div>
+        {% else %}
+            <div style="display: none"
+                 _="on click toggle *display of next <div/>
+                    toggle the *display of me"
+            >
+                <span>
+                    <pre>
+                        {{title|asciart_return_to_line}}
+                    </pre>
+                </span>
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>

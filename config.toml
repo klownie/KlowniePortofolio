@@ -4,7 +4,7 @@ http = 7878
 https =  3000
 
 [interactive_name]
-titles = ["Audrick", "Yeu", "Portofolio", "Concept", "Art"]
+titles = ["Audrick Yeu", "Portofolio", "Concept Art"]
 
 # The order in wich the post are show in the masonry
 [masonry]

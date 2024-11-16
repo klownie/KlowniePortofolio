@@ -55,6 +55,8 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
 
     let index = Index {};
 
+    let topper = Topper {};
+
     let interactive_name = &CONFIG.interactive_name;
 
     let socials = Socials {};
@@ -66,6 +68,7 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
     let reply = format!(
         "\
     {index}\
+    {topper}
     {interactive_name}\
     {socials}\
     {bio}\

@@ -1,7 +1,6 @@
 @import "Twilight";
 
 .center {
-  display: flex;
   text-align: center;
   justify-content: center;
 }
@@ -10,6 +9,7 @@ body {
   background-color: $background;
   font-family: Mononoki, sans-serif;
   scrollbar-gutter: stable both-edges;
+  scrollbar-color: $color_04 $color_05;
 
   ::selection {
     background-color: $color_12;
@@ -118,7 +118,7 @@ img {
     color: $color_12;
     text-align: center;
     line-height: 1.375rem; // Reduce line spacing for ASCII alignment
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     margin: auto 20px;
     transition: 0.25s;
     max-width: 100vw; // Limit width to viewport width
