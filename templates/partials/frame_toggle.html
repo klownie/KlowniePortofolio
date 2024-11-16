@@ -4,7 +4,7 @@
 {% if fullscreen %}
     <button
         class="{{crate::ClassName::FLOATING_X_BUTTON}}"
-        hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
+        hx-get="api/fullscreen?fullscreen=true&project={{project}}"
         hx-swap="innerHTML"
         hx-target="#toggledcontainer"
         hx-trigger="click"

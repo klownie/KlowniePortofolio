@@ -7,12 +7,12 @@ use axum::{
     response::{Html, IntoResponse},
 };
 use axum_extra::extract::Query;
-use log::{debug, error, info};
+use log::{ error, info};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
 use std::ops::Not;
-use std::sync::{Arc, LazyLock, Mutex};
+use std::sync::LazyLock;
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Ports {
@@ -33,9 +33,6 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
     config
 });
 
-pub static VISITORS: LazyLock<Arc<Mutex<Vec<String>>>> =
-    LazyLock::new(|| Arc::new(Mutex::new(Vec::new())));
-
 pub async fn handler_404() -> impl IntoResponse {
     let template = Error404 {};
     let reply = template.render().unwrap();
@@ -43,15 +40,7 @@ pub async fn handler_404() -> impl IntoResponse {
 }
 
 #[debug_handler]
-pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl IntoResponse {
-    let visitors_clone = Arc::clone(&VISITORS);
-    let mut visitors = visitors_clone.lock().unwrap();
-    if visitors.contains(&addr.to_string()) {
-        debug!("{addr} refreshed the page")
-    } else {
-        visitors.push(addr.to_string());
-        info!("{addr} is visiting");
-    }
+pub async fn handle_main() -> impl IntoResponse {
 
     let index = Index {};
 
