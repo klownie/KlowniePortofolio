@@ -34,14 +34,13 @@ pub struct Bio {}
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/masonry.html")]
 pub struct Masonry {
-    pub fullscreen: bool,
-    pub masonry: Vec<String>,
+    pub projects: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
 pub enum Project {
     #[template(path = "projects/MissingProject.html")]
-    MissingProject,
+    MissingFile,
 
     #[template(path = "projects/SamuConceptCharacter.html")]
     SamuConceptCharacter {
@@ -124,21 +123,16 @@ mod filters {
     }
 
     pub fn clean_name<T: std::fmt::Display>(s: T) -> askama::Result<String> {
-        let s = s.to_string();
         let mut result = String::new();
-        let mut chars = s.chars().peekable();
-        let mut last_char: Option<char> = None;
 
-        while let Some(c) = chars.next() {
-            if c.is_uppercase() {
-                if let Some(prev_char) = last_char {
-                    if prev_char != '.' && prev_char != '-' {
-                        result.push(' ');
-                    }
-                }
+        for (prev, c) in std::iter::once(None)
+            .chain(s.to_string().chars().map(Some))
+            .zip(s.to_string().chars())
+        {
+            if c.is_uppercase() && prev.map_or(false, |p| p != '.' && p != '-') {
+                result.push(' ');
             }
             result.push(c);
-            last_char = Some(c);
         }
 
         Ok(result)

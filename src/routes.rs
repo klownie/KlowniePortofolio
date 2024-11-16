@@ -14,11 +14,11 @@ pub fn build_routes() -> Router {
             get(resolution_request_handler),
         );
 
-    let app = Router::new()
+    let mut app = Router::new()
         .nest("/api", api_router)
         .route("/", get(handle_main));
 
-    let app = app.fallback(handler_404);
+    app = app.fallback(handler_404);
 
     app
 }

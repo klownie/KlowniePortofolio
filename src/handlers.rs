@@ -22,13 +22,9 @@ pub struct Ports {
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    pub project_order: ProjectOrder,
+    pub interactive_name: InteractiveName,
+    pub masonry: Masonry,
     pub ports: Ports,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct ProjectOrder {
-    pub projects: Vec<String>,
 }
 
 pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
@@ -57,30 +53,15 @@ pub async fn handle_main(ConnectInfo(addr): ConnectInfo<SocketAddr>) -> impl Int
         info!("{addr} is visiting");
     }
 
-    let index = Index {}.render().unwrap();
+    let index = Index {};
 
-    let interactive_name = InteractiveName {
-        titles: Vec::from(["Audrick", "Yeu", "Portofolio", "Concept", "Art"])
-            .iter()
-            .map(|&s| s.to_string())
-            .collect(),
-    }
-    .render()
-    .unwrap();
+    let interactive_name = &CONFIG.interactive_name;
 
     let socials = Socials {};
 
     let bio = Bio {};
 
-    let masonry = Masonry {
-        fullscreen: false,
-        masonry: CONFIG
-            .project_order
-            .projects
-            .iter()
-            .map(|s| s.to_string())
-            .collect(),
-    };
+    let masonry = &CONFIG.masonry;
 
     let reply = format!(
         "\
@@ -180,7 +161,7 @@ pub async fn render_project_template(project: &str, high_res: bool) -> String {
         },
         _ => {
             error!("Project not found, rendering MissingProject");
-            MissingProject
+            MissingFile
         }
     };
 

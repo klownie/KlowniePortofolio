@@ -1,7 +1,7 @@
 <div id="preload"></div>
 <div id="toggledcontainer"></div>
 <div class={{crate::ClassName::MASONRY}}>
-    {% for project in masonry %}
+    {% for project in projects %}
     {% call toggle_image(project) %}
     {% endfor %}
 </div>
@@ -15,7 +15,7 @@
             loading="lazy"
             src=/assets/projects/{{project}}/thumbnail.avif
             alt="{{project}}"
-            hx-get="api/fullscreen?fullscreen={{fullscreen}}&project={{project}}"
+            hx-get="api/fullscreen?fullscreen=false&project={{project}}"
             hx-trigger="click"
             hx-swap="innerHTML"
             hx-target="#toggledcontainer"
