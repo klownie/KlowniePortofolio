@@ -5,33 +5,27 @@
                  _="on click toggle *display of next <div/>
                     toggle the *display of me"
             >
-                <span>
-                    <pre>
-                        {{title|asciart_return_to_line}}
-                    </pre>
-                </span>
+                <pre>
+                    {{title|asciart_return_to_line}}
+                </pre>
             </div>
         {% else if title == titles.last().unwrap() %}
             <div style="display: none"
                  _="on click toggle *display of #first
                      toggle the *display of me"
             >
-                <span>
-                    <pre>
-                        {{title|asciart_return_to_line}}
-                    </pre>
-                </span>
+                <pre>
+                    {{title|asciart_return_to_line}}
+                </pre>
             </div>
         {% else %}
             <div style="display: none"
                  _="on click toggle *display of next <div/>
                     toggle the *display of me"
             >
-                <span>
-                    <pre>
-                        {{title|asciart_return_to_line}}
-                    </pre>
-                </span>
+                <pre>
+                    {{title|asciart_return_to_line}}
+                </pre>
             </div>
         {% endif %}
     {% endfor %}

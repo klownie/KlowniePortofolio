@@ -1,4 +1,4 @@
-@import "Twilight";
+@import "ColorSchemes";
 
 .center {
   text-align: center;
@@ -6,50 +6,80 @@
 }
 
 body {
-  background-color: $background;
+  background-color: var(--background);
   font-family: Mononoki, sans-serif;
   scrollbar-gutter: stable both-edges;
-  scrollbar-color: $color_04 $color_05;
+  scrollbar-color: var(--yellow) var(--blue);
+  scrollbar-width: thin;
+  transition: background-color 0.25s ease;
 
   ::selection {
-    background-color: $color_12;
-    color: $color_01;
+    background-color: var(--bright-yellow);
+    color: var(--black);
   }
 }
 
 h1 {
   text-align: center;
-  color: $color_12;
+  color: var(--bright-yellow);
 }
 
 p {
-  color: $color_08;
+  color: var(--white);
 }
 
 img {
   user-select: none;
 }
 
+.faded {
+  font-family: IBM-VGA8, sans-serif;
+  font-size: 1.5rem;
+  color: var(--green);
+  button {
+    font-family: IBM-VGA8,sans-serif;
+    font-size: 1.5rem;
+    color: var(--black);
+    background-color: var(--white);
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      background-color: var(--red);
+      color: var(--yellow);
+    }
+  }
+}
 
 .socials {
   text-align: center;
-  color: $color_12;
+  color: var(--bright-yellow);
   margin: 50px;
+  transition: color 1s ease;
+  .socials_container {
+    background-color: var(--bright-black);
+    padding: 1.5rem 0.5rem 0.5rem 1rem;
+    margin: 2rem;
+    border-radius: 0.5rem;
+    transition: background-color 1s ease;
+  }
 }
 
 .bio {
-  background: rgba($color_09, 20%);
+  background: var(--bright-black);
+  border-radius: 1rem;
   padding: 20px;
-  color: $color_08;
+  color: var(--foreground);
   margin: auto auto;
   max-width: 960px;
   text-align: left;
   font-family: Mononoki, sans-serif;
   font-size: 1.1rem;
   font-weight: 400;
+  transition: background-color 1s ease;
 
   span {
-    color: $color_04;
+    color: var(--yellow);
     font-weight: 700;
   }
 }
@@ -78,12 +108,12 @@ img {
     outline: 0 solid transparent;
 
     &:hover {
-      outline: 5px solid $color_10;
+      outline: 5px solid var(--bright-red);
     }
   }
 
   p {
-    color: $foreground;
+    color: var(--foreground);
     font-size: 0;
     max-height: 0;
     margin-bottom: 0;
@@ -115,15 +145,14 @@ img {
     display: inline-block;
     user-select: none;
     cursor: pointer;
-    color: $color_12;
+    color: var(--bright-yellow);
     text-align: center;
     line-height: 1.375rem; // Reduce line spacing for ASCII alignment
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin: auto 20px;
     transition: 0.25s;
     max-width: 100vw; // Limit width to viewport width
     overflow: hidden;
-
 
     &:hover {
       -ms-transform: scale(1.1); /* IE 9 */
@@ -142,7 +171,7 @@ img {
   }
 
   span {
-    text-shadow: 1em 1em $color_05
+    text-shadow: 1em 1em var(--bright-black);
   }
 }
 
@@ -154,6 +183,13 @@ img {
   width: 100%;
   height: 100%;
 
+  .fullscreen_image {
+    height: 100vh;
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
   .fullscreen_gallery {
     display: flex;
     flex-direction: column;
@@ -163,24 +199,26 @@ img {
     overflow-y: scroll;
     overscroll-behavior: contain;
     padding: 10px;
-  }
-
-  .fullscreen_image {
-    height: 100vh;
-    width: 100%;
-    object-fit: contain;
-    margin-bottom: 10px;
+    @media (orientation: portrait) {
+      width: 100vw;
+      height: 100vh;
+    }
   }
 
   .fullscreen_blog {
-    background-color: $color_09;
+    background-color: var(--background);
     overflow-y: scroll;
     width: 34%;
     height: 100%;
     padding: 20px;
     z-index: 700;
+    @media (orientation: portrait) {
+      width: 100vw;
+      height: 34vh;
+    }
   }
 }
+
 .blur {
   position: fixed;
   top: 0;
@@ -202,23 +240,22 @@ a {
 
   &:link {
     text-decoration: none;
-    color: $color_12;
+    color: var(--bright-red);
   }
-;
 
   &:visited {
     text-decoration: none;
-    color: $color_02;
+    color: var(--red);
   }
 
   &:hover {
     text-decoration: none;
-    color: $color_10;
+    color: var(--green);
   }
 
   &:active {
     text-decoration: none;
-    color: $color_12;
+    color: var(--bright-red);
   }
 }
 
@@ -228,15 +265,15 @@ a {
   right: 20px;
   padding: 10px 20px;
   font-weight: 700;
-  background-color: $color_08;
-  color: $color_01;
+  background-color: var(--white);
+  color: var(--black);
   border: none;
   border-radius: 2%;
   cursor: pointer;
   font-size: 2.5rem;
   z-index: 1000; /* Ensures the button stays on top */
   &:hover {
-    background-color: $color_10; /* Darker color on hover */
+    background-color: var(--bright-red); /* Darker color on hover */
   }
 }
 
@@ -244,19 +281,22 @@ a {
   position: fixed;
   top: 20px;
   right: 20px;
-  color: $color_08;
+  color: var(--white);
   background-color: transparent;
   border: none;
   cursor: pointer;
   z-index: 1000; /* Ensures the button stays on top */
   &:hover {
-    color: $color_10; /* Darker color on hover */
+    color: var(--bright-red); /* Darker color on hover */
   }
 }
 
-[scrollable="true"] {
-  overflow: scroll;
-}
-[scrollable="false"] {
+.no_scroll {
   overflow: hidden;
+}
+
+.topper {
+  font-family: IBM-VGA8, sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
 }

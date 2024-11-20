@@ -10,8 +10,9 @@
 <!--    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />-->
     {% block head %}{% endblock %}
 </head>
-<body>
-
+<body theme="Twilight"
+      _="on swap(theme) set @theme to theme"
+>
     <div id="content">
         {% block content %}{% endblock %}
     </div>
