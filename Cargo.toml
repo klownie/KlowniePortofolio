@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 
 #Backend
-axum = { version = "0.8.0-alpha.1", features = ["macros"]}
+axum = { version = "0.8.0-alpha.1", features = ["macros","tokio"]}
 axum-extra = { version = "0.10.0-alpha.1", features = ["cookie", "typed-header", "query"] }
 axum-htmx = "0.6.0"
 axum-server = { version = "0.6.0", features = ["tls-rustls"],  default-features = false }

@@ -1,5 +1,4 @@
-<div id="preload"></div>
-<div id="toggledcontainer"></div>
+<div id="toggledcontainer" preload></div>
 <div class={{crate::ClassName::MASONRY}}>
     {% for project in projects %}
     {% call toggle_image(project) %}
@@ -8,7 +7,7 @@
 
 {% macro toggle_image(project) %}
 
-<div class="{{crate::ClassName::FRAME_CONTAINER}}">
+<div class="{{crate::ClassName::FRAME_CONTAINER}}" href="api/projects/{{project}}" preload="mouseover" preload-images="true">
     <img
             id="frame"
             class="{{crate::ClassName::FRAME}}"

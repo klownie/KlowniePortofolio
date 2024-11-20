@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover">
     <script src="/assets/js/htmx.min.js"></script>
+    <script src="/assets/js/htmx_ext_preload.js"></script>
     <script src="/assets/js/hyperscript.min.js"></script>
     <link rel="icon" href="/assets/favicon.svg" as="image" type="image/svg+xml">
 <!--    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />-->
     {% block head %}{% endblock %}
 </head>
-<body theme="Twilight"
+<body   hx-ext="preload"
+        theme="Twilight"
       _="on swap(theme) set @theme to theme"
 >
     <div id="content">
