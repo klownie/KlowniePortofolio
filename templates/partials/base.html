@@ -5,13 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover">
     <script src="/assets/js/htmx.min.js"></script>
-    <script src="/assets/js/htmx_ext_preload.js"></script>
     <script src="/assets/js/hyperscript.min.js"></script>
+    <script >
+        document.addEventListener('mousemove', (e) => {
+        const cursor = document.querySelector('.{{crate::ClassName::SMALL}}');
+        if (cursor) {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        }
+        });
+    </script>
     <link rel="icon" href="/assets/favicon.svg" as="image" type="image/svg+xml">
-<!--    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />-->
     {% block head %}{% endblock %}
 </head>
-<body   hx-ext="preload"
+<body
         theme="Twilight"
       _="on swap(theme) set @theme to theme"
 >
