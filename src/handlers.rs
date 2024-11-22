@@ -7,7 +7,7 @@ use axum::{
     response::{Html, IntoResponse},
 };
 use axum_extra::extract::Query;
-use log::{ error, info};
+use log::{debug, error, info};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
@@ -104,51 +104,51 @@ pub async fn render_project_template(project: &str, high_res: bool) -> String {
 
     let template = match project {
         "SamuConceptIllustration" => SamuConceptIllustration {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "SamuConceptCharacter" => SamuConceptCharacter {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "Saint-John" => SaintJohn {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "HomardRojas" => HomardRojas {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "CarbonixWorkerSuit" => CarbonixWorkerSuit {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "ClimbingExoSuit" => ClimbingExoSuit {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "ClimbingExoSuit3d" => ClimbingExoSuit3d {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "Intru" => Intru {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "UmbrellaKnight" => UmbrellaKnight {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "TeamBlue" => TeamBlue {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "TribalYellowDemon" => TribalYellowDemon {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         "UrbanWhiteCrowMan" => UrbanWhiteCrowMan {
-            project_name: project.into(),
+            project: project.into(),
             high_res,
         },
         _ => {
@@ -157,6 +157,6 @@ pub async fn render_project_template(project: &str, high_res: bool) -> String {
         }
     };
 
-    info!("Rendering project: {}", project);
+    debug!("Rendering project: {}", project);
     template.render().unwrap()
 }

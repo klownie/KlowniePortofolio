@@ -6,7 +6,7 @@
 
         <button
                 class="{{crate::ClassName::FLOATING_BUTTON}}"
-                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-get="api/toggleres/{{project}}/{{high_res}}"
                 hx-target="#all"
                 hx-swap="outerHTML"
         >
@@ -24,14 +24,14 @@
         <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
             {% if high_res %}
             {% set (res, type) = ("HighRes", "jpg") %}
-            <img src=/assets/projects/{{project_name}}/{{res}}/model_006.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/model_006_smooth_01.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/model_006_smooth_02.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/model_006.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_01.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_02.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
             {% else %}
             {% set (res, type) = ("LowRes", "avif") %}
-            <img src=/assets/projects/{{project_name}}/{{res}}/model_006.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/model_006_smooth_01.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/model_006_smooth_02.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/model_006.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_01.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_02.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
             {% endif %}
         </div>
 

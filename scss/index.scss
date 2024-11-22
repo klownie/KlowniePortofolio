@@ -138,7 +138,7 @@ img {
   pre {
     display: inline-block;
     user-select: none;
-    cursor: pointer;
+    cursor: none;
     color: var(--bright-yellow);
     text-align: center;
     line-height: clamp(0.60rem, 2vw, 1.375rem); // Reduce line spacing for ASCII alignment
@@ -162,17 +162,25 @@ img {
 
 .fullscreen_container {
   display: flex;
+  flex-direction: row;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
+  @media (orientation: portrait) {
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+  }
   .fullscreen_image {
     height: 100vh;
     width: 100%;
     object-fit: contain;
     margin-bottom: 10px;
+    @media (orientation: portrait) {
+      height: 90vh;
+    }
   }
 
   .fullscreen_gallery {
@@ -186,7 +194,8 @@ img {
     padding: 10px;
     @media (orientation: portrait) {
       width: 100vw;
-      height: 100vh;
+      height: 90vh;
+      overflow-y: visible;
     }
   }
 
@@ -199,7 +208,7 @@ img {
     z-index: 700;
     @media (orientation: portrait) {
       width: 100vw;
-      height: 34vh;
+      height: 10vh;
     }
   }
 }
@@ -219,6 +228,7 @@ img {
 }
 
 a {
+  cursor: none;
   .icon {
     text-decoration: none;
   }
@@ -245,6 +255,7 @@ a {
 }
 
 .floating_button {
+  cursor: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -254,7 +265,6 @@ a {
   color: var(--black);
   border: none;
   border-radius: 2%;
-  cursor: pointer;
   font-size: 2.5rem;
   z-index: 999;
   &:hover {
@@ -263,13 +273,13 @@ a {
 }
 
 .floating_x_button {
+  cursor: none;
   position: fixed;
   top: 20px;
   right: 20px;
   color: var(--white);
   background-color: transparent;
   border: none;
-  cursor: pointer;
   z-index: 999;
   &:hover {
     color: var(--bright-red);
@@ -301,6 +311,7 @@ a {
   font-size: var(--size);
   color: var(--green);
   button {
+    cursor: none;
     font-family: IBM-VGA8,sans-serif;
     font-size: var(--size);
     color: var(--black);
@@ -316,7 +327,7 @@ a {
   }
 }
 
-.small{
+#cursor {
   position: fixed;
   width: 1rem;
   height: 1rem;
@@ -324,6 +335,19 @@ a {
   border-radius: 50%;
   z-index: 1000;
   pointer-events: none;
-  transform: translate(-50%, -50%);
   mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease, border 0.5s ease, left 0.1s ease-out, top 0.1s ease-out;
+}
+
+#cursor.grow {
+  border: 2rem solid var(--foreground);
+  height: 0;
+  width: 0;
+}
+
+#cursor.disappear {
+  border: 0 solid var(--foreground);
+  height: 0;
+  width: 0;
 }

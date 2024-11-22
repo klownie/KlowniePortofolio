@@ -48,73 +48,73 @@ pub enum Project {
 
     #[template(path = "projects/SamuConceptCharacter.html")]
     SamuConceptCharacter {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/SamuConceptIllustration.html")]
     SamuConceptIllustration {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/SaintJohn.html")]
     SaintJohn {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/HomardRojas.html")]
     HomardRojas {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/CarbonixWorkerSuit.html")]
     CarbonixWorkerSuit {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/ClimbingExoSuit.html")]
     ClimbingExoSuit {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/Intru.html")]
     Intru {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/UmbrellaKnight.html")]
     UmbrellaKnight {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/ClimbingExoSuit3d.html")]
     ClimbingExoSuit3d {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/TeamBlue.html")]
     TeamBlue {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/TribalYellowDemon.html")]
     TribalYellowDemon {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 
     #[template(path = "projects/UrbanWhiteCrowMan.html")]
     UrbanWhiteCrowMan {
-        project_name: String,
+        project: String,
         high_res: bool,
     },
 }

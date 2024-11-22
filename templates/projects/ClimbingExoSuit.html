@@ -6,7 +6,7 @@
 
         <button
                 class="{{crate::ClassName::FLOATING_BUTTON}}"
-                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-get="api/toggleres/{{project}}/{{high_res}}"
                 hx-target="#all"
                 hx-swap="outerHTML"
         >
@@ -24,19 +24,19 @@
         <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
             {% if high_res %}
             {% set (res, type) = ("HighRes", "jpg") %}
-            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_noise.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_color.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_842.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
             <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
-                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_843.webm" type="video/webm">
+                <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
             </video>
             {% else %}
             {% set (res, type) = ("LowRes", "avif") %}
-            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_noise.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_843_color.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src=/assets/projects/{{project_name}}/{{res}}/sketch_842.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}} class={{crate::ClassName::FULLSCREEN_IMAGE}} />
             <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
-                <source src="/assets/projects/{{project_name}}/{{res}}/sketch_843.webm" type="video/webm">
+                <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
             </video>
             {% endif %}
         </div>

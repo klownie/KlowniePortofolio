@@ -7,8 +7,9 @@
 
 {% macro toggle_image(project) %}
 
-<div class="{{crate::ClassName::FRAME_CONTAINER}}" href="api/projects/{{project}}" >
+<div class="{{crate::ClassName::FRAME_CONTAINER}}" >
     <img
+            role="button"
             id="frame"
             class="{{crate::ClassName::FRAME}}"
             src=/assets/projects/{{project}}/thumbnail.avif

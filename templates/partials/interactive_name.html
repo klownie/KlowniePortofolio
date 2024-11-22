@@ -1,7 +1,7 @@
-<div id="togglable_name_container">
+<div id="togglable_name_container" >
     {% for title in titles %}
         {% if title == titles.first().unwrap() %}
-            <div id="first"
+            <div id="first" role="button"
                  _="on click toggle *display of next <div/>
                     toggle the *display of me"
             >
@@ -10,7 +10,7 @@
                 </pre>
             </div>
         {% else if title == titles.last().unwrap() %}
-            <div style="display: none"
+            <div style="display: none" role="button"
                  _="on click toggle *display of #first
                      toggle the *display of me"
             >
@@ -19,7 +19,7 @@
                 </pre>
             </div>
         {% else %}
-            <div style="display: none"
+            <div style="display: none" role="button"
                  _="on click toggle *display of next <div/>
                     toggle the *display of me"
             >

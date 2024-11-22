@@ -5,7 +5,7 @@
 
         <button
                 class="{{crate::ClassName::FLOATING_BUTTON}}"
-                hx-get="api/toggleres/{{project_name}}/{{high_res}}"
+                hx-get="api/toggleres/{{project}}/{{high_res}}"
                 hx-target="#all"
                 hx-swap="outerHTML"
         >
@@ -23,16 +23,16 @@
         <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
             {% if high_res %}
             {% set (res, type) = ("HighRes", "jpg") %}
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_849_08.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_851.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_852.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_853.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_849_08.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_851.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_852.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_853.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
             {% else %}
             {% set (res, type) = ("LowRes", "avif") %}
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_849_08.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_851.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_852.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            <img src="/assets/projects/{{project_name}}/{{res}}/sketch_853.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_849_08.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_851.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_852.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+            <img src="/assets/projects/{{project}}/{{res}}/sketch_853.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
             {% endif %}
         </div>
 
