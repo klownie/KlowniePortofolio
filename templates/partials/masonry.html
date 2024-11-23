@@ -7,7 +7,9 @@
 
 {% macro toggle_image(project) %}
 
-<div class="{{crate::ClassName::FRAME_CONTAINER}}" >
+<div
+        class="{{crate::ClassName::FRAME_CONTAINER}}"
+>
     <img
             role="button"
             id="frame"
@@ -16,13 +18,15 @@
             alt="{{project}}"
             hx-get="api/fullscreen?fullscreen=false&project={{project}}"
             hx-trigger="mouseover"
-            hx-swap="innerHTML"
+            hx-swap="innerHTML "
             hx-target="#toggledcontainer"
-            _="on intersection(intersecting) having threshold 0.3
-             if intersecting transition opacity to 1
-             else transition opacity to 0 end
+            _="
+             on intersection(intersecting) having threshold 0.3
+                if intersecting transition opacity to 1
+                else transition opacity to 0 end
              on click add .{{crate::ClassName::NO_SCROLL}} to <body/>
-                then show #toggledcontainer"
+                then show #toggledcontainer
+            "
     />
     <p>{{project|clean_name}}</p>
 </div>

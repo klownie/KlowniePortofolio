@@ -4,10 +4,6 @@
 {% if fullscreen %}
     <button
         class="{{crate::ClassName::FLOATING_X_BUTTON}}"
-        hx-get="api/fullscreen?fullscreen=true&project={{project}}"
-        hx-swap="innerHTML"
-        hx-target="#toggledcontainer"
-        hx-trigger="click"
         _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
             then hide #toggledcontainer"
     >
