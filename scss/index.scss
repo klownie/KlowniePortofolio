@@ -161,6 +161,7 @@ img {
 }
 
 .fullscreen_container {
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -170,16 +171,17 @@ img {
   height: 100%;
   @media (orientation: portrait) {
     flex-direction: column;
-    height: 100vh;
     overflow-y: scroll;
+    overflow-x: hidden;
   }
   .fullscreen_image {
     height: 100vh;
     width: 100%;
     object-fit: contain;
-    margin-bottom: 10px;
+    margin: 1rem;
     @media (orientation: portrait) {
       height: 90vh;
+
     }
   }
 
@@ -187,15 +189,15 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 66%;
+    width: 67%;
     height: 100%;
     overflow-y: scroll;
     overscroll-behavior: contain;
-    padding: 10px;
     @media (orientation: portrait) {
-      width: 100vw;
+      width: 100%;
       height: 90vh;
       overflow-y: visible;
+
     }
   }
 
@@ -207,19 +209,11 @@ img {
     padding: 20px;
     z-index: 700;
     @media (orientation: portrait) {
-      width: 100vw;
+      width: 100%;
       height: 10vh;
+
     }
   }
-}
-
-.blur {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
 }
 
 .errorlol {
@@ -337,7 +331,7 @@ a {
   pointer-events: none;
   mix-blend-mode: difference;
   transform: translate(-50%, -50%);
-  transition: width 0.5s ease, height 0.5s ease, border 0.5s ease, left 0.1s ease-out, top 0.1s ease-out;
+  transition: width 0.5s ease, height 0.5s ease, border 0.5s ease;
 }
 
 #cursor.grow {

@@ -9,22 +9,23 @@ edition = "2021"
 axum = { version = "0.8.0-alpha.1", features = ["macros","tokio"]}
 axum-extra = { version = "0.10.0-alpha.1", features = ["cookie", "typed-header", "query"] }
 axum-htmx = "0.6.0"
-axum-server = { version = "0.6.0", features = ["tls-rustls"],  default-features = false }
+axum-server = { version = "0.7.1", features = ["tls-rustls"],  default-features = false }
 
 #templating
 askama = { version = "0.12.1", features = ["with-axum"] }
 askama_axum = "0.4.0"
 askama-enum = "0.0.2"
+askama-filters = "0.1.3"
 
 #protocols
-tokio = { version = "1.0", features = ["full"] }
+tokio = { version = "1.41.1", features = ["full"] }
 tower = { version = "0.5.1", features = ["util"] }
-tower-http = { version = "0.6.1", features = ["fs", "set-header", "compression-full", "decompression-full"] }
+tower-http = { version = "0.6.2", features = ["fs", "set-header", "compression-full", "decompression-full"] }
 
 
 #serde
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+serde = { version = "1.0.*", features = ["derive"] }
+serde_json = "1.0.*"
 
 #debuging
 tracing-subscriber = "0.3.18"
@@ -32,14 +33,14 @@ tracing = "0.1.40"
 log = "0.4.22"
 
 #Esthetics
-turf = "0.9.3"
+turf = "0.9.4"
 text-to-ascii-art="0.1.10"
 
 #toml
 toml = "0.8.19"
 
 [dev-dependencies]
-anyhow = "1.0.91"
+anyhow = "1.0.93"
 httpc-test = "0.1.10"
 
 [package.metadata.turf]
@@ -47,7 +48,7 @@ load_paths = ["scss/colorschemes"]
 minify = true
 
 [package.metadata.turf.class_names]
-template = "klownie_portofolio_<original_name>_<id>"
+template = "<original_name><id>"
 
 [package.metadata.turf.browser_targets]
 chrome = [80, 1, 2]

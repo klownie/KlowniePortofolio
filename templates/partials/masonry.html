@@ -16,7 +16,7 @@
             class="{{crate::ClassName::FRAME}}"
             src=/assets/projects/{{project}}/thumbnail.avif
             alt="{{project}}"
-            hx-get="api/fullscreen?fullscreen=false&project={{project}}"
+            hx-get="api/projects/{{project}}"
             hx-trigger="mouseover"
             hx-swap="innerHTML "
             hx-target="#toggledcontainer"

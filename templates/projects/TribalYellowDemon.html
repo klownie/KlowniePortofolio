@@ -1,34 +1,37 @@
-<div id="all">
-    <div class={{crate::ClassName::BLUR}}></div>
+{%- import "macros/icons.html" as icons -%}
+<div id="{{project}}" class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
+    <button
+            class="{{crate::ClassName::FLOATING_X_BUTTON}}"
+            _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
+        then hide #toggledcontainer"
+    >
+        {%- call icons::IconButtonX -%}
+    </button>
+    <button
+            class="{{crate::ClassName::FLOATING_BUTTON}}"
+            hx-get="api/toggleres/{{project}}/{{high_res}}"
+            hx-target="#{{project}}"
+            hx-swap="outerHTML"
+    >
+        {% if high_res %}
+        HD
+        {% else %}
+        LD
+        {% endif %}
+    </button>
 
-    <div class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
-
-        <button
-                class="{{crate::ClassName::FLOATING_BUTTON}}"
-                hx-get="api/toggleres/{{project}}/{{high_res}}"
-                hx-target="#all"
-                hx-swap="outerHTML"
-        >
-            {% if high_res %}
-            HD
-            {% else %}
-            LD
-            {% endif %}
-        </button>
-
-        <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
-            <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
-        </div>
-
-        <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
-            {% if high_res %}
-            {% set (res, type) = ("HighRes", "jpg") %}
-            <img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            {% else %}
-            {% set (res, type) = ("LowRes", "avif") %}
-            <img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-            {% endif %}
-        </div>
-
+    <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
+        <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
     </div>
+
+    <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
+        {% if high_res %}
+        {% set (res, type) = ("HighRes", "jpg") %}
+        <img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+        {% else %}
+        {% set (res, type) = ("LowRes", "avif") %}
+        <img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
+        {% endif %}
+    </div>
+
 </div>

@@ -1,5 +1,5 @@
 use crate::handlers::{
-    fullscreen_toggle_handler, handle_main, handler_404, project_request_handler,
+    handle_main, handler_404, project_request_handler,
     resolution_request_handler,
 };
 use axum::routing::get;
@@ -7,7 +7,6 @@ use axum::Router;
 
 pub fn build_routes() -> Router {
     let api_router = Router::new()
-        .route("/fullscreen", get(fullscreen_toggle_handler))
         .route("/projects/{project}", get(project_request_handler))
         .route(
             "/toggleres/{project_name}/{high_res}",

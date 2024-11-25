@@ -6,7 +6,6 @@ use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use axum_extra::extract::Query;
 use log::{debug, error, info};
 use serde::Deserialize;
 use std::fs;
@@ -65,21 +64,6 @@ pub async fn handle_main() -> impl IntoResponse {
     "
     );
 
-    (StatusCode::OK, Html(reply))
-}
-
-#[debug_handler]
-pub async fn fullscreen_toggle_handler(
-    Query(template): Query<ToggleFullscreen>,
-) -> impl IntoResponse {
-    let new_template = ToggleFullscreen {
-        fullscreen: template.fullscreen.not(),
-        project: template.project,
-    };
-
-    let reply = new_template.render().unwrap();
-
-    // Return the HTML response
     (StatusCode::OK, Html(reply))
 }
 
