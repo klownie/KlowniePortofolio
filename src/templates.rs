@@ -12,7 +12,9 @@ pub struct Index {}
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/topper.html")]
-pub struct Topper {}
+pub struct Topper {
+    pub themes:Vec<String>,
+}
 
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/interactive_name.html")]
@@ -150,6 +152,22 @@ mod filters {
             result.push(c);
         }
 
+        Ok(result)
+    }
+
+    pub fn to_javascript<T: std::fmt::Display>(s: &[T]) -> askama::Result<String> {
+        let mut result = String::from("[");
+
+        for (i, item) in s.iter().enumerate() {
+            result.push('\''); // Use single quote
+            result.push_str(&item.to_string());
+            result.push('\''); // Use single quote
+            if i < s.len() - 1 {
+                result.push(',');
+            }
+        }
+
+        result.push(']');
         Ok(result)
     }
 }

@@ -21,6 +21,7 @@ pub struct Ports {
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
+    topper: Topper,
     pub interactive_name: InteractiveName,
     pub masonry: Masonry,
     pub ports: Ports,
@@ -43,7 +44,7 @@ pub async fn handle_main() -> impl IntoResponse {
 
     let index = Index {};
 
-    let topper = Topper {};
+    let topper = &CONFIG.topper;
 
     let interactive_name = &CONFIG.interactive_name;
 

@@ -5,7 +5,7 @@
 </a>
 <span class="{{crate::ClassName::FADED}}">echo selected theme :
     <button _="
-        set :themes to ['Twilight','Everblush','RosePineMoon','TempusTempest']
+        set :themes to {{ themes|to_javascript }}
         on click increment :x
             then set theme to :themes[:x mod :themes.length]
             then send swap(theme:theme) to <body/>
