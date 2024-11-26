@@ -4,7 +4,7 @@ http = 7878
 https =  3000
 
 [topper]
-themes = ["Twilight","Everblush","RosePineMoon","TempusTempest"]
+themes = ["Everblush","RosePineMoon","Twilight","TempusTempest"]
 
 [interactive_name]
 titles = ["Audrick Yeu", "Portofolio", "Concept Artist"]

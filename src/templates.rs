@@ -23,13 +23,6 @@ pub struct InteractiveName {
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
-#[template(path = "partials/frame_toggle.html")]
-pub struct ToggleFullscreen {
-    pub fullscreen: bool,
-    pub project: String,
-}
-
-#[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/socials.html")]
 pub struct Socials {}
 
@@ -146,7 +139,7 @@ mod filters {
             .chain(s.to_string().chars().map(Some))
             .zip(s.to_string().chars())
         {
-            if c.is_uppercase() && prev.map_or(false, |p| p != '.' && p != '-') {
+            if c.is_uppercase() && prev.is_some_and(|p| p != '.' && p != '-') {
                 result.push(' ');
             }
             result.push(c);

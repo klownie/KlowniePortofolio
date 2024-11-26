@@ -1,3 +1,28 @@
+body {
+  --black: #333333;
+  --red: #333333;
+  --green: #333333;
+  --yellow: #333333;
+  --blue: #333333;
+  --magenta: #333333;
+  --cyan: #333333;
+  --white: #333333;
+
+  --bright-black: #333333;
+  --bright-red: #333333;
+  --bright-green: #333333;
+  --bright-yellow: #333333;
+  --bright-blue: #333333;
+  --bright-magenta: #333333;
+  --bright-cyan: #333333;
+  --bright-white: #333333;
+
+  --background: #333333;
+  --foreground: #333333;
+
+  --cursor: #333333;
+}
+
 body[theme='Twilight'] {
   --black: #141414;           /* Black */
   --red: #C06D44;             /* Red */

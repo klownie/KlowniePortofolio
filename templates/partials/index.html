@@ -3,19 +3,22 @@
 {% block title %}Audrick Yeu | Portofolio{% endblock %}
 
 {% block head %}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@klownie">
+<meta name="twitter:creator" content="@klownie">
+
 <meta name="robots" content="max-image-preview:large">
 <meta name="description" content="Audrick Concept Art Portofolio">
+
 <meta property="og:url" content="https://portofolio.klownie.me">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Audrick Yeu Portofolio">
 <meta property="og:title" content="Audrick Yeu - Portofolio">
-<meta property="og:description" content="TODO">
-<meta property="og:image" content="/assets/images/sketch_846.avif">
+<meta property="og:description" content="Personal concept portofolio website">
 <meta property="og:image:width" content="3516">
 <meta property="og:image:height" content="1432">
-{% endblock %}
 
-{% block content %}
 <style>
     {{ crate::STYLE_SHEET }}
     @font-face {
@@ -72,7 +75,9 @@
         font-display: swap;
     }
 </style>
+{% endblock %}
 
+{% block content %}
 <div id="cursor" class="{{crate::ClassName::DISAPPEAR}}"></div>
 
 {% endblock %}

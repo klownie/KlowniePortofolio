@@ -12,6 +12,7 @@ use std::fs;
 use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::LazyLock;
+use minify_html_onepass::{Cfg, Error, truncate};
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Ports {
@@ -54,7 +55,7 @@ pub async fn handle_main() -> impl IntoResponse {
 
     let masonry = &CONFIG.masonry;
 
-    let reply = format!(
+    let mut reply = format!(
         "\
     {index}\
     {topper}
@@ -63,7 +64,16 @@ pub async fn handle_main() -> impl IntoResponse {
     {bio}\
     {masonry}\
     "
-    );
+    ).into_bytes();
+
+    let cfg = Cfg {
+        minify_js: true,
+        ..Cfg::default()
+    };
+    match truncate(&mut reply, &cfg) {
+        Ok(()) => debug!("js minified"),
+        Err(Error { position, .. }) => {error!("minification failed at : {}",position)}
+    };
 
     (StatusCode::OK, Html(reply))
 }
