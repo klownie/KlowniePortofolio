@@ -6,7 +6,7 @@ use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use log::{debug, error, info};
+use log::{debug, error};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
@@ -82,19 +82,19 @@ pub async fn project_request_handler(
     ConnectInfo(addr): ConnectInfo<SocketAddr>,
     Path(project): Path<String>,
 ) -> impl IntoResponse {
-    info!("{} has requested {}", addr, &project);
+    debug!("{} has requested {}", addr, &project);
     let reply = render_project_template(&project, false).await;
-    (StatusCode::OK, Html(reply))
+    reply
 }
 
 pub async fn resolution_request_handler(
     Path((project, high_res)): Path<(String, bool)>,
 ) -> impl IntoResponse {
     let reply = render_project_template(&project, high_res.not()).await;
-    (StatusCode::OK, Html(reply))
+    reply
 }
 
-pub async fn render_project_template(project: &str, high_res: bool) -> String {
+pub async fn render_project_template(project: &str, high_res: bool) -> (StatusCode, Html<String>) {
     use Project::*;
 
     let template = match project {
@@ -147,11 +147,11 @@ pub async fn render_project_template(project: &str, high_res: bool) -> String {
             high_res,
         },
         _ => {
-            error!("Project not found, rendering MissingProject");
-            MissingFile
+            error!("no project named {project} was found");
+            return (StatusCode::NOT_FOUND, Html(String::new()));
         }
     };
 
     debug!("Rendering project: {}", project);
-    template.render().unwrap()
+    (StatusCode::OK, Html(template.render().unwrap()))
 }

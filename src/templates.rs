@@ -38,8 +38,6 @@ pub struct Masonry {
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
 pub enum Project {
-    #[template(path = "projects/MissingProject.html")]
-    MissingFile,
 
     #[template(path = "projects/SamuConceptCharacter.html")]
     SamuConceptCharacter {

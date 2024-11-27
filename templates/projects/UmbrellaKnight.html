@@ -27,14 +27,14 @@
     <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
         {% if high_res %}
         {% set (res, type) = ("HighRes", "jpg") %}
-        <img src="/assets/projects/{{project}}/{{res}}/sketch_837_04.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-        <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
+        <img src="/assets/projects/{{project}}/{{res}}/sketch_837_04.{{type}}"/>
+        <video autoplay loop muted playsinline>
             <source src="/assets/projects/{{project}}/{{res}}/sketch_837.webm" type="video/webm">
         </video>
         {% else %}
         {% set (res, type) = ("LowRes", "avif") %}
-        <img src="/assets/projects/{{project}}/{{res}}/sketch_837_04.{{type}}" class={{crate::ClassName::FULLSCREEN_IMAGE}} />
-        <video autoplay loop muted playsinline class={{crate::ClassName::FULLSCREEN_IMAGE}}>
+        <img src="/assets/projects/{{project}}/{{res}}/sketch_837_04.{{type}}"/>
+        <video autoplay loop muted playsinline>
             <source src="/assets/projects/{{project}}/{{res}}/sketch_837.webm" type="video/webm">
         </video>
         {% endif %}

@@ -21,9 +21,6 @@
             hx-swap="innerHTML "
             hx-target="#toggledcontainer"
             _="
-             on intersection(intersecting) having threshold 0.3
-                if intersecting transition opacity to 1
-                else transition opacity to 0 end
              on click add .{{crate::ClassName::NO_SCROLL}} to <body/>
                 then show #toggledcontainer
             "

@@ -10,7 +10,7 @@ body, html {
   background-color: var(--background);
   font-family: Mononoki, sans-serif;
   scrollbar-gutter: stable both-edges;
-  scrollbar-color: var(--yellow) var(--blue);
+  scrollbar-color: var(--yellow) var(--background);
   scrollbar-width: thin;
   transition: background-color 0.25s ease;
 
@@ -36,6 +36,65 @@ p {
 
 img {
   user-select: none;
+}
+
+.topper {
+  --size : clamp(0.5rem,3vw,2rem);
+  font-family: IBM-VGA8, sans-serif;
+  font-size: var(--size);
+  font-weight: 400;
+  svg {
+    height: calc(var(--size) * 0.75);
+    width: calc(var(--size) * 0.75);
+  }
+}
+
+.faded {
+  --size : clamp(0.5rem,3vw,2rem);
+  font-family: IBM-VGA8, sans-serif;
+  font-size: var(--size);
+  color: var(--green);
+  button {
+    cursor: none;
+    font-family: IBM-VGA8,sans-serif;
+    font-size: var(--size);
+    color: var(--black);
+    background-color: var(--white);
+    padding: 0.5rem 1rem;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      background-color: var(--red);
+      color: var(--bright-black);
+    }
+  }
+}
+
+#togglable_name_container {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+  pre {
+    display: inline-block;
+    user-select: none;
+    cursor: none;
+    color: var(--bright-yellow);
+    text-align: center;
+    line-height: clamp(0.60rem, 2vw, 1.375rem);
+    font-size: clamp(0.25rem, 2vw, 1.3rem);
+    margin: auto 20px;
+    transition: 0.25s;
+    max-width: 100vw;
+    overflow: hidden;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 }
 
 .socials {
@@ -82,85 +141,63 @@ img {
   columns: 300px;
   gap: 1rem;
   max-width: 960px;
-  margin: 5rem auto;
-}
-
-.masonry * {
-  break-inside: avoid;
-}
-
-.frame_container {
-  margin-bottom: 0.5rem;
-  text-align: center;
-  outline: 0 solid transparent;
-  z-index: 1;
-
-  .frame {
-    border-radius: 1rem;
-    max-width: 100%;
-    transition: outline 0.25s ease;
-    outline: 0 solid transparent;
-
-    &:hover {
-      outline: 5px solid var(--bright-red);
-    }
-  }
-
-  p {
-    color: var(--foreground);
-    font-size: 0;
-    max-height: 0;
-    margin-bottom: 0;
-    opacity: 0;
-    overflow: hidden;
-    transform: translateY(-10px);
-    transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
-  }
-
-  &:hover {
-    p {
-      font-size: 1rem;
-      max-height: 2rem;
-      margin-bottom: 1rem;
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-#togglable_name_container {
-  height: 75vh;
-  display: flex;
-  align-items: center; // Center items vertically
-  justify-content: center; // Center items horizontally
-  z-index: 100;
-
-  pre {
-    display: inline-block;
-    user-select: none;
-    cursor: none;
-    color: var(--bright-yellow);
+  margin: 5rem auto 20rem auto;
+  .frame_container {
+    margin-bottom: 1rem;
     text-align: center;
-    line-height: clamp(0.60rem, 2vw, 1.375rem); // Reduce line spacing for ASCII alignment
-    font-size: clamp(0.25rem, 2vw, 1.3rem);
-    margin: auto 20px;
-    transition: 0.25s;
-    max-width: 100vw; // Limit width to viewport width
-    overflow: hidden;
+    outline: 0 solid transparent;
+    z-index: 1;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: fade-in ease-in;
+      animation-timeline: view();
+      animation-range-start: 10vh px;
+      animation-range-end: 45vh;
+    }
+    .frame {
+      border-radius: 1rem;
+      max-width: 100%;
+      transition: outline 0.25s ease;
+      outline: 0 solid transparent;
 
+      &:hover {
+        outline: 5px solid var(--bright-red);
+      }
+    }
+    p {
+      color: var(--foreground);
+      font-size: 0;
+      max-height: 0;
+      margin-bottom: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateY(-10px);
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin-bottom 0.3s ease, font-size 0.3s ease, transform 0.3s ease;
+    }
     &:hover {
-      -ms-transform: scale(1.1); /* IE 9 */
-      -webkit-transform: scale(1.1); /* Safari 3-8 */
-      transform: scale(1.1);
+      p {
+        font-size: 1rem;
+        max-height: 2rem;
+        margin-bottom: 1rem;
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
+}
 
-  span {
-    text-shadow: 1em 1em var(--bright-black);
+@keyframes fade-in {
+  from {
+    scale: 0.8;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
   }
 }
 
 .fullscreen_container {
+  pointer-events: auto;
   backdrop-filter: blur(10px);
   display: flex;
   flex-direction: row;
@@ -169,6 +206,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 700;
 
   @media (orientation: portrait) {
     flex-direction: column;
@@ -176,18 +214,9 @@ img {
     overflow-x: hidden;
   }
 
-  .fullscreen_image {
-    height: 100vh;
-    width: 100%;
-    object-fit: contain;
-    @media (orientation: portrait) {
-      height: 90vh;
-
-    }
-  }
-
   .fullscreen_gallery {
-    gap: 1rem;
+    gap: 2rem;
+    padding: 3rem;
     display: flex;
     font-style: italic;
     flex-direction: column;
@@ -200,18 +229,29 @@ img {
       width: 100%;
       height: 90vh;
       overflow-y: visible;
+    }
 
+    img, video {
+      height: 100vh;
+      width: 100%;
+      object-fit: contain;
+      @media (orientation: portrait) {
+        height: 90vh;
+
+      }
     }
   }
 
   .fullscreen_blog {
     background-color: var(--background);
     overflow-y: scroll;
+    resize: horizontal;
     width: 34%;
     height: 100%;
     padding: 20px;
     z-index: 700;
     @media (orientation: portrait) {
+      resize:vertical;
       width: 100%;
       height: 10vh;
 
@@ -254,8 +294,8 @@ a {
 .floating_button {
   cursor: none;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 2rem;
+  right: 2rem;
   padding: 10px 20px;
   font-weight: 700;
   background-color: var(--white);
@@ -272,8 +312,8 @@ a {
 .floating_x_button {
   cursor: none;
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 2rem;
+  right: 2rem;
   color: var(--white);
   background-color: transparent;
   border: none;
@@ -289,45 +329,13 @@ a {
 
 .no_scroll {
   overflow: hidden;
-}
-
-.topper {
-  --size : clamp(0.5rem,3vw,2rem);
-  font-family: IBM-VGA8, sans-serif;
-  font-size: var(--size);
-  font-weight: 400;
-  svg {
-    height: calc(var(--size) * 0.75);
-    width: calc(var(--size) * 0.75);
-  }
-}
-
-.faded {
-  --size : clamp(0.5rem,3vw,2rem);
-  font-family: IBM-VGA8, sans-serif;
-  font-size: var(--size);
-  color: var(--green);
-  button {
-    cursor: none;
-    font-family: IBM-VGA8,sans-serif;
-    font-size: var(--size);
-    color: var(--black);
-    background-color: var(--white);
-    padding: 0.5rem 1rem;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    &:hover {
-      background-color: var(--red);
-      color: var(--bright-black);
-    }
-  }
+  pointer-events: none;
 }
 
 #cursor {
   position: fixed;
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 0.5rem solid var(--foreground);
   border-radius: 50%;
   z-index: 1000;

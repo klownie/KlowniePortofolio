@@ -33,7 +33,7 @@ tracing = "0.1.40"
 log = "0.4.22"
 
 #Esthetics
-turf = "0.9.4"
+turf = "0.9.5"
 text-to-ascii-art="0.1.10"
 
 #toml
