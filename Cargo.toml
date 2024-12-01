@@ -39,6 +39,9 @@ text-to-ascii-art="0.1.10"
 #toml
 toml = "0.8.19"
 
+#middleware
+axum-prometheus = "0.7.0"
+
 [dev-dependencies]
 anyhow = "1.0.93"
 httpc-test = "0.1.10"

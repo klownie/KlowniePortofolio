@@ -9,7 +9,6 @@ body, html {
   cursor: none;
   background-color: var(--background);
   font-family: Mononoki, sans-serif;
-  scrollbar-gutter: stable both-edges;
   scrollbar-color: var(--yellow) var(--background);
   scrollbar-width: thin;
   transition: background-color 0.25s ease;
@@ -18,20 +17,6 @@ body, html {
     background-color: var(--bright-yellow);
     color: var(--black);
   }
-}
-
-svg {
-  height: 1.5rem;
-  width: 1.5rem;
-}
-
-h1 {
-  text-align: center;
-  color: var(--bright-yellow);
-}
-
-p {
-  color: var(--white);
 }
 
 img {
@@ -150,7 +135,7 @@ img {
     @media (prefers-reduced-motion: no-preference) {
       animation: fade-in ease-in;
       animation-timeline: view();
-      animation-range-start: 10vh px;
+      animation-range-start: 15vh px;
       animation-range-end: 45vh;
     }
     .frame {
@@ -187,7 +172,7 @@ img {
 
 @keyframes fade-in {
   from {
-    scale: 0.8;
+    scale: 0.7;
     opacity: 0;
   }
   to {
@@ -197,65 +182,46 @@ img {
 }
 
 .fullscreen_container {
+  border:3px solid blue;
   pointer-events: auto;
   backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
   z-index: 700;
 
   @media (orientation: portrait) {
-    flex-direction: column;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    grid-template-columns: auto;
+    grid-template-rows: 10rem 1fr;
   }
 
   .fullscreen_gallery {
-    gap: 2rem;
-    padding: 3rem;
+    gap: 2%;
+    padding: 2%;
     display: flex;
     font-style: italic;
     flex-direction: column;
     align-items: center;
-    width: 67%;
-    height: 100%;
     overflow-y: scroll;
     overscroll-behavior: contain;
-    @media (orientation: portrait) {
-      width: 100%;
-      height: 90vh;
-      overflow-y: visible;
-    }
-
+    border:3px solid limegreen;
     img, video {
       height: 100vh;
       width: 100%;
       object-fit: contain;
-      @media (orientation: portrait) {
-        height: 90vh;
-
-      }
     }
   }
 
   .fullscreen_blog {
+    border:3px solid limegreen;
     background-color: var(--background);
     overflow-y: scroll;
-    resize: horizontal;
-    width: 34%;
-    height: 100%;
     padding: 20px;
     z-index: 700;
-    @media (orientation: portrait) {
-      resize:vertical;
-      width: 100%;
-      height: 10vh;
-
-    }
   }
 }
 
@@ -346,7 +312,7 @@ a {
 }
 
 #cursor.grow {
-  border: 2rem solid var(--foreground);
+  border: 3rem solid var(--foreground);
   height: 0;
   width: 0;
 }

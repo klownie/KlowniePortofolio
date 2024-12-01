@@ -1,15 +1,10 @@
 mod handlers;
-mod middleware;
 mod routes;
 mod templates;
 
-use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
-
 use crate::handlers::Ports;
 use crate::handlers::CONFIG;
-use crate::middleware::generate_expires_header;
 use axum::extract::Host;
-use axum::http::header;
 use axum::{
     handler::HandlerWithoutStateExt,
     http::{StatusCode, Uri},
@@ -19,9 +14,7 @@ use axum::{
 use axum_server::tls_rustls::RustlsConfig;
 use routes::build_routes;
 use std::{net::SocketAddr, path::PathBuf};
-use tower::ServiceBuilder;
-use tower_http::services::ServeDir;
-use tower_http::set_header::SetResponseHeaderLayer;
+
 
 turf::style_sheet!("scss/index.scss");
 
@@ -46,29 +39,7 @@ async fn main() {
     .await
     .unwrap();
 
-    let middleware = ServiceBuilder::new()
-        .layer(SetResponseHeaderLayer::if_not_present(
-            header::EXPIRES,
-            generate_expires_header(7),
-        ))
-        .layer(
-            RequestDecompressionLayer::new()
-                .br(true)
-                .deflate(true)
-                .gzip(true)
-                .zstd(true),
-        )
-        .layer(
-            CompressionLayer::new()
-                .br(true)
-                .deflate(true)
-                .gzip(true)
-                .zstd(true),
-        );
-
-    let app = build_routes()
-        .nest_service("/assets", ServeDir::new("assets"))
-        .layer(middleware);
+    let app = build_routes();
 
     let addr = SocketAddr::from(([127, 0, 0, 1], CONFIG.ports.https));
     tracing::info!("listening on https://{}", addr);
