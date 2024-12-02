@@ -1,5 +1,5 @@
 {%- import "macros/icons.html" as icons -%}
-<div id="{{project}}" class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
+<article id="{{project}}" class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
     <button
             class="{{crate::ClassName::FLOATING_X_BUTTON}}"
             _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
@@ -44,4 +44,4 @@
         {% endif %}
     </div>
 
-</div>
+</article>

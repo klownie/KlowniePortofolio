@@ -1,9 +1,9 @@
 {%- import "macros/icons.html" as icons -%}
-
-<a href="https://github.com/klownie/KlowniePortofolio/tree/main" class="{{crate::ClassName::TOPPER}}">
-    {%- call icons::IconGitHub -%} /home/klownie/me ~>
-</a>
-<span class="{{crate::ClassName::FADED}}">echo selected theme :
+<header>
+    <a href="https://github.com/klownie/KlowniePortofolio/tree/main">
+        {%- call icons::IconGitHub -%} /home/klownie/me ~>
+    </a>
+    <span>echo selected theme :</span>
     <button _="
         set :themes to {{ themes|to_javascript }}
         init tell <body/> set @theme to :themes[0] then put :themes[0] into me
@@ -14,4 +14,4 @@
             then log theme
     ">
     </button>
-</span>
+</header>

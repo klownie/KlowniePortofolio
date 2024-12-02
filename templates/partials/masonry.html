@@ -1,18 +1,16 @@
-<div id="toggledcontainer" style="display: none"></div>
-<div class={{crate::ClassName::MASONRY}}>
+<section id="toggledcontainer" style="display: none"></section>
+<main class={{crate::ClassName::MASONRY}}>
     {% for project in projects %}
     {% call toggle_image(project) %}
     {% endfor %}
-</div>
+</main>
 
 {% macro toggle_image(project) %}
-
-<div
+<article
         class="{{crate::ClassName::FRAME_CONTAINER}}"
 >
     <img
             role="button"
-            id="frame"
             class="{{crate::ClassName::FRAME}}"
             src=/assets/projects/{{project}}/thumbnail.avif
             alt="{{project}}"
@@ -26,6 +24,5 @@
             "
     />
     <p>{{project|clean_name}}</p>
-</div>
-
+</article>
 {% endmacro %}

@@ -19,11 +19,7 @@ body, html {
   }
 }
 
-img {
-  user-select: none;
-}
-
-.topper {
+header {
   --size : clamp(0.5rem,3vw,2rem);
   font-family: IBM-VGA8, sans-serif;
   font-size: var(--size);
@@ -32,13 +28,6 @@ img {
     height: calc(var(--size) * 0.75);
     width: calc(var(--size) * 0.75);
   }
-}
-
-.faded {
-  --size : clamp(0.5rem,3vw,2rem);
-  font-family: IBM-VGA8, sans-serif;
-  font-size: var(--size);
-  color: var(--green);
   button {
     cursor: none;
     font-family: IBM-VGA8,sans-serif;
@@ -46,13 +35,13 @@ img {
     color: var(--black);
     background-color: var(--white);
     padding: 0.5rem 1rem;
-    border: none;
-    text-align: center;
-    text-decoration: none;
     &:hover {
       background-color: var(--red);
       color: var(--bright-black);
     }
+  }
+  span {
+    color: var(--green);
   }
 }
 
@@ -62,7 +51,6 @@ img {
   align-items: center;
   justify-content: center;
   z-index: 100;
-
   pre {
     display: inline-block;
     user-select: none;
@@ -82,14 +70,14 @@ img {
   }
 }
 
-.socials {
+address {
   text-align: center;
   color: var(--bright-yellow);
   margin: 50px;
   transition: color 1s ease;
   display: flex;
   justify-content: center;
-  .socials_container {
+  a {
     background-color: var(--bright-black);
     padding: 1rem 1rem 0.5rem 1rem;
     margin: clamp(0.25rem,2.5vw,2rem);
@@ -105,20 +93,20 @@ img {
 
 .bio {
   background: var(--bright-black);
-  border-radius: 1rem;
+  border-radius: 0.25rem;
+  border-left: 10px solid var(--bright-blue);
   padding: 20px;
   color: var(--foreground);
   margin: auto auto;
   max-width: 960px;
-  text-align: left;
   font-family: Mononoki, sans-serif;
-  font-size: 1.1rem;
-  font-weight: 400;
   transition: background-color 1s ease;
-
-  span {
+  p {
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+  h1 {
     color: var(--yellow);
-    font-weight: 700;
   }
 }
 
@@ -133,9 +121,11 @@ img {
     outline: 0 solid transparent;
     z-index: 1;
     @media (prefers-reduced-motion: no-preference) {
-      animation: fade-in ease-in;
+      scale: 0.7;
+      opacity: 0;
+      animation: fade-in ease-in forwards;
       animation-timeline: view();
-      animation-range-start: 15vh px;
+      animation-range-start: 15vh;
       animation-range-end: 45vh;
     }
     .frame {
@@ -171,10 +161,6 @@ img {
 }
 
 @keyframes fade-in {
-  from {
-    scale: 0.7;
-    opacity: 0;
-  }
   to {
     scale: 1;
     opacity: 1;
@@ -182,7 +168,6 @@ img {
 }
 
 .fullscreen_container {
-  border:3px solid blue;
   pointer-events: auto;
   backdrop-filter: blur(10px);
   display: grid;
@@ -191,14 +176,13 @@ img {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   height: 100%;
   z-index: 700;
-
   @media (orientation: portrait) {
     grid-template-columns: auto;
     grid-template-rows: 10rem 1fr;
   }
-
   .fullscreen_gallery {
     gap: 2%;
     padding: 2%;
@@ -208,7 +192,6 @@ img {
     align-items: center;
     overflow-y: scroll;
     overscroll-behavior: contain;
-    border:3px solid limegreen;
     img, video {
       height: 100vh;
       width: 100%;
@@ -217,7 +200,6 @@ img {
   }
 
   .fullscreen_blog {
-    border:3px solid limegreen;
     background-color: var(--background);
     overflow-y: scroll;
     padding: 20px;
@@ -232,27 +214,21 @@ img {
 
 a {
   cursor: none;
-  .icon {
-    text-decoration: none;
-  }
+  text-decoration: none;
 
   &:link {
-    text-decoration: none;
     color: var(--bright-red);
   }
 
   &:visited {
-    text-decoration: none;
     color: var(--red);
   }
 
   &:hover {
-    text-decoration: none;
     color: var(--green);
   }
 
   &:active {
-    text-decoration: none;
     color: var(--bright-red);
   }
 }
@@ -309,16 +285,14 @@ a {
   mix-blend-mode: difference;
   transform: translate(-50%, -50%);
   transition: width 0.5s ease, height 0.5s ease, border 0.5s ease;
-}
-
-#cursor.grow {
-  border: 3rem solid var(--foreground);
-  height: 0;
-  width: 0;
-}
-
-#cursor.disappear {
-  border: 0 solid var(--foreground);
-  height: 0;
-  width: 0;
+  &.grow {
+    border: 3rem solid var(--foreground);
+    height: 0;
+    width: 0;
+  }
+  &.disappear {
+    border: 0 solid var(--foreground);
+    height: 0;
+    width: 0;
+  }
 }
