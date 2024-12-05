@@ -35,8 +35,14 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 });
 
 pub async fn handler_404() -> impl IntoResponse {
-    let template = Error404 {};
-    let reply = template.render().unwrap();
+    let topper = &CONFIG.topper;
+    let error = Error404 {};
+    let reply = format!(
+        "\
+        {topper}
+        {error}
+        "
+    );
     (StatusCode::NOT_FOUND, Html(reply))
 }
 
@@ -148,7 +154,7 @@ pub async fn render_project_template(project: &str, high_res: bool) -> (StatusCo
         },
         _ => {
             error!("no project named {project} was found");
-            return (StatusCode::NOT_FOUND, Html(String::new()));
+            return (StatusCode::NOT_FOUND, Html(Error404 {}.render().unwrap()));
         }
     };
 

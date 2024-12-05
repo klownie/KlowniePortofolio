@@ -1,9 +1,9 @@
 {%- import "macros/icons.html" as icons -%}
-<article id="{{project}}" class={{crate::ClassName::FULLSCREEN_CONTAINER}}>
+<article id="{{project}}">
     <button
             class="{{crate::ClassName::FLOATING_X_BUTTON}}"
             _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
-        then hide #toggledcontainer"
+        then hide #toggled_article"
     >
         {%- call icons::IconButtonX -%}
     </button>
@@ -24,14 +24,14 @@
         <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
     </div>
 
-    <div class="{{crate::ClassName::FULLSCREEN_GALLERY}}">
+    <ul>
         {% if high_res %}
         {% set (res, type) = ("HighRes", "jpg") %}
-        <img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}"/>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}"/></li>
         {% else %}
         {% set (res, type) = ("LowRes", "avif") %}
-        <img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}"/>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_716.{{type}}"/></li>
         {% endif %}
-    </div>
+    </ul>
 
 </article>

@@ -1,4 +1,4 @@
-<section id="toggledcontainer" style="display: none"></section>
+<section id="toggled_article" style="display: none"></section>
 <main class={{crate::ClassName::MASONRY}}>
     {% for project in projects %}
     {% call toggle_image(project) %}
@@ -6,23 +6,20 @@
 </main>
 
 {% macro toggle_image(project) %}
-<article
-        class="{{crate::ClassName::FRAME_CONTAINER}}"
->
+<figure>
     <img
             role="button"
-            class="{{crate::ClassName::FRAME}}"
             src=/assets/projects/{{project}}/thumbnail.avif
             alt="{{project}}"
             hx-get="api/projects/{{project}}"
             hx-trigger="mouseover"
             hx-swap="innerHTML "
-            hx-target="#toggledcontainer"
+            hx-target="#toggled_article"
             _="
              on click add .{{crate::ClassName::NO_SCROLL}} to <body/>
-                then show #toggledcontainer
+                then show #toggled_article
             "
     />
-    <p>{{project|clean_name}}</p>
-</article>
+    <figcaption>{{project|clean_name}}</figcaption>
+</figure>
 {% endmacro %}

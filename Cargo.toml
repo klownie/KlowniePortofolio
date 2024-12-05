@@ -1,7 +1,19 @@
 [package]
-name = "AxumHtmxAskamaPortofolioWebsite"
+name = "AudrickConceptPortofolio"
 version = "0.1.0"
 edition = "2021"
+
+[package.metadata.turf]
+load_paths = ["scss/colorschemes"]
+minify = true
+
+[package.metadata.turf.class_names]
+template = "<original_name><id>"
+
+[package.metadata.turf.browser_targets]
+chrome = [80, 1, 2]
+firefox = 65
+safari = [12, 3]
 
 [dependencies]
 
@@ -45,18 +57,6 @@ axum-prometheus = "0.7.0"
 [dev-dependencies]
 anyhow = "1.0.93"
 httpc-test = "0.1.10"
-
-[package.metadata.turf]
-load_paths = ["scss/colorschemes"]
-minify = true
-
-[package.metadata.turf.class_names]
-template = "<original_name><id>"
-
-[package.metadata.turf.browser_targets]
-chrome = [80, 1, 2]
-firefox = 65
-safari = [12, 3]
 
 [profile.dev.package.askama_derive]
 opt-level = 3
