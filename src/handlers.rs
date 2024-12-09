@@ -6,13 +6,15 @@ use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use log::{debug, error};
+use log::{debug, error, info};
+use minify_html_onepass::{truncate, Cfg, Error};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::LazyLock;
-use minify_html_onepass::{Cfg, Error, truncate};
+use uiua::*;
+use uuid::Uuid;
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Ports {
@@ -29,7 +31,7 @@ pub struct Config {
 }
 
 pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
-    let content = fs::read_to_string("config.toml").expect("Failed to read TOML file");
+    let content = fs::read_to_string("server.toml").expect("Failed to read TOML file");
     let config: Config = toml::from_str(&content).expect("Failed to parse TOML file");
     config
 });
@@ -48,6 +50,12 @@ pub async fn handler_404() -> impl IntoResponse {
 
 #[debug_handler]
 pub async fn handle_main() -> impl IntoResponse {
+    let new_uuid = Uuid::new_v4().to_string();
+    info!{"created {new_uuid}"};
+    let mut uiua = Uiua::with_native_sys()
+        .with_recursion_limit(100);
+    uiua.push(new_uuid);
+    uiua.run_file(std::path::Path::new("uiua/manager.ua")).unwrap();
 
     let index = Index {};
 
@@ -70,7 +78,8 @@ pub async fn handle_main() -> impl IntoResponse {
     {bio}\
     {masonry}\
     "
-    ).into_bytes();
+    )
+    .into_bytes();
 
     let cfg = Cfg {
         minify_js: true,
@@ -78,7 +87,9 @@ pub async fn handle_main() -> impl IntoResponse {
     };
     match truncate(&mut reply, &cfg) {
         Ok(()) => debug!("js minified"),
-        Err(Error { position, .. }) => {error!("minification failed at : {}",position)}
+        Err(Error { position, .. }) => {
+            error!("minification failed at : {}", position)
+        }
     };
 
     (StatusCode::OK, Html(reply))

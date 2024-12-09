@@ -13,7 +13,7 @@ pub struct Index {}
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/topper.html")]
 pub struct Topper {
-    pub themes:Vec<String>,
+    pub themes: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
@@ -38,78 +38,41 @@ pub struct Masonry {
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
 pub enum Project {
-
     #[template(path = "projects/SamuConceptCharacter.html")]
-    SamuConceptCharacter {
-        project: String,
-        high_res: bool,
-    },
+    SamuConceptCharacter { project: String, high_res: bool },
 
     #[template(path = "projects/SamuConceptIllustration.html")]
-    SamuConceptIllustration {
-        project: String,
-        high_res: bool,
-    },
+    SamuConceptIllustration { project: String, high_res: bool },
 
     #[template(path = "projects/SaintJohn.html")]
-    SaintJohn {
-        project: String,
-        high_res: bool,
-    },
+    SaintJohn { project: String, high_res: bool },
 
     #[template(path = "projects/HomardRojas.html")]
-    HomardRojas {
-        project: String,
-        high_res: bool,
-    },
+    HomardRojas { project: String, high_res: bool },
 
     #[template(path = "projects/CarbonixWorkerSuit.html")]
-    CarbonixWorkerSuit {
-        project: String,
-        high_res: bool,
-    },
+    CarbonixWorkerSuit { project: String, high_res: bool },
 
     #[template(path = "projects/ClimbingExoSuit.html")]
-    ClimbingExoSuit {
-        project: String,
-        high_res: bool,
-    },
+    ClimbingExoSuit { project: String, high_res: bool },
 
     #[template(path = "projects/Intru.html")]
-    Intru {
-        project: String,
-        high_res: bool,
-    },
+    Intru { project: String, high_res: bool },
 
     #[template(path = "projects/UmbrellaKnight.html")]
-    UmbrellaKnight {
-        project: String,
-        high_res: bool,
-    },
+    UmbrellaKnight { project: String, high_res: bool },
 
     #[template(path = "projects/ClimbingExoSuit3d.html")]
-    ClimbingExoSuit3d {
-        project: String,
-        high_res: bool,
-    },
+    ClimbingExoSuit3d { project: String, high_res: bool },
 
     #[template(path = "projects/TeamBlue.html")]
-    TeamBlue {
-        project: String,
-        high_res: bool,
-    },
+    TeamBlue { project: String, high_res: bool },
 
     #[template(path = "projects/TribalYellowDemon.html")]
-    TribalYellowDemon {
-        project: String,
-        high_res: bool,
-    },
+    TribalYellowDemon { project: String, high_res: bool },
 
     #[template(path = "projects/UrbanWhiteCrowMan.html")]
-    UrbanWhiteCrowMan {
-        project: String,
-        high_res: bool,
-    },
+    UrbanWhiteCrowMan { project: String, high_res: bool },
 }
 
 mod filters {
@@ -122,7 +85,8 @@ mod filters {
     pub fn asciart_return_to_line<T: std::fmt::Display>(s: T) -> askama::Result<String> {
         let s: String = s.to_string();
 
-        let r = s.split_whitespace()
+        let r = s
+            .split_whitespace()
             .map(|part| to_art(part.into(), "", 0, 0, 0).unwrap())
             .collect::<Vec<_>>()
             .join("\n\n");

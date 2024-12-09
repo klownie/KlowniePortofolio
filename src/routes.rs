@@ -1,17 +1,15 @@
 use crate::handlers::{
-    handle_main, handler_404, project_request_handler,
-    resolution_request_handler,
+    handle_main, handler_404, project_request_handler, resolution_request_handler,
 };
+use axum::http::header;
+use axum::http::HeaderValue;
 use axum::routing::get;
 use axum::Router;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use tower::ServiceBuilder;
 use tower_http::services::ServeDir;
-use axum::http::HeaderValue;
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
-use axum::http::header;
-use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
 use tower_http::set_header::SetResponseHeaderLayer;
-use axum_prometheus::PrometheusMetricLayer;
+use tower_http::{compression::CompressionLayer, decompression::RequestDecompressionLayer};
 
 pub fn build_routes() -> Router {
     let api_router = Router::new()
@@ -21,34 +19,30 @@ pub fn build_routes() -> Router {
             get(resolution_request_handler),
         );
 
-    let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();
-    let middleware =
-        ServiceBuilder::new()
-            .layer(SetResponseHeaderLayer::if_not_present(
-                header::EXPIRES,
-                generate_expires_header(7),
-            ))
-            .layer(
-                RequestDecompressionLayer::new()
-                    .br(true)
-                    .deflate(true)
-                    .gzip(true)
-                    .zstd(true),
-            )
-            .layer(
-                CompressionLayer::new()
-                    .br(true)
-                    .deflate(true)
-                    .gzip(true)
-                    .zstd(true),
-            )
-            .layer(prometheus_layer);
+    let middleware = ServiceBuilder::new()
+        .layer(SetResponseHeaderLayer::if_not_present(
+            header::EXPIRES,
+            generate_expires_header(7),
+        ))
+        .layer(
+            RequestDecompressionLayer::new()
+                .br(true)
+                .deflate(true)
+                .gzip(true)
+                .zstd(true),
+        )
+        .layer(
+            CompressionLayer::new()
+                .br(true)
+                .deflate(true)
+                .gzip(true)
+                .zstd(true),
+        );
 
     let mut app = Router::new()
         .nest("/api", api_router)
         .route("/", get(handle_main))
         .nest_service("/assets", ServeDir::new("assets"))
-        .route("/metrics", get(|| async move { metric_handle.render() }))
         .layer(middleware);
 
     app = app.fallback(handler_404);

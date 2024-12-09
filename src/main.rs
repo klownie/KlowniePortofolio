@@ -15,7 +15,6 @@ use axum_server::tls_rustls::RustlsConfig;
 use routes::build_routes;
 use std::{net::SocketAddr, path::PathBuf};
 
-
 turf::style_sheet!("scss/index.scss");
 
 #[tokio::main]
