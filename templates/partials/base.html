@@ -62,6 +62,13 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div class="{{crate::ClassName::NO_SCRIPT}}">
+    <noscript>
+        This Website needs javascript to function<br>
+        Please enable javascript to continue<br>
+        :(
+    </noscript>
+    </div>
     {% block content %}{% endblock %}
 </body>
 </html>

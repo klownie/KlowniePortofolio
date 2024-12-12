@@ -6,6 +6,12 @@ use serde::{Deserialize, Serialize};
 #[template(path = "errors/error_404.html")]
 pub struct Error404 {}
 
+#[derive(Debug, Template)]
+#[template(path = "errors/error_500.html")]
+pub struct Error500 {
+    pub err: String,
+}
+
 #[derive(Debug, Serialize, Deserialize, Template)]
 #[template(path = "partials/index.html")]
 pub struct Index {}

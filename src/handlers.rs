@@ -1,20 +1,25 @@
 use crate::templates::*;
 use askama_axum::Template;
-use axum::debug_handler;
+use axum::{debug_handler, Form};
 use axum::extract::{ConnectInfo, Path};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use log::{debug, error, info};
+use tracing::{debug, error, info};
 use minify_html_onepass::{truncate, Cfg, Error};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::LazyLock;
+use axum_extra::extract::CookieJar;
+use axum_extra::extract::cookie::Cookie;
 use uiua::*;
 use uuid::Uuid;
+use crate::errors::AppError;
+use crate::uiua;
+use time::Duration;
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Ports {
@@ -24,7 +29,7 @@ pub struct Ports {
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    topper: Topper,
+    pub topper: Topper,
     pub interactive_name: InteractiveName,
     pub masonry: Masonry,
     pub ports: Ports,
@@ -36,26 +41,40 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
     config
 });
 
-pub async fn handler_404() -> impl IntoResponse {
-    let topper = &CONFIG.topper;
-    let error = Error404 {};
-    let reply = format!(
-        "\
-        {topper}
-        {error}
-        "
-    );
-    (StatusCode::NOT_FOUND, Html(reply))
-}
-
 #[debug_handler]
-pub async fn handle_main() -> impl IntoResponse {
-    let new_uuid = Uuid::new_v4().to_string();
-    info!{"created {new_uuid}"};
-    let mut uiua = Uiua::with_native_sys()
-        .with_recursion_limit(100);
-    uiua.push(new_uuid);
-    uiua.run_file(std::path::Path::new("uiua/manager.ua")).unwrap();
+pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse,AppError> {
+
+    let new_uuid = Uuid::new_v4();
+    let cookie = Cookie::build(("SessionID", new_uuid.to_string()))
+        .domain("portofolio.klownie.me")
+        .max_age(Duration::days(100))
+        .http_only(true)
+        .secure(true)
+        .build();
+
+    let new_jar = match jar.get("SessionID").map(|cookie| cookie.value().to_owned()) {
+        Some(uuid) => {
+            if uiua!(
+            "# Experimental!
+            Path     ← \"sessions.data\"
+            Database ← &frab Path
+            °binaryDatabase
+            has  □\"{uuid}\""
+        ).pop_bool().unwrap() {
+                info!("Welcome back : {}", uuid);
+                jar
+            } else {
+                info!("Invalid session : {}", uuid);
+                create_session(&new_uuid);
+                jar.add(cookie)
+            }
+        }
+        None => {
+            create_session(&new_uuid);
+            jar.add(cookie)
+        }
+    };
+
 
     let index = Index {};
 
@@ -92,7 +111,11 @@ pub async fn handle_main() -> impl IntoResponse {
         }
     };
 
-    (StatusCode::OK, Html(reply))
+    Ok((
+        StatusCode::OK,
+        new_jar,
+        Html(reply)
+    ))
 }
 
 pub async fn project_request_handler(
@@ -111,7 +134,7 @@ pub async fn resolution_request_handler(
     reply
 }
 
-pub async fn render_project_template(project: &str, high_res: bool) -> (StatusCode, Html<String>) {
+pub async fn render_project_template(project: &str, high_res: bool) -> Result<impl IntoResponse,AppError> {
     use Project::*;
 
     let template = match project {
@@ -164,11 +187,35 @@ pub async fn render_project_template(project: &str, high_res: bool) -> (StatusCo
             high_res,
         },
         _ => {
-            error!("no project named {project} was found");
-            return (StatusCode::NOT_FOUND, Html(Error404 {}.render().unwrap()));
+            return Ok(
+                (StatusCode::NOT_FOUND, Html(Error404 {}.render()?))
+            );
         }
     };
 
     debug!("Rendering project: {}", project);
-    (StatusCode::OK, Html(template.render().unwrap()))
+    Ok(
+        (StatusCode::OK, Html(template.render()?))
+    )
+}
+fn create_session(new_uuid: &Uuid) {
+    uiua!(
+        "# Experimental!
+        Path     ← \"sessions.data\"
+        Database ← &frab Path
+
+        □\"{new_uuid}\"
+        □NaN
+        □°binaryDatabase
+        ⊙⊙°□°⊟₃⇌⊟₃
+        insert
+        &s .
+        binary
+        &fwa Path"
+    );
+    info!("Created : {}", new_uuid);
+}
+
+pub async fn db_handle(Path(action): Path<String>) {
+    todo!()
 }

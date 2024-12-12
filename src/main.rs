@@ -1,6 +1,8 @@
+mod errors;
 mod handlers;
 mod routes;
 mod templates;
+mod macros;
 
 use crate::handlers::Ports;
 use crate::handlers::CONFIG;

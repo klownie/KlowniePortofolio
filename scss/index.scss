@@ -19,6 +19,13 @@ body, html {
   }
 }
 
+.no_script{
+  display: grid;
+  font-size: 3rem;
+  place-items: center;
+  background-color: white;
+}
+
 a {
   cursor: none;
   text-decoration: none;
@@ -195,7 +202,6 @@ address {
 
 #toggled_article {
   article {
-    resize: horizontal;
     pointer-events: auto;
     backdrop-filter: blur(10px);
     display: grid;
@@ -226,7 +232,6 @@ address {
       }
     }
     .fullscreen_blog {
-      resize: horizontal;
       background-color: var(--background);
       overflow-y: scroll;
       padding: 20px;

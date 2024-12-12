@@ -1,22 +1,25 @@
-Path ← "uuids.txt"
+# Experimental!
 
-Database ← &fras Path
+Path     ← "sessions.data"
+Database ← &frab Path
 
-┌─╴UUID
-  # Counts the number of UUIDS in the database
-  NumberOfUUID ← ÷36 ⧻
-  # give the index of the uuid in the database
-  WhereIs ← ⊚≡/+⌕
-  # Add UUID to datbase
-  Append ← ↯⇌[36 NumberOfUUID] . ⊂
-  # Remove 1 instance of a UUID from the database
-  Remove = ▽≠1⊸⦷
-└─╴
+# ---- Add UUID ----
+□
+□NaN
+□°binaryDatabase
+⊙⊙°□°⊟₃⇌⊟₃ # Adds a UUID with a Name to datbase
+insert
+# --- Remove UUID ---
+# °binaryDatabase
+# remove "5b580d2e-e38a-41de-a60b-7f5a2fd76686"
+# --- Rename UUID ---
+# °binaryDatabase
+# □ "chandler"
+# □ "sfafafvv-e383-dghdfbdba-4f5a2fd76686"
+# insert
 
-UUID~Append Database
-UUID~WhereIs "c8cf24cc-7e49-4780-8e52-bb891295d92e" .
+#map □"5b580d2e-e38a-41de-a60b-7f5a2fd76686" □"root"
 ?
-&s
-&s.
 
+binary
 &fwa Path
