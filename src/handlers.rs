@@ -1,25 +1,25 @@
+use crate::errors::AppError;
 use crate::templates::*;
+use crate::uiua;
 use askama_axum::Template;
-use axum::{debug_handler, Form};
+use axum::debug_handler;
 use axum::extract::{ConnectInfo, Path};
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use tracing::{debug, error, info};
+use axum_extra::extract::cookie::Cookie;
+use axum_extra::extract::CookieJar;
 use minify_html_onepass::{truncate, Cfg, Error};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::LazyLock;
-use axum_extra::extract::CookieJar;
-use axum_extra::extract::cookie::Cookie;
+use time::Duration;
+use tracing::{debug, error, info};
 use uiua::*;
 use uuid::Uuid;
-use crate::errors::AppError;
-use crate::uiua;
-use time::Duration;
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Ports {
@@ -42,8 +42,7 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 });
 
 #[debug_handler]
-pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse,AppError> {
-
+pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> {
     let new_uuid = Uuid::new_v4();
     let cookie = Cookie::build(("SessionID", new_uuid.to_string()))
         .domain("portofolio.klownie.me")
@@ -55,12 +54,15 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse,AppError> {
     let new_jar = match jar.get("SessionID").map(|cookie| cookie.value().to_owned()) {
         Some(uuid) => {
             if uiua!(
-            "# Experimental!
+                "# Experimental!
             Path     ← \"sessions.data\"
             Database ← &frab Path
             °binaryDatabase
             has  □\"{uuid}\""
-        ).pop_bool().unwrap() {
+            )
+            .pop_bool()
+            .unwrap()
+            {
                 info!("Welcome back : {}", uuid);
                 jar
             } else {
@@ -74,7 +76,6 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse,AppError> {
             jar.add(cookie)
         }
     };
-
 
     let index = Index {};
 
@@ -111,11 +112,7 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse,AppError> {
         }
     };
 
-    Ok((
-        StatusCode::OK,
-        new_jar,
-        Html(reply)
-    ))
+    Ok((StatusCode::OK, new_jar, Html(reply)))
 }
 
 pub async fn project_request_handler(
@@ -134,10 +131,17 @@ pub async fn resolution_request_handler(
     reply
 }
 
-pub async fn render_project_template(project: &str, high_res: bool) -> Result<impl IntoResponse,AppError> {
+pub async fn render_project_template(
+    project: &str,
+    high_res: bool,
+) -> Result<impl IntoResponse, AppError> {
     use Project::*;
 
     let template = match project {
+        "VulturesBrigadeCaptain" => VulturesBrigadeCaptain {
+            project: project.into(),
+            high_res,
+        },
         "SamuConceptIllustration" => SamuConceptIllustration {
             project: project.into(),
             high_res,
@@ -187,16 +191,12 @@ pub async fn render_project_template(project: &str, high_res: bool) -> Result<im
             high_res,
         },
         _ => {
-            return Ok(
-                (StatusCode::NOT_FOUND, Html(Error404 {}.render()?))
-            );
+            return Ok((StatusCode::NOT_FOUND, Html(Error404 {}.render()?)));
         }
     };
 
     debug!("Rendering project: {}", project);
-    Ok(
-        (StatusCode::OK, Html(template.render()?))
-    )
+    Ok((StatusCode::OK, Html(template.render()?)))
 }
 fn create_session(new_uuid: &Uuid) {
     uiua!(
@@ -219,3 +219,4 @@ fn create_session(new_uuid: &Uuid) {
 pub async fn db_handle(Path(action): Path<String>) {
     todo!()
 }
+
