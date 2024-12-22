@@ -18,6 +18,7 @@
             _="
              on click add .{{crate::ClassName::NO_SCROLL}} to <body/>
                 then show #toggled_article
+                then history.pushState({}, '', '{{project}}')
             "
     />
     <figcaption>{{project|clean_name}}</figcaption>

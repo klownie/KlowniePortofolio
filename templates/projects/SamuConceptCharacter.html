@@ -3,7 +3,9 @@
     <button
             class="{{crate::ClassName::FLOATING_X_BUTTON}}"
             _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
-        then hide #toggled_article"
+                then hide #toggled_article
+                then history.pushState({}, '', '/')
+            "
     >
         {%- call icons::IconButtonX -%}
     </button>
@@ -21,7 +23,13 @@
     </button>
 
     <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
-        <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+        <h1>S.A.M.U Medical Staff</h1>
+        <h2>~ Concept Character ~</h2>
+        <p>
+            To aid injured soldiers and reduce casualties, a special division was created.
+            This team of medical soldiers is trained to de-escalate situations and retrieve individuals in peril.
+            Using advanced tear gas bombs and stealth balloon drones, these specialists have a significant impact on saving lives in the chaos of the battlefield.
+        </p>
     </div>
 
     <ul>

@@ -26,6 +26,11 @@ body, html {
   background-color: white;
 }
 
+mark {
+  background-color: var(--bright-magenta);
+  color: var(--background);
+}
+
 a {
   cursor: none;
   text-decoration: none;
@@ -53,8 +58,9 @@ header {
   font-size: var(--size);
   font-weight: 400;
   svg {
-    height: calc(var(--size) * 0.75);
-    width: calc(var(--size) * 0.75);
+    height: calc(var(--size)* 2);
+    width: calc(var(--size)* 2);
+    translate: calc(var(--size)* 0.2) calc(var(--size)* 0.7);
   }
   button {
     cursor: none;
@@ -80,18 +86,15 @@ header {
   justify-content: center;
   z-index: 100;
   pre {
-    display: inline-block;
     user-select: none;
     cursor: none;
     color: var(--bright-yellow);
     text-align: center;
-    line-height: clamp(0.60rem, 2vw, 1.375rem);
-    font-size: clamp(0.25rem, 2vw, 1.3rem);
+    line-height: max(.6rem, min(2vw, 1.375rem));
+    font-size: max(.25rem, min(1.75vw, 1.2rem));
     margin: auto 20px;
-    transition: 0.25s;
     max-width: 100vw;
     overflow: hidden;
-
     &:hover {
       transform: scale(1.1);
     }
@@ -99,16 +102,18 @@ header {
 }
 
 address {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   text-align: center;
   color: var(--bright-yellow);
-  margin: 50px;
-  transition: color 1s ease;
-  display: flex;
-  justify-content: center;
+  margin: 2rem auto;
+  max-width: 912px;
+  transition: color 1s;
+  justify-items: center;
   a {
     background-color: var(--bright-black);
     padding: 1rem 1rem 0.5rem 1rem;
-    margin: clamp(0.25rem,2.5vw,2rem);
     border-radius: 0.5rem;
     transition: background-color 1s ease;
     svg {
@@ -120,15 +125,18 @@ address {
 }
 
 .bio {
+  display: grid;
   background: var(--bright-black);
-  border-radius: 0.25rem;
+  border-radius: .25rem;
   border-left: 10px solid var(--bright-blue);
-  padding: 20px;
+  padding: 1rem 4rem;
+  box-sizing: border-box;
   color: var(--foreground);
-  margin: auto auto;
   max-width: 960px;
   font-family: Mononoki, sans-serif;
-  transition: background-color 1s ease;
+  transition: background-color 1s;
+  margin: auto;
+  width: 90vw;
   p {
     font-size: 1.1rem;
     font-weight: 400;
@@ -152,7 +160,6 @@ address {
     margin-bottom: 1rem;
     text-align: center;
     outline: 0 solid transparent;
-    z-index: 1;
     @media (prefers-reduced-motion: no-preference) {
       scale: 0.7;
       opacity: 0;
@@ -203,7 +210,7 @@ address {
 #toggled_article {
   article {
     pointer-events: auto;
-    backdrop-filter: blur(10px);
+    background-color: var(--black);
     display: grid;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: auto;
@@ -215,7 +222,7 @@ address {
     z-index: 700;
     @media (orientation: portrait) {
       grid-template-columns: auto;
-      grid-template-rows: 10rem 1fr;
+      grid-template-rows: 20rem 1fr;
     }
     ul {
       gap: 2%;
@@ -236,6 +243,28 @@ address {
       overflow-y: scroll;
       padding: 20px;
       z-index: 700;
+      h1 {
+        color: var(--bright-yellow);
+        text-align: center;
+        font-size: 2.3rem;
+      }
+      h2 {
+        color: var(--cyan);
+        text-align: center;
+        font-size: 1.7rem;
+      }
+      p {
+        font-size: 1.25rem;
+        color: var(--white);
+        padding-left: 3rem;
+      }
+      ul {
+        font-size: 1.2rem;
+        color: var(--foreground);
+        padding-left: 4rem;
+        list-style: disc;
+        overflow-y: auto;
+      }
     }
     .floating_button {
       cursor: none;
@@ -270,6 +299,9 @@ address {
       svg {
         width: 5rem;
         height: 5rem;
+      }
+      @media (orientation: portrait) {
+        translate: 0 20rem;
       }
     }
   }

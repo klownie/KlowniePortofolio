@@ -3,7 +3,9 @@
     <button
             class="{{crate::ClassName::FLOATING_X_BUTTON}}"
             _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
-        then hide #toggled_article"
+            then hide #toggled_article
+            then history.pushState({}, '', '/')
+            "
     >
         {%- call icons::IconButtonX -%}
     </button>
@@ -21,7 +23,8 @@
     </button>
 
     <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
-        <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+        <h1>Carbonix Worker Suit</h1>
+        <p>&emsp;&emsp;An exosuit concept for workers. The suit focuses on movement and transportation.</p>
     </div>
 
     <ul>

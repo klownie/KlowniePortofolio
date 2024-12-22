@@ -3,7 +3,9 @@
     <button
             class="{{crate::ClassName::FLOATING_X_BUTTON}}"
             _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
-        then hide #toggled_article"
+                then hide #toggled_article
+                then history.pushState({}, '', '/')
+            "
     >
         {%- call icons::IconButtonX -%}
     </button>
@@ -21,7 +23,19 @@
     </button>
 
     <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
-        <h1>Homard Rojas - Capitain de l'Asociation Atlantitique</h1>
+        <h1>Climbing Exo-Suit </h1>
+        <h2>== 3D Model ==</h2>
+        <p>
+            &emsp;&emsp;Making a 3D model of my concept helped me understand the severity of my shortcomings. As I said in the concept post, the design lacks fonctionality.<br>
+            Modeling this concept also <strong><mark>made me relise how lazy the design was</mark></strong> :
+        </p>
+        <ul>
+            <li>unclear fonction</li>
+            <li>lack of details</li>
+            <li>not enough small in the big medium small</li>
+            <li>porportional issues that lead to confusion on how the body fits in the exosuit</li>
+            <li>lack of continuty in the design</li>
+        </ul>
     </div>
 
     <ul>
