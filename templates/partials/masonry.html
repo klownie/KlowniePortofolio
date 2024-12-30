@@ -1,10 +1,11 @@
+
 <section id="toggled_article" style="display: none"></section>
+
 <main class={{crate::ClassName::MASONRY}}>
     {% for project in projects %}
     {% call toggle_image(project) %}
     {% endfor %}
 </main>
-
 {% macro toggle_image(project) %}
 <figure>
     <img

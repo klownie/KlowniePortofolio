@@ -167,10 +167,10 @@ address {
       animation-range-end: 45vh;
     }
     img {
-      border-radius: 1rem;
+      border-radius: 0.5rem;
       max-width: 100%;
-      transition: outline 0.25s ease;
       outline: 0 solid transparent;
+      transition: outline 0.25s ease;
       &:hover {
         outline: 5px solid var(--bright-red);
       }

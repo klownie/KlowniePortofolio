@@ -116,10 +116,8 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> 
 }
 
 pub async fn project_request_handler(
-    ConnectInfo(addr): ConnectInfo<SocketAddr>,
     Path(project): Path<String>,
 ) -> impl IntoResponse {
-    debug!("{} has requested {}", addr, &project);
     let reply = render_project_template(&project, false).await;
     reply
 }

@@ -40,6 +40,7 @@ pub struct Bio {}
 #[template(path = "partials/masonry.html")]
 pub struct Masonry {
     pub projects: Vec<String>,
+    pub loaded: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
