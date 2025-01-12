@@ -1,0 +1,48 @@
+{%- import "macros/icons.html" as icons -%}
+
+<article id="{{project}}">
+    <button
+            class="{{crate::ClassName::FLOATING_X_BUTTON}}"
+            _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
+            then hide #toggled_article
+            then history.pushState({}, '', '/')
+            "
+    >
+        {%- call icons::IconButtonX -%}
+    </button>
+    <button
+            class="{{crate::ClassName::FLOATING_BUTTON}}"
+            hx-get="api/toggleres/{{project}}/{{high_res}}"
+            hx-target="#{{project}}"
+            hx-swap="outerHTML"
+    >
+        {% if high_res %}
+        HD
+        {% else %}
+        LD
+        {% endif %}
+    </button>
+
+    <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
+        <h1>Homard Rojas</h1>
+        <h2>- Capitain de l'Asociation Atlantitique -</h2>
+        <p> Concept To practice rendering techniques.</p>
+    </div>
+
+    <ul>
+        {% if high_res %}
+        {% set (res, type) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_836_06.{{type}}/></li>
+        <li><video autoplay loop muted playsinline>
+            <source src="/assets/projects/{{project}}/{{res}}/sketch_836.webm" type="video/webm">
+        </video></li>
+        {% else %}
+        {% set (res, type) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_836_06.{{type}}/></li>
+        <li><video autoplay loop muted playsinline>
+            <source src="/assets/projects/{{project}}/{{res}}/sketch_836.webm" type="video/webm">
+        </video></li>
+        {% endif %}
+    </ul>
+
+</article>

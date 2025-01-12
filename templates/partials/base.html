@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <title>{% block title %}{{title}}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, viewport-fit=cover">
+    <link rel="icon" href="/assets/favicon_light.svg" as="image" type="image/svg+xml" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="/assets/favicon_dark.svg" as="image" type="image/svg+xml" media="(prefers-color-scheme: dark)">
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="{{crate::ClassName::NO_SCRIPT}}">
+    <noscript>
+        This Website needs javascript to function<br>
+        Please enable javascript to continue<br>
+        :(
+    </noscript>
+    </div>
+    {% block content %}{% endblock %}
+</body>
+</html>

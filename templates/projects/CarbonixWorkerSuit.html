@@ -1,0 +1,47 @@
+{%- import "macros/icons.html" as icons -%}
+<article id="{{project}}">
+    <button
+            class="{{crate::ClassName::FLOATING_X_BUTTON}}"
+            _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
+            then hide #toggled_article
+            then history.pushState({}, '', '/')
+            "
+    >
+        {%- call icons::IconButtonX -%}
+    </button>
+    <button
+            class="{{crate::ClassName::FLOATING_BUTTON}}"
+            hx-get="api/toggleres/{{project}}/{{high_res}}"
+            hx-target="#{{project}}"
+            hx-swap="outerHTML"
+    >
+        {% if high_res %}
+        HD
+        {% else %}
+        LD
+        {% endif %}
+    </button>
+
+    <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
+        <h1>Carbonix Worker Suit</h1>
+        <p>&emsp;&emsp;An exosuit concept for workers. The suit focuses on movement and transportation.</p>
+    </div>
+
+    <ul>
+        {% if high_res %}
+        {% set (res, type) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_830_15.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_829.{{type}}/></li>
+        <li><video autoplay loop muted playsinline>
+            <source src="/assets/projects/{{project}}/{{res}}/sketch_830.webm" type="video/webm">
+        </video></li>
+        {% else %}
+        {% set (res, type) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_830_15.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_829.{{type}}/></li>
+        <li><video autoplay loop muted playsinline>
+            <source src="/assets/projects/{{project}}/{{res}}/sketch_830.webm" type="video/webm">
+        </video></li>
+        {% endif %}
+    </ul>
+</article>

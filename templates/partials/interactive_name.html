@@ -1,0 +1,32 @@
+<section id="togglable_name_container" >
+    {% for title in titles %}
+        {% if title == titles.first().unwrap() %}
+
+            <pre id="first" role="button"
+                 _="on click toggle *display of next <pre/>
+                toggle the *display of me"
+            >
+                {{title|asciart_return_to_line}}
+            </pre>
+
+        {% else if title == titles.last().unwrap() %}
+
+            <pre style="display: none" role="button"
+                 _="on click toggle *display of #first
+                 toggle the *display of me"
+            >
+                {{title|asciart_return_to_line}}
+            </pre>
+
+        {% else %}
+
+            <pre style="display: none" role="button"
+                 _="on click toggle *display of next <pre/>
+                toggle the *display of me"
+            >
+                {{title|asciart_return_to_line}}
+            </pre>
+
+        {% endif %}
+    {% endfor %}
+</section>

@@ -1,0 +1,64 @@
+[package]
+name = "AudrickConceptPortofolio"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.turf]
+load_paths = ["scss/colorschemes"]
+minify = true
+
+[package.metadata.turf.class_names]
+template = "<original_name><id>"
+
+[package.metadata.turf.browser_targets]
+chrome = [80, 1, 2]
+firefox = 65
+safari = [12, 3]
+
+
+
+[dependencies]
+
+#Backend
+axum = { version = "0.8.1", features = ["macros", "tokio"]}
+axum-extra = { version = "0.10.0", features = ["cookie", "typed-header"] }
+axum-htmx = "0.6.0"
+axum-server = { version = "0.7.1", features = ["tls-rustls"],  default-features = false }
+
+#templating
+askama = { version = "0.12.1", features = ["with-axum"] }
+askama_axum = "0.4.0"
+askama-enum = "0.0.2"
+
+#protocols
+tokio = { version = "1.42", features = ["full"] }
+tower = { version = "0.5.2", features = ["util"] }
+tower-http = { version = "0.6.2", features = ["fs", "set-header", "compression-full", "decompression-full"] }
+minify-html-onepass = "0.15.0"
+uuid = { version = "1.11.0", features = ["v4" ,"fast-rng"] }
+uiua = { version = "0.14.1", default-features = false, features = ["native_sys"]}
+anyhow = "^1.0"
+time = "0.3.37"
+
+#serde
+serde = { version = "1.0", features = ["derive"] }
+
+#debuging
+tracing-subscriber = "0.3.18"
+tracing = "0.1.41"
+
+#Esthetics
+turf = "0.9.5"
+text-to-ascii-art="0.1.10"
+
+#toml
+toml = "0.8.19"
+
+#optimisation
+[profile.dev.package.askama_derive]
+opt-level = 3
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"

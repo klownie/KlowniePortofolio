@@ -1,0 +1,27 @@
+
+<section id="toggled_article" style="display: none"></section>
+
+<main class={{crate::ClassName::MASONRY}}>
+    {% for project in projects %}
+    {% call toggle_image(project) %}
+    {% endfor %}
+</main>
+{% macro toggle_image(project) %}
+<figure>
+    <img
+            role="button"
+            src=/assets/projects/{{project}}/thumbnail.avif
+            alt="{{project}}"
+            hx-get="api/projects/{{project}}"
+            hx-trigger="mouseover"
+            hx-swap="innerHTML "
+            hx-target="#toggled_article"
+            _="
+             on click add .{{crate::ClassName::NO_SCROLL}} to <body/>
+                then show #toggled_article
+                then history.pushState({}, '', '{{project}}')
+            "
+    />
+    <figcaption>{{project|clean_name}}</figcaption>
+</figure>
+{% endmacro %}

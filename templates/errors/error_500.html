@@ -1,0 +1,66 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Audrick Yeu | Portofolio{% endblock %}
+{% block head %}
+<style>
+    {{ crate::STYLE_SHEET }}
+    @font-face {
+        font-family: Mononoki;
+        font-weight: 400;
+        font-style: normal;
+        src: url('/assets/fonts/mononoki-Regular.woff2') format('woff2'),
+        url('/assets/fonts/mononoki-Regular.woff') format('woff');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: Mononoki;
+        font-weight: 700;
+        font-style: normal;
+        src: url('/assets/fonts/mononoki-Bold.woff2') format('woff2'),
+        url('/assets/fonts/mononoki-Bold.woff') format('woff');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: Mononoki;
+        font-weight: 400;
+        font-style: italic;
+        src: url('/assets/fonts/mononoki-Italic.woff2') format('woff2'),
+        url('/assets/fonts/mononoki-Italic.woff') format('woff');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: Mononoki;
+        font-weight: 700;
+        font-style: italic;
+        src: url('/assets/fonts/mononoki-BoldItalic.woff2') format('woff2'),
+        url('/assets/fonts/mononoki-BoldItalic.woff') format('woff');
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: IBM-VGA8;
+        font-weight: 400;
+        font-style: normal;
+        src: url('/assets/fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
+        url('/assets/fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
+        font-display: swap;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<cursor id="cursor" class="{{crate::ClassName::DISAPPEAR}}"></cursor>
+<div class="{{crate::ClassName::ERROR}}">
+    <h1>Internal server Error</h1>
+    <pre>
+        {{"Error :: 500"|asciart}}
+    </pre>
+    <p>
+        I guess sommone broke something <br>
+        The server crashed there's no way out <br>
+        <strong>{{err}}</strong>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{%- import "macros/icons.html" as icons -%}
+<article id="{{project}}">
+    <button
+            class="{{crate::ClassName::FLOATING_X_BUTTON}}"
+            _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
+                then hide #toggled_article
+                then history.pushState({}, '', '/')
+            "
+    >
+        {%- call icons::IconButtonX -%}
+    </button>
+    <button
+            class="{{crate::ClassName::FLOATING_BUTTON}}"
+            hx-get="api/toggleres/{{project}}/{{high_res}}"
+            hx-target="#{{project}}"
+            hx-swap="outerHTML"
+    >
+        {% if high_res %}
+        HD
+        {% else %}
+        LD
+        {% endif %}
+    </button>
+
+    <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
+        <h1>VULUTRES BRIGADE</h1>
+        <h2>~ Captain Taraka~</h2>
+        <p>
+            &emsp;&emsp;By 2250, the LGL conglomerate dominates the global economy.
+            Its technological innovations have eroded individual independence,
+            forcing citizens to rely on it for daily life. This tyranny spawns rebels and revolutionaries.
+            To suppress dissent, LGL employs cybernetic mercenaries.
+            Amongst them, <mark><strong>Tarka and her Vulture Brigade</strong></mark> are the most feared in Jakarta.
+        </p>
+    </div>
+
+    <ul>
+        {% if high_res %}
+        {% set (res, type) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_872_character.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_finale.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_comp.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_grey.{{type}}/></li>
+        <li><video autoplay loop muted playsinline>
+            <source src="/assets/projects/{{project}}/{{res}}/sketch_867.webm" type="video/webm">
+        </video></li>
+        {% else %}
+        {% set (res, type) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_872_character.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_finale.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_comp.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_grey.{{type}}/></li>
+        <li><video autoplay loop muted playsinline>
+            <source src="/assets/projects/{{project}}/{{res}}/sketch_867.webm" type="video/webm">
+        </video></li>
+        {% endif %}
+    </ul>
+</article>

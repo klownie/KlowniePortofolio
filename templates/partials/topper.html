@@ -1,0 +1,17 @@
+{%- import "macros/icons.html" as icons -%}
+<header>
+    <a href="https://github.com/klownie/KlowniePortofolio/tree/main">
+        {%- call icons::IconGitHub -%} /home/klownie/me ~>
+    </a>
+    <span>echo selected theme : </span>
+    <button _="
+        set :themes to {{ themes|to_javascript }}
+        init tell <body/> set @theme to :themes[0] then put :themes[0] into me
+        on click increment :x
+            then set theme to :themes[:x mod :themes.length]
+            then tell <body/> set @theme to theme
+            then put theme into me
+            then log theme
+    ">
+    </button>
+</header>
