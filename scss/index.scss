@@ -79,12 +79,20 @@ header {
   }
 }
 
-#togglable_name_container {
+.togglable_name {
   height: 30vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  margin: 3rem;
+  border-radius: 0.5rem;
+
+  background-image: url("assets/banner.avif");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   pre {
     user-select: none;
     cursor: none;

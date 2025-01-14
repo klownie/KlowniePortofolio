@@ -95,8 +95,8 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> 
     {topper}
     {interactive_name}\
     {socials}\
-    {masonry}\
     {bio}\
+    {masonry}\
     "
     )
     .into_bytes();
