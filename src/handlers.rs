@@ -136,6 +136,10 @@ pub async fn render_project_template(
     use Project::*;
 
     let template = match project {
+        "BatBossIllustration"  => BatBossIllustration {
+            project: project.into(),
+            high_res,
+        },
         "VulturesBrigadeCaptain" => VulturesBrigadeCaptain {
             project: project.into(),
             high_res,

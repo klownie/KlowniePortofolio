@@ -45,6 +45,9 @@ pub struct Masonry {
 
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
 pub enum Project {
+    #[template(path = "projects/BatBossIllustration.html")]
+    BatBossIllustration { project: String, high_res: bool },
+
     #[template(path = "projects/VulturesBrigadeCaptain.html")]
     VulturesBrigadeCaptain { project: String, high_res: bool },
 

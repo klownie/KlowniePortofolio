@@ -12,6 +12,7 @@ body, html {
   scrollbar-color: var(--yellow) var(--background);
   scrollbar-width: thin;
   transition: background-color 0.25s ease;
+  margin-bottom : 20rem;
 
   ::selection {
     background-color: var(--bright-yellow);
@@ -84,8 +85,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 3rem;
-  border-radius: 0.5rem;
+  margin: 6rem;
+  border-radius: 2.5rem;
 
   background-image: url("assets/banner.avif");
   min-height: 500px;
@@ -93,6 +94,8 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  mix-blend-mode: lighten;
+
   pre {
     user-select: none;
     cursor: none;
