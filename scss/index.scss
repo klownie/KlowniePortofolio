@@ -85,11 +85,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 6rem;
+  margin: min(2vw,6rem);
   border-radius: 2.5rem;
 
   background-image: url("assets/banner.avif");
-  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
