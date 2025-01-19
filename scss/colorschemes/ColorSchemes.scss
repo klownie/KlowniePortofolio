@@ -81,7 +81,7 @@ body[theme='RosePineMoon'] {
   --cyan: #EA9A97;
   --white: #E0DEF4;
 
-  --bright-black: #6E6A86;
+  --bright-black: #474457;
   --bright-red: #EB6F92;
   --bright-green: #9CCFD8;
   --bright-yellow: #F6C177;
@@ -96,27 +96,52 @@ body[theme='RosePineMoon'] {
   --cursor: #E0DEF4;
 }
 
-body[theme='TempusTempest'] {
-  --black: #1a1c1c;
-  --red: #cfc80a;
-  --green: #7ad97a;
-  --yellow: #bfcc4a;
-  --blue: #60d7cd;
-  --magenta: #c5c4af;
-  --cyan: #8bd0bf;
-  --white: #b0c8ca;
+body[theme='SeaShells'] {
+  --black: #17384C;
+  --red: #ce6540;
+  --green: #027C9B;
+  --yellow: #FCA02F;
+  --blue: #1E4950;
+  --magenta: #68D4F1;
+  --cyan: #50A3B5;
+  --white: #DEB88D;
 
-  --bright-black: #323535;
-  --bright-red: #d1d933;
-  --bright-green: #99e299;
-  --bright-yellow: #bbde4f;
-  --bright-blue: #74e4cd;
-  --bright-magenta: #d2d4aa;
-  --bright-cyan: #9bdfc4;
-  --bright-white: #b6e0ca;
+  --bright-black: #434B53;
+  --bright-red: #D48678;
+  --bright-green: #628D98;
+  --bright-yellow: #FDD39F;
+  --bright-blue: #1BBCDD;
+  --bright-magenta: #BBE3EE;
+  --bright-cyan: #87ACB4;
+  --bright-white: #FEE4CE;
 
-  --background: #282b2b;
-  --foreground: #b6e0ca;
+  --background: #09141B;
+  --foreground: #DEB88D;
 
-  --cursor: #b6e0ca;
+  --cursor: #DEB88D;
+}
+
+body[theme='AtelierSulphurpool'] {
+  --black: #121628;
+  --red: #d36e4f;
+  --green: #ac9739;
+  --yellow: #c08b30;
+  --blue: #3d8fd1;
+  --magenta: #9c637a;
+  --cyan: #22a2c9;
+  --white: #dfe2f1;
+
+  --bright-black: #33414f;
+  --bright-red: #d57835;
+  --bright-green: #ac9739;
+  --bright-yellow: #c08b30;
+  --bright-blue: #6679cc;
+  --bright-magenta: #9c637a;
+  --bright-cyan: #22a2c9;
+  --bright-white: #f5f7ff;
+
+  --background: #202746;
+  --foreground: #898ea4;
+
+  --cursor: #898ea4;
 }

@@ -14,6 +14,7 @@ dependencies = [
  "axum-extra",
  "axum-htmx",
  "axum-server",
+ "log",
  "minify-html-onepass",
  "serde",
  "text-to-ascii-art",

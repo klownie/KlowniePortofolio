@@ -59,9 +59,8 @@ header {
   font-size: var(--size);
   font-weight: 400;
   svg {
-    height: calc(var(--size)* 2);
-    width: calc(var(--size)* 2);
-    translate: calc(var(--size)* 0.2) calc(var(--size)* 0.7);
+    height: var(--size);
+    width: var(--size);
   }
   button {
     cursor: none;
@@ -89,7 +88,6 @@ header {
   border-radius: 2.5rem;
   background-image: url(assets/banner.avif);
   background-attachment: fixed;
-  background-position: 50%;
   background-repeat: repeat;
   background-size: max(65.5vh,98%);
   mix-blend-mode: lighten;

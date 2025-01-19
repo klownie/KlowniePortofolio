@@ -53,6 +53,7 @@ text-to-ascii-art="0.1.10"
 
 #toml
 toml = "0.8.19"
+log = "0.4.22"
 
 #optimisation
 [profile.dev.package.askama_derive]

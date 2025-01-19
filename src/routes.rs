@@ -1,5 +1,5 @@
 use crate::errors::handler_404;
-use crate::handlers::{handle_main, project_request_handler, resolution_request_handler, db_handle};
+use crate::handlers::{handle_main, project_request_handler, resolution_request_handler, db_handle, log_message};
 use axum::http::header;
 use axum::http::HeaderValue;
 use axum::routing::{get, post};
@@ -16,7 +16,9 @@ pub fn build_routes() -> Router {
         .route(
             "/toggleres/{project_name}/{high_res}",
             get(resolution_request_handler),
-        ).route("/db/{action}", post(db_handle));
+        )
+        .route("/db/{action}", post(db_handle))
+        .route("/log/{message}", post(log_message));
 
     let middleware = ServiceBuilder::new()
         .layer(SetResponseHeaderLayer::if_not_present(

@@ -8,7 +8,7 @@ use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use axum_extra::extract::cookie::Cookie;
+use axum_extra::extract::cookie::{Cookie, SameSite};
 use axum_extra::extract::CookieJar;
 use minify_html_onepass::{truncate, Cfg, Error};
 use serde::Deserialize;
@@ -45,7 +45,8 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> {
     let new_uuid = Uuid::new_v4();
     let cookie = Cookie::build(("SessionID", new_uuid.to_string()))
-        .domain("portofolio.klownie.me")
+        // .domain("portofolio.klownie.me")
+        .same_site(SameSite::None)
         .max_age(Duration::days(100))
         .http_only(true)
         .secure(true)
@@ -222,3 +223,6 @@ pub async fn db_handle(Path(action): Path<String>) {
     todo!()
 }
 
+pub async fn log_message(Path(message): Path<String>) {
+    info!("visiting : {message}")
+}
