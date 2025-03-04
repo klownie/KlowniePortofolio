@@ -198,6 +198,9 @@ address {
       }
     }
   }
+  footer {
+    margin-bottom: 5rem;
+  }
 }
 
 @keyframes fade-in {
@@ -346,4 +349,58 @@ cursor {
     height: 0;
     width: 0;
   }
+}
+
+@font-face {
+  font-family: Mononoki;
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/fonts/mononoki-Regular.woff2') format('woff2'),
+  url('/assets/fonts/mononoki-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Mononoki;
+  font-weight: 700;
+  font-style: normal;
+  src: url('/assets/fonts/mononoki-Bold.woff2') format('woff2'),
+  url('/assets/fonts/mononoki-Bold.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Mononoki;
+  font-weight: 400;
+  font-style: italic;
+  src: url('/assets/fonts/mononoki-Italic.woff2') format('woff2'),
+  url('/assets/fonts/mononoki-Italic.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Mononoki;
+  font-weight: 700;
+  font-style: italic;
+  src: url('/assets/fonts/mononoki-BoldItalic.woff2') format('woff2'),
+  url('/assets/fonts/mononoki-BoldItalic.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: IBM-VGA8;
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
+  url('/assets/fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: SixtyFour;
+  font-weight: 400;
+  font-style: normal;
+  src: url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff2') format('woff2'),
+  url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff') format('woff');
+  font-display: swap;
 }

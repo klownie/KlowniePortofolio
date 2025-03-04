@@ -5,77 +5,26 @@
 
 {% block head %}
 
-{%- call js::htmx -%}
-{%- call js::CoolCursor -%}
-<script src="/assets/js/hyperscript.min.js"></script>
-
 <meta name="fediverse:creator" content="@klownie_@mastodon.social">
 
-<meta name="robots" content="max-image-preview:large">
+<meta name="author" content="Audrick Yeu">
+<meta name="robots" content="index, follow">
 <meta name="description" content="Audrick Concept Art Portofolio">
+<meta name="keywords" content="Audrick, Yeu, Concept Artist, Portofolio, Klownie">
 
-<meta property="og:url" content="https://portofolio.klownie.me">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Audrick Yeu Portofolio">
+<meta property="og:url" content="https://portofolio.klownie.me">
 <meta property="og:title" content="Audrick Yeu - Portofolio">
 <meta property="og:description" content="Personal concept portofolio website">
 
 <style>
-    {{ crate::STYLE_SHEET }}
-    @font-face {
-        font-family: Mononoki;
-        font-weight: 400;
-        font-style: normal;
-        src: url('/assets/fonts/mononoki-Regular.woff2') format('woff2'),
-        url('/assets/fonts/mononoki-Regular.woff') format('woff');
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: Mononoki;
-        font-weight: 700;
-        font-style: normal;
-        src: url('/assets/fonts/mononoki-Bold.woff2') format('woff2'),
-        url('/assets/fonts/mononoki-Bold.woff') format('woff');
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: Mononoki;
-        font-weight: 400;
-        font-style: italic;
-        src: url('/assets/fonts/mononoki-Italic.woff2') format('woff2'),
-        url('/assets/fonts/mononoki-Italic.woff') format('woff');
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: Mononoki;
-        font-weight: 700;
-        font-style: italic;
-        src: url('/assets/fonts/mononoki-BoldItalic.woff2') format('woff2'),
-        url('/assets/fonts/mononoki-BoldItalic.woff') format('woff');
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: IBM-VGA8;
-        font-weight: 400;
-        font-style: normal;
-        src: url('/assets/fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
-        url('/assets/fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: SixtyFour;
-        font-weight: 400;
-        font-style: normal;
-        src: url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff2') format('woff2'),
-        url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff') format('woff');
-        font-display: swap;
-    }
+    {{ crate::STYLE_SHEET|safe}}
 </style>
+
+{%- call js::htmx -%}
+{%- call js::CoolCursor -%}
+<script src="/assets/js/hyperscript.min.js"></script>
+
 {% endblock %}
 
 {% block content %}
