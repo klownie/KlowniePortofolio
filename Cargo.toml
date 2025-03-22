@@ -22,7 +22,7 @@ safari = [12, 3]
 #Backend
 axum = { version = "0.8.1", features = ["macros", "tokio"]}
 axum-extra = { version = "0.10.0", features = ["cookie", "typed-header"] }
-axum-htmx = "0.6.0"
+axum-htmx = "0.7.0"
 axum-server = { version = "0.7.1", features = ["tls-rustls"],  default-features = false }
 
 #templating

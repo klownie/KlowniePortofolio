@@ -19,7 +19,13 @@ body, html {
     color: var(--black);
   }
 }
-
+iframe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+  mix-blend-mode: multiply;
+}
 .no_script{
   display: grid;
   font-size: 3rem;
@@ -58,6 +64,7 @@ header {
   font-family: IBM-VGA8, sans-serif;
   font-size: var(--size);
   font-weight: 400;
+  margin-top: 2rem;
   svg {
     height: var(--size);
     width: var(--size);
