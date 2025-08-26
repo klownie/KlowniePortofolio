@@ -1,24 +1,7 @@
-{%- import "macros/icons.html" as icons -%}
+{%- import "macros/snipets.html" as snipets -%}
 <article id="{{project}}">
-    <button
-            class="{{crate::ClassName::FLOATING_X_BUTTON}}"
-            _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
-        then hide #toggled_article"
-    >
-        {%- call icons::IconButtonX -%}
-    </button>
-    <button
-            class="{{crate::ClassName::FLOATING_BUTTON}}"
-            hx-get="api/toggleres/{{project}}/{{high_res}}"
-            hx-target="#{{project}}"
-            hx-swap="outerHTML"
-    >
-        {% if high_res %}
-        HD
-        {% else %}
-        LD
-        {% endif %}
-    </button>
+    {% call snipets::CloseButton %}
+    {% call snipets::ResolutionButton %}
 
     <div class={{crate::ClassName::FULLSCREEN_BLOG}}>
         <h1>CLimbing Exo-suit delta</h1>
@@ -31,20 +14,20 @@
     <ul>
         {% if high_res %}
         {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}}/></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}}/></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}} /></li>
         <li><video autoplay loop muted playsinline>
-            <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
-        </video></li>
+                <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
+            </video></li>
         {% else %}
         {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}}/></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}}/></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}}/></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}} /></li>
         <li><video autoplay loop muted playsinline>
-            <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
-        </video></li>
+                <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
+            </video></li>
         {% endif %}
     </ul>
 </article>

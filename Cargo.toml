@@ -52,7 +52,7 @@ turf = "0.9.5"
 text-to-ascii-art="0.1.10"
 
 #toml
-toml = "0.8.19"
+toml = "0.9.5"
 log = "0.4.22"
 
 #optimisation

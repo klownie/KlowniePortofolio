@@ -1,8 +1,9 @@
+{%- import "macros/snipets.html" as snipets -%}
+{% call snipets::SectionTitle("Concept Art") %}
 
 <div hx-history-elt>
     <section id="toggled_article" style="display: none"
-             _="init remove .{{crate::ClassName::NO_SCROLL}} from <body/> then hide #toggled_article"
-    >
+        _="init remove .{{crate::ClassName::NO_SCROLL}} from <body/> then hide #toggled_article">
     </section>
 </div>
 
@@ -13,26 +14,13 @@
     <footer></footer>
 </main>
 {% macro toggle_image(project) %}
-<figure
-        hx-post="/api/log/{{project}}"
-        hx-trigger="click"
-        hx-push-url="/{{project}}"
-        hx-swap="none"
->
-    <img
-            role="button"
-            src=/assets/projects/{{project}}/thumbnail.avif
-            alt="{{project}}"
-            hx-get="api/projects/{{project}}"
-            hx-trigger="mouseover"
-            hx-swap="innerHTML "
-            hx-target="#toggled_article"
-            hx-push-url="false"
-            _="
+<figure hx-post="/api/log/{{project}}" hx-trigger="click" hx-push-url="/{{project}}" hx-swap="none">
+    <img role="button" src=/assets/projects/{{project}}/thumbnail.avif alt="{{project}}"
+        hx-get="api/projects/{{project}}" hx-trigger="mouseover" hx-swap="innerHTML " hx-target="#toggled_article"
+        hx-push-url="false" _="
              on click add .{{crate::ClassName::NO_SCROLL}} to <body/>
                 then show #toggled_article
-            "
-    />
+            " />
     <figcaption>{{project|clean_name}}</figcaption>
 </figure>
 {% endmacro %}

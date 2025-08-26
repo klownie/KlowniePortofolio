@@ -1,32 +1,26 @@
-<section class="{{crate::ClassName::TOGGLABLE_NAME}}" >
+<section class="{{crate::ClassName::TOGGLABLE_NAME}}">
     {% for title in titles %}
-        {% if title == titles.first().unwrap() %}
+    {% if title == titles.first().unwrap() %}
 
-            <pre id="first" role="button"
-                 _="on click toggle *display of next <pre/>
-                toggle the *display of me"
-            >
-                {{title|asciart_return_to_line}}
-            </pre>
+    <pre id="first" role="button" _="on click toggle *display of next <pre/>
+                toggle the *display of me">
+        {{title|asciart_return_to_line}}
+    </pre>
 
-        {% else if title == titles.last().unwrap() %}
+    {% else if title == titles.last().unwrap() %}
 
-            <pre style="display: none" role="button"
-                 _="on click toggle *display of #first
-                 toggle the *display of me"
-            >
-                {{title|asciart_return_to_line}}
-            </pre>
+    <pre style="display: none" role="button" _="on click toggle *display of #first
+                 toggle the *display of me">
+        {{title|asciart_return_to_line}}
+    </pre>
 
-        {% else %}
+    {% else %}
 
-            <pre style="display: none" role="button"
-                 _="on click toggle *display of next <pre/>
-                toggle the *display of me"
-            >
-                {{title|asciart_return_to_line}}
-            </pre>
+    <pre style="display: none" role="button" _="on click toggle *display of next <pre/>
+                toggle the *display of me">
+        {{title|asciart_return_to_line}}
+    </pre>
 
-        {% endif %}
+    {% endif %}
     {% endfor %}
 </section>

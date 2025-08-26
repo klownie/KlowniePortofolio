@@ -5,14 +5,15 @@
   justify-content: center;
 }
 
-body, html {
+body,
+html {
   cursor: none;
   background-color: var(--background);
   font-family: Mononoki, sans-serif;
   scrollbar-color: var(--yellow) var(--background);
   scrollbar-width: thin;
   transition: background-color 0.25s ease;
-  margin-bottom : 20rem;
+  margin-bottom: 20rem;
 
   ::selection {
     background-color: var(--bright-yellow);
@@ -27,7 +28,8 @@ body, html {
   z-index: -100;
   mix-blend-mode: multiply;
 }
-.no_script{
+
+.no_script {
   display: grid;
   font-size: 3rem;
   place-items: center;
@@ -60,28 +62,39 @@ a {
   }
 }
 
+.section_header {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 3rem;
+  color: var(--magenta);
+}
+
 header {
-  --size : clamp(0.5rem,3vw,2rem);
+  --size: clamp(0.5rem, 3vw, 2rem);
   font-family: IBM-VGA8, sans-serif;
   font-size: var(--size);
   font-weight: 400;
   margin-top: 2rem;
+
   svg {
     height: var(--size);
     width: var(--size);
   }
+
   button {
     cursor: none;
-    font-family: IBM-VGA8,sans-serif;
+    font-family: IBM-VGA8, sans-serif;
     font-size: var(--size);
     color: var(--black);
     background-color: var(--white);
     padding: 0.5rem 1rem;
+
     &:hover {
       background-color: var(--red);
       color: var(--bright-black);
     }
   }
+
   span {
     color: var(--green);
   }
@@ -92,12 +105,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: min(2vw,6rem);
+  margin: min(2vw, 6rem);
   border-radius: 2.5rem;
-  background-image: url(assets/banner.avif),url(assets/banner_low.avif);
+  background-image: url(assets/banner.avif), url(assets/banner_low.avif);
   background-attachment: fixed;
   background-repeat: repeat;
-  background-size: max(65.5vh,98%);
+  background-size: max(65.5vh, 98%);
   mix-blend-mode: lighten;
 
   pre {
@@ -110,6 +123,7 @@ header {
     margin: auto 20px;
     max-width: 100vw;
     overflow: hidden;
+
     &:hover {
       transform: scale(1.1);
     }
@@ -126,13 +140,15 @@ address {
   max-width: 912px;
   transition: color 1s;
   justify-items: center;
+
   a {
     background-color: var(--bright-black);
     padding: 1rem 1rem 0.5rem 1rem;
     border-radius: 0.5rem;
     transition: background-color 1s ease;
+
     svg {
-      --social-size : clamp(1rem,3vw,1.5rem);
+      --social-size: clamp(1rem, 3vw, 1.5rem);
       height: var(--social-size);
       width: var(--social-size);
     }
@@ -152,10 +168,12 @@ address {
   transition: background-color 1s;
   margin: auto;
   width: 90vw;
+
   p {
     font-size: 1.1rem;
     font-weight: 400;
   }
+
   h1 {
     color: var(--yellow);
   }
@@ -166,6 +184,7 @@ address {
   gap: 1rem;
   max-width: 960px;
   margin: 5rem auto 5rem auto;
+
   figure {
     display: grid;
     margin-block-start: 0;
@@ -173,6 +192,7 @@ address {
     margin-inline-start: 0;
     margin-inline-end: 0;
     margin-bottom: 1rem;
+
     @media (prefers-reduced-motion: no-preference) {
       scale: 0.7;
       opacity: 0;
@@ -181,15 +201,18 @@ address {
       animation-range-start: 15vh;
       animation-range-end: 45vh;
     }
+
     img {
       border-radius: 0.5rem;
       max-width: 100%;
       outline: 0 solid transparent;
       transition: outline 0.25s ease;
+
       &:hover {
         outline: 5px solid var(--bright-red);
       }
     }
+
     figcaption {
       color: var(--foreground);
       text-align: center;
@@ -198,6 +221,7 @@ address {
       opacity: 0;
       transition: opacity 0.3s ease, margin 0.3s ease, font-size 0.3s ease;
     }
+
     &:hover {
       figcaption {
         font-size: 1rem;
@@ -206,6 +230,7 @@ address {
       }
     }
   }
+
   footer {
     margin-bottom: 5rem;
   }
@@ -231,10 +256,12 @@ address {
     width: 100%;
     height: 100%;
     z-index: 700;
+
     @media (orientation: portrait) {
       grid-template-columns: auto;
       grid-template-rows: 20rem 1fr;
     }
+
     ul {
       gap: 2%;
       padding: 2%;
@@ -242,33 +269,40 @@ address {
       font-style: italic;
       overflow-y: scroll;
       overscroll-behavior: contain;
-      img, video {
+
+      img,
+      video {
         height: 100%;
         max-height: 100vh;
         width: 100%;
         object-fit: contain;
       }
     }
+
     .fullscreen_blog {
       background-color: var(--background);
       overflow-y: scroll;
       padding: 20px;
       z-index: 700;
+
       h1 {
         color: var(--bright-yellow);
         text-align: center;
         font-size: 2.3rem;
       }
+
       h2 {
         color: var(--cyan);
         text-align: center;
         font-size: 1.7rem;
       }
+
       p {
         font-size: 1.25rem;
         color: var(--white);
         padding-left: 3rem;
       }
+
       ul {
         font-size: 1.2rem;
         color: var(--foreground);
@@ -277,6 +311,7 @@ address {
         overflow-y: auto;
       }
     }
+
     .floating_button {
       cursor: none;
       position: fixed;
@@ -295,6 +330,7 @@ address {
         background-color: var(--bright-red);
       }
     }
+
     .floating_x_button {
       cursor: none;
       position: fixed;
@@ -304,17 +340,69 @@ address {
       background-color: transparent;
       border: none;
       z-index: 999;
+
       &:hover {
         color: var(--bright-red);
       }
+
       svg {
         width: 5rem;
         height: 5rem;
       }
+
       @media (orientation: portrait) {
         translate: 0 20rem;
       }
     }
+  }
+}
+
+.curriculum_vitae {
+  display: grid;
+  margin: auto;
+  aspect-ratio: 9/16;
+  max-width: 1080px;
+  padding: 2rem;
+  background-color: var(--background);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "profile intro intro intro"
+    "forma forma exper exper"
+    "langue lnague skills skills"
+  ;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .profile {
+    img {
+      width: 100%;
+      border-radius: 100%;
+    }
+
+    grid-area: profile;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .formation {
+    grid-area: forma;
+  }
+
+  .experience {
+    grid-area: exper;
+  }
+
+  .langage {
+    grid-area: langue;
+  }
+
+  .skills {
+    grid-area: skills;
   }
 }
 
@@ -323,8 +411,9 @@ address {
   place-items: center;
   translate: 0 25vh;
   grid-template-rows: 1fr 1fr 1fr;
-  color:var(--bright-red);
+  color: var(--bright-red);
   font-size: 1rem;
+
   a {
     color: var(--green);
     text-decoration: underline;
@@ -347,11 +436,13 @@ cursor {
   mix-blend-mode: difference;
   transform: translate(-50%, -50%);
   transition: width 0.5s ease, height 0.5s ease, border 0.5s ease;
+
   &.grow {
     border: 3rem solid var(--foreground);
     height: 0;
     width: 0;
   }
+
   &.disappear {
     border: 0 solid var(--foreground);
     height: 0;
@@ -364,7 +455,7 @@ cursor {
   font-weight: 400;
   font-style: normal;
   src: url('/assets/fonts/mononoki-Regular.woff2') format('woff2'),
-  url('/assets/fonts/mononoki-Regular.woff') format('woff');
+    url('/assets/fonts/mononoki-Regular.woff') format('woff');
   font-display: swap;
 }
 
@@ -373,7 +464,7 @@ cursor {
   font-weight: 700;
   font-style: normal;
   src: url('/assets/fonts/mononoki-Bold.woff2') format('woff2'),
-  url('/assets/fonts/mononoki-Bold.woff') format('woff');
+    url('/assets/fonts/mononoki-Bold.woff') format('woff');
   font-display: swap;
 }
 
@@ -382,7 +473,7 @@ cursor {
   font-weight: 400;
   font-style: italic;
   src: url('/assets/fonts/mononoki-Italic.woff2') format('woff2'),
-  url('/assets/fonts/mononoki-Italic.woff') format('woff');
+    url('/assets/fonts/mononoki-Italic.woff') format('woff');
   font-display: swap;
 }
 
@@ -391,7 +482,7 @@ cursor {
   font-weight: 700;
   font-style: italic;
   src: url('/assets/fonts/mononoki-BoldItalic.woff2') format('woff2'),
-  url('/assets/fonts/mononoki-BoldItalic.woff') format('woff');
+    url('/assets/fonts/mononoki-BoldItalic.woff') format('woff');
   font-display: swap;
 }
 
@@ -400,7 +491,7 @@ cursor {
   font-weight: 400;
   font-style: normal;
   src: url('/assets/fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
-  url('/assets/fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
+    url('/assets/fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
   font-display: swap;
 }
 
@@ -409,6 +500,6 @@ cursor {
   font-weight: 400;
   font-style: normal;
   src: url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff2') format('woff2'),
-  url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff') format('woff');
+    url('/assets/fonts/sixtyfour-regular-variablefont_bledscan-webfont.woff') format('woff');
   font-display: swap;
 }

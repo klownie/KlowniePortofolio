@@ -43,40 +43,40 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 
 #[debug_handler]
 pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> {
-    let new_uuid = Uuid::new_v4();
-    let cookie = Cookie::build(("SessionID", new_uuid.to_string()))
-        // .domain("portofolio.klownie.me")
-        .same_site(SameSite::None)
-        .max_age(Duration::days(100))
-        .http_only(true)
-        .secure(true)
-        .build();
-
-    let new_jar = match jar.get("SessionID").map(|cookie| cookie.value().to_owned()) {
-        Some(uuid) => {
-            if uiua!(
-                "# Experimental!
-            Path     ← \"sessions.data\"
-            Database ← &frab Path
-            °binaryDatabase
-            has  □\"{uuid}\""
-            )
-            .pop_bool()
-            .unwrap()
-            {
-                info!("Welcome back : {}", uuid);
-                jar
-            } else {
-                info!("Invalid session : {}", uuid);
-                create_session(&new_uuid);
-                jar.add(cookie)
-            }
-        }
-        None => {
-            create_session(&new_uuid);
-            jar.add(cookie)
-        }
-    };
+    // let new_uuid = Uuid::new_v4();
+    // let cookie = Cookie::build(("SessionID", new_uuid.to_string()))
+    //     // .domain("portofolio.klownie.me")
+    //     .same_site(SameSite::None)
+    //     .max_age(Duration::days(100))
+    //     .http_only(true)
+    //     .secure(true)
+    //     .build();
+    //
+    // let new_jar = match jar.get("SessionID").map(|cookie| cookie.value().to_owned()) {
+    //     Some(uuid) => {
+    //         if uiua!(
+    //             "# Experimental!
+    //         Path     ← \"sessions.data\"
+    //         Database ← &frab Path
+    //         °binaryDatabase
+    //         has  □\"{uuid}\""
+    //         )
+    //         .pop_bool()
+    //         .unwrap()
+    //         {
+    //             info!("Welcome back : {}", uuid);
+    //             jar
+    //         } else {
+    //             info!("Invalid session : {}", uuid);
+    //             create_session(&new_uuid);
+    //             jar.add(cookie)
+    //         }
+    //     }
+    //     None => {
+    //         create_session(&new_uuid);
+    //         jar.add(cookie)
+    //     }
+    // };
 
     let index = Index {};
 
@@ -90,7 +90,9 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> 
 
     let masonry = &CONFIG.masonry;
 
-    let mut reply = format!(
+    let cv = CurriculumVitae {};
+
+    let reply = format!(
         "\
     {index}\
     {topper}
@@ -102,23 +104,21 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> 
     )
     .into_bytes();
 
-    let cfg = Cfg {
-        minify_js: true,
-        ..Cfg::default()
-    };
-    match truncate(&mut reply, &cfg) {
-        Ok(()) => debug!("js minified"),
-        Err(Error { position, .. }) => {
-            error!("minification failed at : {}", position)
-        }
-    };
+    // let cfg = Cfg {
+    //     minify_js: true,
+    //     ..Cfg::default()
+    // };
+    // match truncate(&mut reply, &cfg) {
+    //     Ok(()) => debug!("js minified"),
+    //     Err(Error { position, .. }) => {
+    //         error!("minification failed at : {}", position)
+    //     }
+    // };
 
-    Ok((StatusCode::OK, new_jar, Html(reply)))
+    Ok((StatusCode::OK, Html(reply)))
 }
 
-pub async fn project_request_handler(
-    Path(project): Path<String>,
-) -> impl IntoResponse {
+pub async fn project_request_handler(Path(project): Path<String>) -> impl IntoResponse {
     let reply = render_project_template(&project, false).await;
     reply
 }
@@ -137,7 +137,7 @@ pub async fn render_project_template(
     use Project::*;
 
     let template = match project {
-        "BatBossIllustration"  => BatBossIllustration {
+        "BatBossIllustration" => BatBossIllustration {
             project: project.into(),
             high_res,
         },

@@ -43,6 +43,10 @@ pub struct Masonry {
     pub loaded: Option<String>,
 }
 
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "partials/AudrickYeu_CV.html")]
+pub struct CurriculumVitae {}
+
 #[derive(Debug, Serialize, Deserialize, EnumTemplate)]
 pub enum Project {
     #[template(path = "projects/BatBossIllustration.html")]

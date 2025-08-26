@@ -1,3 +1,25 @@
+{%- import "macros/icons.html" as icons -%}
+
 {% macro SectionTitle(title) %}
-<h1 id={{title}} href="#"> <span>¶</span> {{title}}</h1>
+<h1 class="{{crate::ClassName::SECTION_HEADER}}" href="#"> <span>¶ </span> {{title}}</h1>
+{% endmacro %}
+
+{% macro CloseButton %}
+<button class="{{crate::ClassName::FLOATING_X_BUTTON}}" _="on click remove .{{crate::ClassName::NO_SCROLL}} from <body/>
+            then hide #toggled_article
+            then history.pushState({}, '', '/')
+            ">
+  {%- call icons::IconButtonX -%}
+</button>
+{% endmacro %}
+
+{% macro ResolutionButton %}
+<button class="{{crate::ClassName::FLOATING_BUTTON}}" hx-get="api/toggleres/{{project}}/{{high_res}}"
+  hx-target="#{{project}}" hx-swap="outerHTML">
+  {% if high_res %}
+  HD
+  {% else %}
+  SD
+  {% endif %}
+</button>
 {% endmacro %}
