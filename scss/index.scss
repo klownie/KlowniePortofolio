@@ -64,9 +64,15 @@ a {
 
 .section_header {
   display: flex;
+  font-size: 2rem;
   justify-content: center;
   padding: 1rem 3rem;
   color: var(--magenta);
+}
+
+.section_header::before {
+  content: "¶";
+  padding-right: 1.5rem;
 }
 
 header {
