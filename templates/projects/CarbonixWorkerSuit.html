@@ -10,16 +10,16 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_830_15.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_829.{{type}} /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_830_15.{f{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_829.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_830.webm" type="video/webm">
             </video></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_830_15.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_829.{{type}} /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_830_15.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_829.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_830.webm" type="video/webm">
             </video></li>

@@ -10,11 +10,11 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_717.{{type}}" /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_717.{{ftype}}" /></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_717.{{type}}" /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_717.{{ftype}}" /></li>
         {% endif %}
     </ul>
 

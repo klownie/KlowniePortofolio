@@ -1,7 +1,6 @@
 use crate::errors::AppError;
 use crate::templates::*;
 use crate::uiua;
-use askama_axum::Template;
 use axum::debug_handler;
 use axum::extract::{ConnectInfo, Path};
 use axum::{
@@ -10,7 +9,6 @@ use axum::{
 };
 use axum_extra::extract::cookie::{Cookie, SameSite};
 use axum_extra::extract::CookieJar;
-use minify_html_onepass::{truncate, Cfg, Error};
 use serde::Deserialize;
 use std::fs;
 use std::net::SocketAddr;
@@ -90,7 +88,7 @@ pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> 
 
     let masonry = &CONFIG.masonry;
 
-    let cv = CurriculumVitae {};
+    // let cv = CurriculumVitae {};
 
     let reply = format!(
         "\
@@ -130,77 +128,6 @@ pub async fn resolution_request_handler(
     reply
 }
 
-pub async fn render_project_template(
-    project: &str,
-    high_res: bool,
-) -> Result<impl IntoResponse, AppError> {
-    use Project::*;
-
-    let template = match project {
-        "BatBossIllustration" => BatBossIllustration {
-            project: project.into(),
-            high_res,
-        },
-        "VulturesBrigadeCaptain" => VulturesBrigadeCaptain {
-            project: project.into(),
-            high_res,
-        },
-        "SamuConceptIllustration" => SamuConceptIllustration {
-            project: project.into(),
-            high_res,
-        },
-        "SamuConceptCharacter" => SamuConceptCharacter {
-            project: project.into(),
-            high_res,
-        },
-        "Saint-John" => SaintJohn {
-            project: project.into(),
-            high_res,
-        },
-        "HomardRojas" => HomardRojas {
-            project: project.into(),
-            high_res,
-        },
-        "CarbonixWorkerSuit" => CarbonixWorkerSuit {
-            project: project.into(),
-            high_res,
-        },
-        "ClimbingExoSuit" => ClimbingExoSuit {
-            project: project.into(),
-            high_res,
-        },
-        "ClimbingExoSuit3d" => ClimbingExoSuit3d {
-            project: project.into(),
-            high_res,
-        },
-        "Intru" => Intru {
-            project: project.into(),
-            high_res,
-        },
-        "UmbrellaKnight" => UmbrellaKnight {
-            project: project.into(),
-            high_res,
-        },
-        "TeamBlue" => TeamBlue {
-            project: project.into(),
-            high_res,
-        },
-        "TribalYellowDemon" => TribalYellowDemon {
-            project: project.into(),
-            high_res,
-        },
-        "UrbanWhiteCrowMan" => UrbanWhiteCrowMan {
-            project: project.into(),
-            high_res,
-        },
-        _ => {
-            return Ok((StatusCode::NOT_FOUND, Html(Error404 {}.render()?)));
-        }
-    };
-
-    debug!("Rendering project: {}", project);
-    Ok((StatusCode::OK, Html(template.render()?)))
-}
 fn create_session(new_uuid: &Uuid) {
     uiua!(
         "# Experimental!

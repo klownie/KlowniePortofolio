@@ -1,6 +1,12 @@
-use askama_axum::Template;
-use askama_enum::EnumTemplate;
+use askama::Template;
+use axum::{
+    http::StatusCode,
+    response::{Html, IntoResponse},
+};
+use log::debug;
 use serde::{Deserialize, Serialize};
+
+use crate::errors::AppError;
 
 #[derive(Debug, Template)]
 #[template(path = "errors/error_404.html")]
@@ -44,62 +50,321 @@ pub struct Masonry {
 }
 
 #[derive(Debug, Serialize, Deserialize, Template)]
-#[template(path = "partials/AudrickYeu_CV.html")]
-pub struct CurriculumVitae {}
+#[template(path = "projects/BatBossIllustration.html")]
+pub struct BatBossIllustration {
+    project: String,
+    high_res: bool,
+}
 
-#[derive(Debug, Serialize, Deserialize, EnumTemplate)]
-pub enum Project {
-    #[template(path = "projects/BatBossIllustration.html")]
-    BatBossIllustration { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/VulturesBrigadeCaptain.html")]
+pub struct VulturesBrigadeCaptain {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/VulturesBrigadeCaptain.html")]
-    VulturesBrigadeCaptain { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/SamuConceptCharacter.html")]
+pub struct SamuConceptCharacter {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/SamuConceptCharacter.html")]
-    SamuConceptCharacter { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/SamuConceptIllustration.html")]
+pub struct SamuConceptIllustration {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/SamuConceptIllustration.html")]
-    SamuConceptIllustration { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/SaintJohn.html")]
+pub struct SaintJohn {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/SaintJohn.html")]
-    SaintJohn { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/HomardRojas.html")]
+pub struct HomardRojas {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/HomardRojas.html")]
-    HomardRojas { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/CarbonixWorkerSuit.html")]
+pub struct CarbonixWorkerSuit {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/CarbonixWorkerSuit.html")]
-    CarbonixWorkerSuit { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/ClimbingExoSuit.html")]
+pub struct ClimbingExoSuit {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/ClimbingExoSuit.html")]
-    ClimbingExoSuit { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/Intru.html")]
+pub struct Intru {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/Intru.html")]
-    Intru { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/UmbrellaKnight.html")]
+pub struct UmbrellaKnight {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/UmbrellaKnight.html")]
-    UmbrellaKnight { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/ClimbingExoSuit3d.html")]
+pub struct ClimbingExoSuit3d {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/ClimbingExoSuit3d.html")]
-    ClimbingExoSuit3d { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/TeamBlue.html")]
+pub struct TeamBlue {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/TeamBlue.html")]
-    TeamBlue { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/TribalYellowDemon.html")]
+pub struct TribalYellowDemon {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/TribalYellowDemon.html")]
-    TribalYellowDemon { project: String, high_res: bool },
+#[derive(Debug, Serialize, Deserialize, Template)]
+#[template(path = "projects/UrbanWhiteCrowMan.html")]
+pub struct UrbanWhiteCrowMan {
+    project: String,
+    high_res: bool,
+}
 
-    #[template(path = "projects/UrbanWhiteCrowMan.html")]
-    UrbanWhiteCrowMan { project: String, high_res: bool },
+pub async fn render_project_template(
+    project: &str,
+    high_res: bool,
+) -> Result<impl IntoResponse, AppError> {
+    match project {
+        "BatBossIllustration" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    BatBossIllustration {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "VulturesBrigadeCaptain" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    VulturesBrigadeCaptain {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "SamuConceptIllustration" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    SamuConceptIllustration {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "SamuConceptCharacter" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    SamuConceptCharacter {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "SaintJohn" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    SaintJohn {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "HomardRojas" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    HomardRojas {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "CarbonixWorkerSuit" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    CarbonixWorkerSuit {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "ClimbingExoSuit" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    ClimbingExoSuit {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "ClimbingExoSuit3d" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    ClimbingExoSuit3d {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "Intru" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    Intru {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "UmbrellaKnight" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    UmbrellaKnight {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "TeamBlue" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    TeamBlue {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "TribalYellowDemon" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    TribalYellowDemon {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        "UrbanWhiteCrowMan" => {
+            debug!("Rendering project: {}", project);
+            return Ok((
+                StatusCode::OK,
+                Html(
+                    UrbanWhiteCrowMan {
+                        project: project.into(),
+                        high_res,
+                    }
+                    .render()?,
+                ),
+            ));
+        }
+
+        _ => {
+            return Ok((StatusCode::NOT_FOUND, Html(Error404 {}.render()?)));
+        }
+    }
 }
 
 mod filters {
     use text_to_ascii_art::to_art;
-    pub fn asciart<T: std::fmt::Display>(s: T) -> askama::Result<String> {
+    pub fn asciart<T: std::fmt::Display>(s: T, _: &dyn askama::Values) -> askama::Result<String> {
         let s: String = s.to_string();
         Ok(to_art(s, "", 0, 0, 0).unwrap())
     }
 
-    pub fn asciart_return_to_line<T: std::fmt::Display>(s: T) -> askama::Result<String> {
+    pub fn asciart_return_to_line<T: std::fmt::Display>(
+        s: T,
+        _: &dyn askama::Values,
+    ) -> askama::Result<String> {
         let s: String = s.to_string();
 
         let r = s
@@ -111,7 +376,10 @@ mod filters {
         Ok(r)
     }
 
-    pub fn clean_name<T: std::fmt::Display>(s: T) -> askama::Result<String> {
+    pub fn clean_name<T: std::fmt::Display>(
+        s: T,
+        _: &dyn askama::Values,
+    ) -> askama::Result<String> {
         let mut result = String::new();
 
         for (prev, c) in std::iter::once(None)
@@ -127,7 +395,10 @@ mod filters {
         Ok(result)
     }
 
-    pub fn to_javascript<T: std::fmt::Display>(s: &[T]) -> askama::Result<String> {
+    pub fn to_javascript<T: std::fmt::Display>(
+        s: &[T],
+        _: &dyn askama::Values,
+    ) -> askama::Result<String> {
         let mut result = String::from("[");
 
         for (i, item) in s.iter().enumerate() {

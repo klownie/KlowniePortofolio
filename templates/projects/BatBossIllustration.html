@@ -13,23 +13,23 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_final.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_grey.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_01.{{type}} /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_final.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_grey.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_01.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_877.webm" type="video/webm">
             </video></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_00.{{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_00.{{ftype}} /></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_final.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_grey.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_01.{{type}} /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_final.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_grey.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_01.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_877.webm" type="video/webm">
             </video></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_00.{{type}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_877_00.{{ftype}} /></li>
         {% endif %}
     </ul>
 </article>

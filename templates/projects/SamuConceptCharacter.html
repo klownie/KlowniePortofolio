@@ -16,17 +16,17 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_849_08.{{type}}" /></li>
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_851.{{type}}" /></li>
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_852.{{type}}" /></li>
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_853.{{type}}" /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_849_08.{{ftype}}" /></li>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_851.{{ftype}}" /></li>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_852.{{ftype}}" /></li>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_853.{{ftype}}" /></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_849_08.{{type}}" /></li>
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_851.{{type}}" /></li>
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_852.{{type}}" /></li>
-        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_853.{{type}}" /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_849_08.{{ftype}}" /></li>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_851.{{ftype}}" /></li>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_852.{{ftype}}" /></li>
+        <li><img src="/assets/projects/{{project}}/{{res}}/sketch_853.{{ftype}}" /></li>
         {% endif %}
     </ul>
 

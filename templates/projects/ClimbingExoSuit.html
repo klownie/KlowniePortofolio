@@ -13,18 +13,18 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}} /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
             </video></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{type}} /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_noise.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_843_color.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_842.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_843.webm" type="video/webm">
             </video></li>

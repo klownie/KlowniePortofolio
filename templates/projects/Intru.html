@@ -10,19 +10,19 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_03.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Stylized_003.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Posed.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Back3quarter.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Front3quarter.{{type}} /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_03.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Stylized_003.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Posed.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Back3quarter.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Front3quarter.{{ftype}} /></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_03.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Stylized_003.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Posed.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Back3quarter.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Front3quarter.{{type}} /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_03.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Stylized_003.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Posed.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Back3quarter.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_003_Front3quarter.{{ftype}} /></li>
         {% endif %}
     </ul>
 

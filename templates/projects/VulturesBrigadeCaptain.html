@@ -17,20 +17,20 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_872_character.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_finale.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_comp.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_grey.{{type}} /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_872_character.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_finale.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_comp.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_grey.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_867.webm" type="video/webm">
             </video></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_872_character.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_finale.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_comp.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_grey.{{type}} /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_872_character.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_finale.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_comp.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/sketch_867_grey.{{ftype}} /></li>
         <li><video autoplay loop muted playsinline>
                 <source src="/assets/projects/{{project}}/{{res}}/sketch_867.webm" type="video/webm">
             </video></li>

@@ -22,15 +22,15 @@
 
     <ul>
         {% if high_res %}
-        {% set (res, type) = ("HighRes", "jpg") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_006.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_01.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_02.{{type}} /></li>
+        {% set (res, ftype) = ("HighRes", "jpg") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_006.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_01.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_02.{{ftype}} /></li>
         {% else %}
-        {% set (res, type) = ("LowRes", "avif") %}
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_006.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_01.{{type}} /></li>
-        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_02.{{type}} /></li>
+        {% set (res, ftype) = ("LowRes", "avif") %}
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_006.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_01.{{ftype}} /></li>
+        <li><img src=/assets/projects/{{project}}/{{res}}/model_006_smooth_02.{{ftype}} /></li>
         {% endif %}
     </ul>
 
