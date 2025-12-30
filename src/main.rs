@@ -1,18 +1,18 @@
 mod errors;
 mod handlers;
+mod macros;
 mod routes;
 mod templates;
-mod macros;
 
 use crate::handlers::Ports;
 use crate::handlers::CONFIG;
-use axum_extra::extract::Host;
 use axum::{
     handler::HandlerWithoutStateExt,
     http::{StatusCode, Uri},
     response::Redirect,
     BoxError,
 };
+use axum_extra::extract::Host;
 use axum_server::tls_rustls::RustlsConfig;
 use routes::build_routes;
 use std::{net::SocketAddr, path::PathBuf};
@@ -25,10 +25,8 @@ async fn main() {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    // optional: spawn a second server to redirect http requests to this server
     tokio::spawn(redirect_http_to_https(CONFIG.ports));
 
-    // configure certificate and private key used by https
     let config = RustlsConfig::from_pem_file(
         PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("private_certs")

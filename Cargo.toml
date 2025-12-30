@@ -23,17 +23,15 @@ safari = [12, 3]
 axum = { version = "0.8.7", features = ["macros", "tokio"]}
 axum-extra = { version = "0.12.2", features = ["cookie", "typed-header"] }
 axum-htmx = "0.8.1"
-axum-server = { version = "0.7.1", features = ["tls-rustls"],  default-features = false }
+axum-server = { version = "0.8", features = ["tls-rustls"],  default-features = false }
 
 #templating
-askama = "0.14.0"
+askama = "0.14"
 
 #protocols
 tokio = { version = "1.42", features = ["full"] }
 tower = { version = "0.5.2", features = ["util"] }
 tower-http = { version = "0.6.2", features = ["fs", "set-header", "compression-full", "decompression-full"] }
-uuid = { version = "1.11.0", features = ["v4" ,"fast-rng"] }
-uiua = { version = "0.17.2", default-features = false, features = ["native_sys"]}
 anyhow = "^1.0"
 time = "0.3.37"
 

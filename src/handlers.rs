@@ -1,23 +1,15 @@
 use crate::errors::AppError;
 use crate::templates::*;
-use crate::uiua;
 use axum::debug_handler;
-use axum::extract::{ConnectInfo, Path};
+use axum::extract::Path;
 use axum::{
     http::StatusCode,
     response::{Html, IntoResponse},
 };
-use axum_extra::extract::cookie::{Cookie, SameSite};
-use axum_extra::extract::CookieJar;
 use serde::Deserialize;
 use std::fs;
-use std::net::SocketAddr;
 use std::ops::Not;
 use std::sync::LazyLock;
-use time::Duration;
-use tracing::{debug, error, info};
-use uiua::*;
-use uuid::Uuid;
 
 #[derive(Clone, Copy, Debug, Deserialize)]
 pub struct Ports {
@@ -40,42 +32,7 @@ pub static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 });
 
 #[debug_handler]
-pub async fn handle_main(jar: CookieJar) -> Result<impl IntoResponse, AppError> {
-    // let new_uuid = Uuid::new_v4();
-    // let cookie = Cookie::build(("SessionID", new_uuid.to_string()))
-    //     // .domain("portofolio.klownie.me")
-    //     .same_site(SameSite::None)
-    //     .max_age(Duration::days(100))
-    //     .http_only(true)
-    //     .secure(true)
-    //     .build();
-    //
-    // let new_jar = match jar.get("SessionID").map(|cookie| cookie.value().to_owned()) {
-    //     Some(uuid) => {
-    //         if uiua!(
-    //             "# Experimental!
-    //         Path     ← \"sessions.data\"
-    //         Database ← &frab Path
-    //         °binaryDatabase
-    //         has  □\"{uuid}\""
-    //         )
-    //         .pop_bool()
-    //         .unwrap()
-    //         {
-    //             info!("Welcome back : {}", uuid);
-    //             jar
-    //         } else {
-    //             info!("Invalid session : {}", uuid);
-    //             create_session(&new_uuid);
-    //             jar.add(cookie)
-    //         }
-    //     }
-    //     None => {
-    //         create_session(&new_uuid);
-    //         jar.add(cookie)
-    //     }
-    // };
-
+pub async fn handle_main() -> Result<impl IntoResponse, AppError> {
     let index = Index {};
 
     let topper = &CONFIG.topper;
@@ -126,30 +83,4 @@ pub async fn resolution_request_handler(
 ) -> impl IntoResponse {
     let reply = render_project_template(&project, high_res.not()).await;
     reply
-}
-
-fn create_session(new_uuid: &Uuid) {
-    uiua!(
-        "# Experimental!
-        Path     ← \"sessions.data\"
-        Database ← &frab Path
-
-        □\"{new_uuid}\"
-        □NaN
-        □°binaryDatabase
-        ⊙⊙°□°⊟₃⇌⊟₃
-        insert
-        &s .
-        binary
-        &fwa Path"
-    );
-    info!("Created : {}", new_uuid);
-}
-
-pub async fn db_handle(Path(action): Path<String>) {
-    todo!()
-}
-
-pub async fn log_message(Path(message): Path<String>) {
-    info!("visiting : {message}")
 }
