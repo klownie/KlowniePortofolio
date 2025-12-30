@@ -15,7 +15,8 @@ chrome = [80, 1, 2]
 firefox = 65
 safari = [12, 3]
 
-
+[features]
+tls = ["axum-server/tls-rustls"]
 
 [dependencies]
 
@@ -23,7 +24,7 @@ safari = [12, 3]
 axum = { version = "0.8.7", features = ["macros", "tokio"]}
 axum-extra = { version = "0.12.2", features = ["cookie", "typed-header"] }
 axum-htmx = "0.8.1"
-axum-server = { version = "0.8", features = ["tls-rustls"],  default-features = false }
+axum-server = { version = "0.8",  default-features = false }
 
 #templating
 askama = "0.14"

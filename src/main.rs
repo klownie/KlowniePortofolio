@@ -13,9 +13,8 @@ use axum::{
     BoxError,
 };
 use axum_extra::extract::Host;
-use axum_server::tls_rustls::RustlsConfig;
 use routes::build_routes;
-use std::{net::SocketAddr, path::PathBuf};
+use std::net::SocketAddr;
 
 turf::style_sheet!("scss/index.scss");
 
@@ -25,27 +24,44 @@ async fn main() {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    tokio::spawn(redirect_http_to_https(CONFIG.ports));
-
-    let config = RustlsConfig::from_pem_file(
-        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("private_certs")
-            .join("cert.pem"),
-        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("private_certs")
-            .join("key.pem"),
-    )
-    .await
-    .unwrap();
-
     let app = build_routes();
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], CONFIG.ports.https));
-    tracing::info!("listening on https://{}", addr);
-    axum_server::bind_rustls(addr, config)
-        .serve(app.into_make_service_with_connect_info::<SocketAddr>())
+    #[cfg(feature = "tls")]
+    {
+        use axum_server::tls_rustls::RustlsConfig;
+        use std::path::PathBuf;
+
+        tokio::spawn(redirect_http_to_https(CONFIG.ports));
+
+        let config = RustlsConfig::from_pem_file(
+            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("private_certs")
+                .join("cert.pem"),
+            PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+                .join("private_certs")
+                .join("key.pem"),
+        )
         .await
-        .unwrap();
+        .expect("failed to load TLS certs");
+
+        let addr = SocketAddr::from(([127, 0, 0, 1], CONFIG.ports.https));
+        tracing::info!("listening on https://{}", addr);
+
+        axum_server::bind_rustls(addr, config)
+            .serve(app.into_make_service_with_connect_info::<SocketAddr>())
+            .await
+            .unwrap();
+    }
+
+    #[cfg(not(feature = "tls"))]
+    {
+        let addr = tokio::net::TcpListener::bind(format!("127.0.0.1:{}", CONFIG.ports.http))
+            .await
+            .unwrap();
+        tracing::info!("listening on http://{}", addr.local_addr().unwrap());
+
+        axum::serve(addr, app).await.unwrap();
+    }
 }
 
 #[allow(dead_code)]
