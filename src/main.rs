@@ -91,11 +91,12 @@ async fn redirect_http_to_https(ports: Ports) {
         }
     };
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], ports.http));
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-    tracing::info!("listening on http://{}", listener.local_addr().unwrap());
+    let addr = tokio::net::TcpListener::bind(format!("127.0.0.1:{}", CONFIG.ports.http))
+        .await
+        .unwrap();
+    tracing::info!("listening on http://{}", addr.local_addr().unwrap());
     axum::serve(
-        listener,
+        addr,
         redirect.into_make_service_with_connect_info::<SocketAddr>(),
     )
     .await
