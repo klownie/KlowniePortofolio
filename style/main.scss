@@ -1,0 +1,127 @@
+:root {
+  --background-color: #262626;
+  --dot-color: #2f2f2f;
+  --outline-color: #434343;
+  --accent-color: #ddd678;
+  --scale: 1;
+  --main-text-color: #ebebeb;
+  --secondary-text-color: #a1a1a1;
+}
+
+body {
+  overflow: hidden;
+  font-family: Uiua, Mononoki, sans-serif;
+  background: var(--background-color);
+  background-image: radial-gradient(
+    var(--dot-color) 1.5px,
+    var(--background-color) 0
+  );
+  margin: 0;
+  background-size: 10px 10px;
+  background-position: -19px -19px;
+}
+a {
+  text-decoration: none;
+  color: var(--secondary-text-color);
+  &:link {
+    color: var(--secondary-text-color);
+  }
+
+  &:hover {
+    color: var(--main-text-color);
+  }
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-text-color);
+  font-size: 10rem;
+}
+main {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+nav {
+  height: 100vh;
+  font-size: 1rem;
+  color: var(--secondary-text-color);
+  z-index: 1;
+  background-color: var(--background-color);
+  overflow-x: hidden;
+  padding: 20px;
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  li {
+    margin-bottom: 16px;
+  }
+  li::before {
+    content: ">";
+    margin-right: 15px;
+  }
+}
+
+.obsidian_canvas {
+  will-change: transform;
+  color: var(--main-text-color);
+  border-radius: 10px;
+  outline: 1px solid var(--outline-color);
+  background-color: var(--background-color);
+  p {
+    display: grid;
+    box-sizing: border-box;
+    padding: 20px;
+    align-items: center;
+    font-size: 14px;
+    background-color: var(--background-color);
+    border-radius: inherit;
+    outline: inherit;
+    overflow: hidden;
+  }
+  section {
+    border-radius: inherit;
+    label {
+      display: inline-block;
+      color: black;
+      font-size: clamp(15px, calc(15px / var(--scale)), 75px);
+      padding: 5px;
+      border-radius: 2px;
+      position: relative;
+      left: 20px;
+      top: -50px;
+    }
+  }
+  img {
+    outline: inherit;
+    border-radius: inherit;
+    transition: outline 0.3s ease;
+  }
+  img:hover {
+    outline: 3px solid var(--accent-color);
+  }
+}
+
+.canvas_overlay {
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: Mononoki;
+  font-weight: 400;
+  font-style: normal;
+  src:
+    url("/fonts/mononoki-Regular.woff2") format("woff2"),
+    url("/fonts/mononoki-Regular.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Uiua;
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/Uiua386.ttf") format("ttf");
+  font-display: swap;
+}
