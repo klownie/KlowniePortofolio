@@ -6,6 +6,8 @@
   --scale: 1;
   --main-text-color: #ebebeb;
   --secondary-text-color: #a1a1a1;
+
+  --columns-template: 1fr 6fr;
 }
 
 body {
@@ -20,6 +22,19 @@ body {
   background-size: 10px 10px;
   background-position: -19px -19px;
 }
+
+button {
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  svg {
+    color: var(--main-text-color);
+  }
+}
+
 a {
   text-decoration: none;
   color: var(--secondary-text-color);
@@ -31,6 +46,7 @@ a {
     color: var(--main-text-color);
   }
 }
+
 .loading {
   display: flex;
   justify-content: center;
@@ -38,28 +54,66 @@ a {
   color: var(--secondary-text-color);
   font-size: 10rem;
 }
+
 main {
   display: grid;
-  grid-template-columns: 1fr 6fr;
-}
-nav {
   height: 100vh;
-  font-size: 1rem;
-  color: var(--secondary-text-color);
+  transition: grid-template-columns 0.2s ease;
+  grid-template:
+    "nav overlay" 1fr
+    "nav foot" 2rem / var(--columns-template);
+  footer {
+    grid-area: foot;
+    font-size: 1rem;
+    padding: 5px;
+    background-color: var(--accent-color);
+    z-index: 2;
+  }
+  nav {
+    grid-area: nav;
+    height: auto;
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    z-index: 2;
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    padding-top: 50px;
+    padding-left: 2cqw;
+    outline: 1px solid var(--outline-color);
+    transition: padding-left 0.2s ease;
+    &.collapsed {
+      padding-left: 0;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 16px;
+    }
+    li::before {
+      content: ">";
+      margin-right: 15px;
+    }
+  }
+}
+
+.focus-box {
+  position: absolute;
+  pointer-events: none;
   z-index: 1;
-  background-color: var(--background-color);
-  overflow-x: hidden;
-  padding: 20px;
-  ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  li {
-    margin-bottom: 16px;
-  }
-  li::before {
-    content: ">";
-    margin-right: 15px;
+  transition:
+    border-radius 0.5s ease,
+    outline 0.5s ease,
+    width 0.2s ease,
+    height 0.2s ease,
+    left 0.2s ease,
+    top 0.2s ease;
+  border-radius: 10px;
+  outline: max(calc(3px / var(--scale)), 3px) solid var(--accent-color);
+  &.expand {
+    border-radius: 0;
+    outline: calc(100vmax / var(--scale)) solid var(--background-color);
   }
 }
 
@@ -67,7 +121,7 @@ nav {
   will-change: transform;
   color: var(--main-text-color);
   border-radius: 10px;
-  outline: 1px solid var(--outline-color);
+  outline: max(calc(1px / var(--scale)), 1px) solid var(--outline-color);
   background-color: var(--background-color);
   p {
     display: grid;
@@ -96,14 +150,18 @@ nav {
   img {
     outline: inherit;
     border-radius: inherit;
-    transition: outline 0.3s ease;
-  }
-  img:hover {
-    outline: 3px solid var(--accent-color);
+    transition:
+      outline 0.3s ease,
+      border-radius 0.5s ease;
+    &.focused {
+      outline: none;
+      border-radius: 0;
+    }
   }
 }
 
 .canvas_overlay {
+  grid-area: overlay;
   width: 100%;
   height: 100%;
 }

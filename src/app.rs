@@ -1,290 +1,34 @@
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
-    components::{Route, Router, Routes},
+    components::{Redirect, Route, Router, Routes},
     hooks::use_params_map,
     path,
 };
-use serde::Deserialize;
-use std::fs;
 
-#[derive(Debug, Deserialize)]
-struct Canvas {
-    nodes: Vec<Node>,
-}
+use crate::canvas::{load_canvas, render_node};
 
-#[derive(Debug, Deserialize)]
-#[serde(tag = "type")]
-enum Node {
-    #[serde(rename = "group")]
-    Group {
-        id: String,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-        color: String,
-        label: String,
-    },
-
-    #[serde(rename = "file")]
-    File {
-        id: String,
-        file: String,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-    },
-
-    #[serde(rename = "text")]
-    Text {
-        id: String,
-        text: String,
-        #[serde(default)]
-        styleAttributes: Option<StyleAttributes>,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-    },
-    #[serde(rename = "link")]
-    Link {
-        id: String,
-        url: String,
-        x: i32,
-        y: i32,
-        width: i32,
-        height: i32,
-    },
-}
-
-#[derive(Debug, Deserialize)]
-struct StyleAttributes {
-    textAlign: Option<String>,
-}
-
-#[server]
-pub async fn load_canvas(name: String) -> Result<String, ServerFnError> {
-    Ok(parse_canvas(&format!("canvas/{name}.canvas")))
-}
-
-fn parse_canvas(path: &str) -> String {
-    let contents = fs::read_to_string(path).unwrap();
-
-    let canvas: Canvas = serde_json::from_str(&contents).expect("Failed to parse JSON");
-
-    let mut html = String::new();
-
-    for node in &canvas.nodes {
-        match node {
-            Node::Group {
-                color,
-                label,
-                x,
-                y,
-                width,
-                height,
-                ..
-            } => {
-                html.push_str(&format!(
-                    r#"
-<section
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-        border:5px solid hsl(from {} h s l / 50%);
-        background-color: hsl(from {} h s l / 5%);;
-        box-sizing:border-box;
-        padding:8px;
-    "
->
-    <label style="background-color: {};">{}</label>
-</section>
-"#,
-                    x, y, width, height, color, color, color, label
-                ));
-            }
-
-            Node::File {
-                file,
-                x,
-                y,
-                width,
-                height,
-                ..
-            } => {
-                let html_node = match std::path::Path::new(file)
-                    .extension()
-                    .and_then(|ext| ext.to_str())
-                {
-                    Some("md") => {
-                        let content = fs::read_to_string(file)
-                            .unwrap_or_else(|_| format!("Failed to load {}", file));
-
-                        format!(
-                            r#"
-<div
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-        overflow:auto;
-        box-sizing:border-box;
-        padding:10px;
-    "
->
-    {}
-</div>
-"#,
-                            x, y, width, height, content
-                        )
-                    }
-
-                    Some("png" | "jpg" | "jpeg" | "webp" | "gif") => {
-                        format!(
-                            r#"
-<img
-    src="{}"
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-        object-fit:cover;
-    "
-/>
-"#,
-                            file, x, y, width, height
-                        )
-                    }
-
-                    Some(ext) => {
-                        format!(
-                            r#"
-<div
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-        border:1px solid gray;
-        padding:10px;
-        box-sizing:border-box;
-    "
->
-    Unsupported file: {}
-</div>
-"#,
-                            x, y, width, height, ext
-                        )
-                    }
-
-                    None => {
-                        format!(
-                            r#"
-<div
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-    "
->
-    {}
-</div>
-"#,
-                            x, y, width, height, file
-                        )
-                    }
-                };
-
-                html.push_str(&html_node);
-            }
-
-            Node::Text {
-                text,
-                x,
-                y,
-                width,
-                height,
-                styleAttributes,
-                ..
-            } => {
-                html.push_str(&format!(
-                    r#"
-<p
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-        margin:0;
-        justify-content: {};
-    "
->
-    {}
-</p>
-"#,
-                    x,
-                    y,
-                    width,
-                    height,
-                    styleAttributes
-                        .as_ref()
-                        .and_then(|s| s.textAlign.as_deref())
-                        .unwrap_or("left"),
-                    text
-                ));
-            }
-            Node::Link {
-                url,
-                x,
-                y,
-                width,
-                height,
-                ..
-            } => {
-                html.push_str(&format!(
-                    r#"
-<iframe
-    src="{}"
-    style="
-        position:absolute;
-        left:{}px;
-        top:{}px;
-        width:{}px;
-        height:{}px;
-        margin:0;
-    "
-
-></iframe>
-"#,
-                    url, x, y, width, height,
-                ));
-            }
-        }
-    }
-
-    html
+#[derive(Clone)]
+pub(crate) struct HoveredNodeContext {
+    pub file: RwSignal<Option<String>>,
+    pub position: RwSignal<Option<(isize, isize)>>,
+    pub size: RwSignal<Option<(isize, isize)>>,
+    pub fullscreen: RwSignal<bool>,
 }
 
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
+    let hover = HoveredNodeContext {
+        file: RwSignal::new(None),
+        position: RwSignal::new(None),
+        size: RwSignal::new(None),
+        fullscreen: RwSignal::new(false),
+    };
+    provide_context(hover.clone());
 
     view! {
         <Stylesheet id="leptos" href="/pkg/portfolio_website.css" />
-
         <Title text="Audrick Yeu | Portfolio" />
 
         <Router>
@@ -292,8 +36,18 @@ pub fn App() -> impl IntoView {
                 <SideBar />
 
                 <Routes fallback=|| "Page not found.".into_view()>
-                    <Route path=path!("/canvas/:name") view=ObsidianCanvas />
+                    <Route
+                        path=path!("/")
+                        view=|| view! { <Redirect path="/canvas/movie" /> }
+                    />
+
+                    <Route
+                        path=path!("/canvas/:name")
+                        view=ObsidianCanvas
+                    />
                 </Routes>
+
+                <FootBar />
             </main>
         </Router>
     }
@@ -341,7 +95,7 @@ fn ObsidianCanvas() -> impl IntoView {
 
     let canvas = Resource::new(
         move || params.read().get("name").unwrap_or_default(),
-        |name| async move { load_canvas(name).await.unwrap_or_default() },
+        |name| async move { load_canvas(name).await.unwrap() },
     );
 
     view! {
@@ -352,10 +106,10 @@ fn ObsidianCanvas() -> impl IntoView {
                 canvas.get().map(|canvas_file| {
                     view! {
                         <MouseTracker>
-                            <div
-                                class="obsidian_canvas"
-                                inner_html=canvas_file
-                            />
+                            <FocusBox />
+                            <div class="obsidian_canvas">
+                                {canvas_file.nodes.into_iter().map(render_node).collect_view()}
+                            </div>
                         </MouseTracker>
                     }
                 })
@@ -375,6 +129,43 @@ pub async fn list_canvases() -> Result<Vec<String>, ServerFnError> {
 }
 
 #[component]
+fn FootBar() -> impl IntoView {
+    let hover = expect_context::<HoveredNodeContext>();
+    view! {<footer>{move || {
+        hover.file.get()
+            .unwrap_or_else(|| "(੭｡╹▿╹｡)੭".into())
+    }}</footer>}
+}
+
+#[component]
+fn FocusBox() -> impl IntoView {
+    let hover = expect_context::<HoveredNodeContext>();
+
+    view! {
+        <div
+            class="focus-box"
+            class:expand=move || hover.fullscreen.get()
+            style=move || {
+                let position = hover.position.get().unwrap_or_default();
+                let size = hover.size.get().unwrap_or_default();
+
+                format!(
+                    "position:absolute;\
+                     left:{}px;\
+                     top:{}px;\
+                     width:{}px;\
+                     height:{}px;",
+                    position.0,
+                    position.1,
+                    size.0,
+                    size.1
+                )
+            }
+        ></div>
+    }
+}
+
+#[component]
 fn SideBar() -> impl IntoView {
     use leptos_router::components::A;
 
@@ -383,34 +174,104 @@ fn SideBar() -> impl IntoView {
         |_| async { list_canvases().await.unwrap_or_default() },
     );
 
+    let (collapsed, set_collapsed) = signal(false);
+
+    let toggle_collapse = move |_| {
+        set_collapsed.update(|c| *c = !*c);
+    };
+
+    #[cfg(feature = "hydrate")]
+    {
+        use leptos_use::use_css_var;
+
+        let (_, set_template) = use_css_var("--columns-template");
+
+        Effect::new(move |_| {
+            set_template.set(if collapsed.get() {
+                "0fr 1fr".to_string()
+            } else {
+                "1fr 6fr".to_string()
+            });
+        });
+    }
+
+    let collapse_button = move || {
+        view! {
+            <button on:click=toggle_collapse>
+                {move || {
+                    if collapsed.get() {
+                        view! {
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                                <path d="M9 3v18"/>
+                                <path d="m14 9 3 3-3 3"/>
+                            </svg>
+                        }
+                    } else {
+                        view! {
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                                <path d="M9 3v18"/>
+                                <path d="m16 15-3-3 3-3"/>
+                            </svg>
+                        }
+                    }
+                }}
+            </button>
+        }
+    };
+
+    let canvas_list = move || {
+        canvases.get().map(|list| {
+            view! {
+                <ul>
+                    <For
+                        each=move || list.clone()
+                        key=|name| name.clone()
+                        children=move |name| {
+                            view! {
+                                <li>
+                                    <A href=format!("/canvas/{name}")>
+                                        {name}
+                                    </A>
+                                </li>
+                            }
+                        }
+                    />
+                </ul>
+            }
+        })
+    };
+
     view! {
-        <nav class="sidebar">
+        <nav class:collapsed=move || collapsed.get()>
+        {collapse_button}
             <Suspense fallback=|| view! {
                 <ul>
                     <li>"Loading…"</li>
                 </ul>
             }>
-                {move || {
-                    canvases.get().map(|list| {
-                        view! {
-                            <ul>
-                                <For
-                                    each=move || list.clone()
-                                    key=|name| name.clone()
-                                    children=move |name| {
-                                        view! {
-                                            <li>
-                                                <A href=format!("/canvas/{name}")>
-                                                    {name}
-                                                </A>
-                                            </li>
-                                        }
-                                    }
-                                />
-                            </ul>
-                        }
-                    })
-                }}
+                {canvas_list}
             </Suspense>
         </nav>
     }
@@ -460,7 +321,7 @@ fn MouseTracker(children: Children) -> impl IntoView {
 
             let zoom_factor = if ev.delta_y() < 0.0 { 1.1_f64 } else { 0.9_f64 };
 
-            let new_scale = (old_scale * zoom_factor).clamp(0.1, 10.0);
+            let new_scale = (old_scale * zoom_factor).clamp(0.01, 10.0);
 
             let old_offset = offset.get();
 
