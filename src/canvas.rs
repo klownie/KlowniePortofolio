@@ -1,7 +1,7 @@
 use std::fs;
 
 use crate::app::HoveredNodeContext;
-use leptos::prelude::*;
+use leptos::{attr::Imagesrcset, prelude::*};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -192,6 +192,7 @@ pub fn ImageNode(file: String, x: isize, y: isize, width: isize, height: isize) 
             on:mouseenter=on_hover
             on:mouseleave=on_leave
             on:click=on_click
+            loading="lazy"
             src=file
             style=format!(
                 "position:absolute;\

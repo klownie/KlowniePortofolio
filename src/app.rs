@@ -38,7 +38,7 @@ pub fn App() -> impl IntoView {
                 <Routes fallback=|| "Page not found.".into_view()>
                     <Route
                         path=path!("/")
-                        view=|| view! { <Redirect path="/canvas/movie" /> }
+                        view=|| view! { <Redirect path="/canvas/Movie" /> }
                     />
 
                     <Route
