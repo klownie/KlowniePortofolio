@@ -1,4 +1,4 @@
-use leptos::prelude::*;
+use leptos::{attr::Align, prelude::*};
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Redirect, Route, Router, Routes},
@@ -6,10 +6,10 @@ use leptos_router::{
     path,
 };
 
-use crate::canvas::{load_canvas, render_node};
+use crate::canvas::{Canvas, Node, StyleAttributes, TextNode, load_canvas, render_node};
 
 #[derive(Clone)]
-pub(crate) struct HoveredNodeContext {
+pub(crate) struct NodeContext {
     pub file: RwSignal<Option<String>>,
     pub position: RwSignal<Option<(isize, isize)>>,
     pub size: RwSignal<Option<(isize, isize)>>,
@@ -19,7 +19,7 @@ pub(crate) struct HoveredNodeContext {
 #[component]
 pub fn App() -> impl IntoView {
     provide_meta_context();
-    let hover = HoveredNodeContext {
+    let hover = NodeContext {
         file: RwSignal::new(None),
         position: RwSignal::new(None),
         size: RwSignal::new(None),
@@ -95,7 +95,24 @@ fn ObsidianCanvas() -> impl IntoView {
 
     let canvas = Resource::new(
         move || params.read().get("name").unwrap_or_default(),
-        |name| async move { load_canvas(name).await.unwrap() },
+        |name| async move {
+            match load_canvas(name).await {
+                Ok(canvas) => canvas,
+                Err(e) => Canvas {
+                    nodes: vec![Node::Text {
+                        id: "404".into(),
+                        x: 600,
+                        y: 600,
+                        width: 500,
+                        height: 500,
+                        text: format!("Error: {:?}", e),
+                        style_attributes: Some(StyleAttributes {
+                            text_align: Some("center".into()),
+                        }),
+                    }],
+                },
+            }
+        },
     );
 
     view! {
@@ -130,7 +147,7 @@ pub async fn list_canvases() -> Result<Vec<String>, ServerFnError> {
 
 #[component]
 fn FootBar() -> impl IntoView {
-    let hover = expect_context::<HoveredNodeContext>();
+    let hover = expect_context::<NodeContext>();
     view! {<footer>{move || {
         hover.file.get()
             .unwrap_or_else(|| "(੭｡╹▿╹｡)੭".into())
@@ -139,7 +156,7 @@ fn FootBar() -> impl IntoView {
 
 #[component]
 fn FocusBox() -> impl IntoView {
-    let hover = expect_context::<HoveredNodeContext>();
+    let hover = expect_context::<NodeContext>();
 
     view! {
         <div

@@ -1,7 +1,7 @@
 use std::fs;
 
-use crate::app::HoveredNodeContext;
-use leptos::{attr::Imagesrcset, prelude::*};
+use crate::app::NodeContext;
+use leptos::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -57,19 +57,16 @@ pub(crate) enum Node {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-struct StyleAttributes {
+pub(crate) struct StyleAttributes {
     #[serde(rename = "textAlign")]
-    text_align: Option<String>,
+    pub text_align: Option<String>,
 }
 
 #[server]
 pub(crate) async fn load_canvas(name: String) -> Result<Canvas, ServerFnError> {
-    Ok(parse_canvas(&format!("canvas/{name}.canvas")))
-}
-
-pub(crate) fn parse_canvas(path: &str) -> Canvas {
-    let contents = fs::read_to_string(path).unwrap();
-    serde_json::from_str(&contents).expect("Failed to parse JSON")
+    let path = format!("canvas/{name}.canvas");
+    let contents = fs::read_to_string(&path)?;
+    Ok(serde_json::from_str(&contents)?)
 }
 
 pub(crate) fn render_node(node: Node) -> AnyView {
@@ -153,10 +150,18 @@ pub(crate) fn render_node(node: Node) -> AnyView {
 }
 
 #[component]
-pub fn ImageNode(file: String, x: isize, y: isize, width: isize, height: isize) -> impl IntoView {
-    let hover = expect_context::<HoveredNodeContext>();
+pub fn ImageNode(
+    file: String,
+    x: isize,
+    y: isize,
+    width: isize,
+    height: isize,
+) -> impl IntoView {
+    let hover = expect_context::<NodeContext>();
 
-    let on_hover = {
+    let loaded = RwSignal::new(false);
+
+    let on_click = {
         let file = file.clone();
 
         move |_| {
@@ -170,40 +175,45 @@ pub fn ImageNode(file: String, x: isize, y: isize, width: isize, height: isize) 
         }
     };
 
-    let on_leave = {
-        move |_| {
-            if hover.fullscreen.get() {
-                return;
-            }
-
-            hover.file.set(None);
-        }
-    };
-
-    let on_click = {
-        move |_| {
-            hover.fullscreen.update(|f| *f = !*f);
-        }
-    };
-
     view! {
-        <img
-            class:focused=move || hover.fullscreen.get()
-            on:mouseenter=on_hover
-            on:mouseleave=on_leave
-            on:click=on_click
-            loading="lazy"
-            src=file
-            style=format!(
-                "position:absolute;\
-                 left:{}px;\
-                 top:{}px;\
-                 width:{}px;\
-                 height:{}px;\
-                 object-fit:cover;",
-                x, y, width, height
-            )
-        />
+
+            // Loading indicator
+            <Show
+                when=move || !loaded.get()
+                fallback=|| ()
+            >
+                <div
+                style=format!(
+                    "position:absolute;\
+                     align-items:center;\
+                     justify-content:center;\
+                     left:{}px;\
+                     top:{}px;\
+                     width:{}px;\
+                     height:{}px;",
+                    x, y, width, height
+                )
+                >
+                    Downloading...
+                </div>
+            </Show>
+
+            <img
+                class:focused=move || hover.fullscreen.get()
+                on:click=on_click
+                on:load=move |_| loaded.set(true)
+                loading="lazy"
+                src=file
+                style=format!(
+                    "position:absolute;\
+                     left:{}px;\
+                     top:{}px;\
+                     width:{}px;\
+                     height:{}px;",
+                    x, y, width, height
+                )
+            />
+
     }
 }
 
