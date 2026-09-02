@@ -64,7 +64,7 @@ pub(crate) struct StyleAttributes {
 
 #[server]
 pub(crate) async fn load_canvas(name: String) -> Result<Canvas, ServerFnError> {
-    let path = format!("canvas/{name}.canvas");
+    let path = format!("public/canvas/Canvas/{name}.canvas");
     let contents = fs::read_to_string(&path)?;
     Ok(serde_json::from_str(&contents)?)
 }
@@ -185,6 +185,7 @@ pub fn ImageNode(
                 <div
                 style=format!(
                     "position:absolute;\
+                     display:flex;\
                      align-items:center;\
                      justify-content:center;\
                      left:{}px;\

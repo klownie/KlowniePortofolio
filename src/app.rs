@@ -137,7 +137,7 @@ fn ObsidianCanvas() -> impl IntoView {
 
 #[server]
 pub async fn list_canvases() -> Result<Vec<String>, ServerFnError> {
-    Ok(std::fs::read_dir("canvas")?
+    Ok(std::fs::read_dir("public/canvas/Canvas")?
         .filter_map(Result::ok)
         .map(|e| e.path())
         .filter(|p| p.extension().and_then(|s| s.to_str()) == Some("canvas"))
