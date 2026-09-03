@@ -1,6 +1,7 @@
 use std::fs;
 
 use crate::app::NodeContext;
+use leptos_md::Markdown;
 use leptos::prelude::*;
 use serde::{Deserialize, Serialize};
 
@@ -85,6 +86,11 @@ pub(crate) fn render_node(node: Node) -> AnyView {
             {
                 Some("png" | "jpg" | "jpeg" | "gif" | "webp" | "avif") => view! {
                     <ImageNode file x y width height />
+                }
+                .into_any(),
+
+                Some("webm") => view! {
+                    <VideoNode file x y width height />
                 }
                 .into_any(),
 
@@ -245,6 +251,31 @@ pub fn MarkDownNode(
 }
 
 #[component]
+pub fn VideoNode(
+    file: String,
+    x: isize,
+    y: isize,
+    width: isize,
+    height: isize,
+) -> impl IntoView {
+    view! {
+        <video autoplay loop muted playsinline
+            style=format!(
+                "position:absolute;\
+                 left:{}px;\
+                 top:{}px;\
+                 width:{}px;\
+                 height:{}px;\
+                 object-fit:cover;",
+                x, y, width, height
+            )
+        >
+          <source src={file} type="video/webm" />
+        </video>
+    }
+}
+
+#[component]
 pub fn TextNode(
     text: String,
     x: isize,
@@ -254,7 +285,7 @@ pub fn TextNode(
     text_align: String,
 ) -> impl IntoView {
     view! {
-        <p
+        <hgroup
             style=format!(
                 "position:absolute;\
                  left:{}px;\
@@ -266,8 +297,8 @@ pub fn TextNode(
                 x, y, width, height, text_align
             )
         >
-            {text}
-        </p>
+            <Markdown content={text} />
+        </hgroup>
     }
 }
 

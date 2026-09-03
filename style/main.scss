@@ -123,7 +123,7 @@ main {
   border-radius: 10px;
   outline: max(calc(1px / var(--scale)), 1px) solid var(--outline-color);
   background-color: var(--background-color);
-  p {
+  hgroup {
     display: grid;
     box-sizing: border-box;
     padding: 20px;
@@ -147,7 +147,7 @@ main {
       top: -50px;
     }
   }
-  img {
+  img, video {
     outline: inherit;
     border-radius: inherit;
     transition:
