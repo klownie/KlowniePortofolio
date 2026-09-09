@@ -1,8 +1,9 @@
 use std::fs;
 
 use crate::app::NodeContext;
+use leptos::{attr::Imagesrcset, html::Hgroup, prelude::*};
 use leptos_md::Markdown;
-use leptos::prelude::*;
+use leptos_use::{UseElementBoundingReturn, use_element_bounding};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -163,66 +164,62 @@ pub fn ImageNode(
     width: isize,
     height: isize,
 ) -> impl IntoView {
-    let hover = expect_context::<NodeContext>();
+    let node_context = expect_context::<NodeContext>();
+    let small_file = {
+        let path = std::path::Path::new(&file);
 
-    let loaded = RwSignal::new(false);
+        let stem = path
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .unwrap_or("");
+
+        path.with_file_name(format!("{stem}_small.avif"))
+            .to_string_lossy()
+            .into_owned()
+    };
+
+    let source = RwSignal::new(small_file);
+
+    let on_mouse_enter = {
+        let value = file.clone();
+        move |_| {
+            source.set(value.clone());
+        }
+    };
 
     let on_click = {
         let file = file.clone();
 
         move |_| {
-            if hover.fullscreen.get() {
+            if node_context.fullscreen.get() {
                 return;
             }
 
-            hover.file.set(Some(file.clone()));
-            hover.position.set(Some((x, y)));
-            hover.size.set(Some((width, height)));
+            node_context.file.set(Some(file.clone()));
+            node_context.position.set(Some((x, y)));
+            node_context.size.set(Some((width, height)));
         }
     };
 
     view! {
-
-            // Loading indicator
-            <Show
-                when=move || !loaded.get()
-                fallback=|| ()
-            >
-                <div
-                style=format!(
-                    "position:absolute;\
-                     display:flex;\
-                     align-items:center;\
-                     justify-content:center;\
-                     left:{}px;\
-                     top:{}px;\
-                     width:{}px;\
-                     height:{}px;",
-                    x, y, width, height
-                )
-                >
-                    Downloading...
-                </div>
-            </Show>
-
-            <img
-                class:focused=move || hover.fullscreen.get()
-                on:click=on_click
-                on:load=move |_| loaded.set(true)
-                loading="lazy"
-                src=file
-                style=format!(
-                    "position:absolute;\
-                     left:{}px;\
-                     top:{}px;\
-                     width:{}px;\
-                     height:{}px;",
-                    x, y, width, height
-                )
-            />
-
+        <img
+            class:focused=move || node_context.fullscreen.get()
+            on:click=on_click
+            on:mouseenter=on_mouse_enter
+            loading="lazy"
+            src=source
+            style=format!(
+                "position:absolute;\
+                 left:{}px;\
+                 top:{}px;\
+                 width:{}px;\
+                 height:{}px;",
+                x, y, width, height
+            )
+        />
     }
 }
+
 
 #[component]
 pub fn MarkDownNode(
@@ -251,13 +248,7 @@ pub fn MarkDownNode(
 }
 
 #[component]
-pub fn VideoNode(
-    file: String,
-    x: isize,
-    y: isize,
-    width: isize,
-    height: isize,
-) -> impl IntoView {
+pub fn VideoNode(file: String, x: isize, y: isize, width: isize, height: isize) -> impl IntoView {
     view! {
         <video autoplay loop muted playsinline
             style=format!(
@@ -284,6 +275,7 @@ pub fn TextNode(
     height: isize,
     text_align: String,
 ) -> impl IntoView {
+
     view! {
         <hgroup
             style=format!(

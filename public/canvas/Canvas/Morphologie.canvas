@@ -1,0 +1,43 @@
+{
+	"nodes":[
+		{"id":"030ee8475465402d","type":"group","x":-1000,"y":-360,"width":1340,"height":1140,"color":"#dd5a5a","label":"Howards Shwatz"},
+		{"id":"b899d3423d44b978","type":"file","file":"Canvas/assets/Morphologie/file-20260907161345262.jpeg","x":-191,"y":-174,"width":470,"height":195},
+		{"id":"7150eeea084562ef","type":"file","file":"Canvas/assets/Morphologie/file-20260907161420277.jpeg","x":-191,"y":546,"width":230,"height":146},
+		{"id":"825b8379887749a3","type":"file","file":"Canvas/assets/Morphologie/file-20260907161442525.jpeg","x":50,"y":378,"width":229,"height":149},
+		{"id":"b9f13b46a6e02c9d","type":"file","file":"Canvas/assets/Morphologie/file-20260907161424430.jpeg","x":50,"y":540,"width":229,"height":152},
+		{"id":"ba0fbbd9ccf6c6db","type":"file","file":"Canvas/assets/Morphologie/file-20260907161339832.jpeg","x":-934,"y":-174,"width":731,"height":865},
+		{
+			"id":"ed3a19ec162192a1",
+			"type":"text",
+			"text":"Body variations of Olympic and Professional athletes captured by photographer Howards Schatz.\n> We got all the varieties here",
+			"styleAttributes":{},
+			"x":-934,
+			"y":-320,
+			"width":634,
+			"height":120
+		},
+		{
+			"id":"648e7926857c131f",
+			"type":"text",
+			"text":"His personal website : https://www.zphotojournal.com/howards-schatz",
+			"styleAttributes":{},
+			"x":-260,
+			"y":-320,
+			"width":520,
+			"height":120
+		},
+		{"id":"1b2b1130fae1b492","type":"file","file":"Canvas/assets/Morphologie/file-20260907162036715.jpeg","x":400,"y":480,"width":658,"height":236},
+		{"id":"a4e8b58d9e4243fc","type":"file","file":"Canvas/assets/Morphologie/file-20260907161400888.jpeg","x":-191,"y":32,"width":230,"height":156},
+		{"id":"c49690de93288275","type":"file","file":"Canvas/assets/Morphologie/file-20260907161411552.jpeg","x":-191,"y":374,"width":229,"height":157},
+		{"id":"9a97dbb83fd5941f","type":"file","file":"Canvas/assets/Morphologie/file-20260907161407050.jpeg","x":-191,"y":202,"width":229,"height":149},
+		{"id":"d6a02d9840acfea1","type":"file","file":"Canvas/assets/Morphologie/file-20260907161431060.jpeg","x":50,"y":32,"width":230,"height":169},
+		{"id":"6d5be0757c77f3f9","type":"file","file":"Canvas/assets/Morphologie/file-20260907161438116.jpeg","x":50,"y":221,"width":229,"height":145},
+		{"id":"95d3dca7156952c4","type":"file","file":"Canvas/assets/Morphologie/file-20260907162016750.jpeg","x":400,"y":-296,"width":660,"height":317},
+		{"id":"962ff68be2f1b10f","type":"file","file":"Canvas/assets/Morphologie/file-20260907162030401.jpeg","x":400,"y":57,"width":660,"height":366}
+	],
+	"edges":[],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}

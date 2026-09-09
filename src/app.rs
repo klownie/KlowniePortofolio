@@ -34,19 +34,10 @@ pub fn App() -> impl IntoView {
         <Router>
             <main>
                 <SideBar />
-
                 <Routes fallback=|| "Page not found.".into_view()>
-                    <Route
-                        path=path!("/")
-                        view=|| view! { <Redirect path="/canvas/Portfolio" /> }
-                    />
-
-                    <Route
-                        path=path!("/canvas/:name")
-                        view=ObsidianCanvas
-                    />
+                    <Route path=path!("/") view=|| view! { <Redirect path="/canvas/Portfolio" /> }/>
+                    <Route path=path!("/canvas/:name") view=ObsidianCanvas/>
                 </Routes>
-
                 <FootBar />
             </main>
         </Router>

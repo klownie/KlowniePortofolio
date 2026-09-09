@@ -29,9 +29,11 @@ image = { version = "0.25", features = [
   "gif",
   "tiff",
 ] }
+glob = "0.3.4"
 
 
 [features]
+resize = []
 hydrate = ["leptos/hydrate", "dep:console_error_panic_hook", "dep:wasm-bindgen"]
 ssr = [
   "dep:axum",
