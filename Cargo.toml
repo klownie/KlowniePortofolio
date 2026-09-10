@@ -7,20 +7,20 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-leptos = { version = "0.8", features = ["nightly"] }
-leptos_router = { version = "0.8", features = ["nightly"] }
-leptos-use = { version = "0.19" }
+leptos = { version = "0.8.20", features = ["nightly"] }
+leptos_router = { version = "0.8.15", features = ["nightly"] }
+leptos-use = { version = "0.19.2" }
 axum = { version = "0.8", optional = true }
 console_error_panic_hook = { version = "0.1", optional = true }
-leptos_axum = { version = "0.8", optional = true }
-leptos_meta = { version = "0.8" }
+leptos_axum = { version = "0.8.10", optional = true }
+leptos_meta = { version = "0.8.6" }
 tokio = { version = "1", features = ["rt-multi-thread"], optional = true }
-wasm-bindgen = { version = "0.2.126", optional = true }
+wasm-bindgen = { version = "0.2.128", optional = true }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0" }
 leptos-bevy-canvas = { version = "0.6" }
 leptos-md = { git = "https://github.com/epenabella/leptos-md", features = ["simd"] }
-web-sys = { version = "0.3" }
+web-sys = { version = "0.3.105" }
 image = { version = "0.25", features = [
   "avif",
   "webp",

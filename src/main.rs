@@ -46,9 +46,12 @@ fn main() {
 }
 
 #[cfg(feature = "resize")]
-fn resize_canvas_images() {
   use image::ImageReader;
+#[cfg(feature = "resize")]
   use std::path::{Path, PathBuf};
+#[cfg(feature = "resize")]
+fn resize_canvas_images() {
+
   let pattern = "public/canvas/Canvas/assets/*/*";
 
   for entry in glob::glob(pattern).expect("Invalid glob pattern") {
@@ -156,9 +159,9 @@ fn resize_canvas_images() {
 }
 
 #[cfg(feature = "resize")]
+#[cfg(feature = "resize")]
 fn resized_path(path: &Path) -> PathBuf {
-use std::path::{Path, PathBuf};
-    let stem = path.file_stem().unwrap().to_string_lossy();
 
-    path.with_file_name(format!("{stem}_small.avif"))
+  let stem = path.file_stem().unwrap().to_string_lossy();
+  path.with_file_name(format!("{stem}_small.avif"))
 }
