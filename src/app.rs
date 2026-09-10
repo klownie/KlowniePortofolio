@@ -1,4 +1,4 @@
-use leptos::{attr::Align, prelude::*};
+use leptos::{attr::disabled, prelude::*};
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{Redirect, Route, Router, Routes},
@@ -6,26 +6,36 @@ use leptos_router::{
     path,
 };
 
-use crate::canvas::{Canvas, Node, StyleAttributes, TextNode, load_canvas, render_node};
+
+use crate::canvas::{Canvas, Node, StyleAttributes, load_canvas, render_node};
+
+#[derive(Clone, serde::Deserialize)]
+pub(crate) enum NodeState {
+Normal,
+Focused,
+Fullscreen,
+}
 
 #[derive(Clone)]
 pub(crate) struct NodeContext {
     pub file: RwSignal<Option<String>>,
     pub position: RwSignal<Option<(isize, isize)>>,
     pub size: RwSignal<Option<(isize, isize)>>,
-    pub fullscreen: RwSignal<bool>,
+    pub state: RwSignal<NodeState>,
 }
 
 #[component]
 pub fn App() -> impl IntoView {
+
     provide_meta_context();
     let hover = NodeContext {
         file: RwSignal::new(None),
         position: RwSignal::new(None),
         size: RwSignal::new(None),
-        fullscreen: RwSignal::new(false),
+        state: RwSignal::new(NodeState::Normal),
     };
     provide_context(hover.clone());
+        provide_context( NavigationContext::new());
 
     view! {
         <Stylesheet id="leptos" href="/pkg/portfolio_website.css" />
@@ -75,7 +85,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
 }
 
 #[derive(Clone, Copy, Debug, Default)]
-struct Point {
+pub(crate) struct Point {
     x: f64,
     y: f64,
 }
@@ -147,15 +157,16 @@ fn FootBar() -> impl IntoView {
 
 #[component]
 fn FocusBox() -> impl IntoView {
-    let hover = expect_context::<NodeContext>();
+    let node_context = expect_context::<NodeContext>();
 
     view! {
         <div
             class="focus-box"
-            class:expand=move || hover.fullscreen.get()
+            class:expand=move || matches!(node_context.state.get(), NodeState::Fullscreen)
+            class:hidden=move || matches!(node_context.state.get(), NodeState::Normal)
             style=move || {
-                let position = hover.position.get().unwrap_or_default();
-                let size = hover.size.get().unwrap_or_default();
+                let position = node_context.position.get().unwrap_or_default();
+                let size = node_context.size.get().unwrap_or_default();
 
                 format!(
                     "position:absolute;\
@@ -177,6 +188,7 @@ fn FocusBox() -> impl IntoView {
 fn SideBar() -> impl IntoView {
     use leptos_router::components::A;
 
+    let node_context = expect_context::<NodeContext>();
     let canvases = Resource::new(
         || (),
         |_| async { list_canvases().await.unwrap_or_default() },
@@ -202,6 +214,10 @@ fn SideBar() -> impl IntoView {
             });
         });
     }
+
+    let disabled_focus_box = move |_| {
+        node_context.state.set(NodeState::Normal)
+    };
 
     let collapse_button = move || {
         view! {
@@ -272,7 +288,7 @@ fn SideBar() -> impl IntoView {
     };
 
     view! {
-        <nav class:collapsed=move || collapsed.get()>
+        <nav on:click=disabled_focus_box class:collapsed=move || collapsed.get()>
         {collapse_button}
             <Suspense fallback=|| view! {
                 <ul>
@@ -285,33 +301,70 @@ fn SideBar() -> impl IntoView {
     }
 }
 
+#[derive(Clone, Copy)]
+pub(crate) struct NavigationContext {
+    pub offset: RwSignal<Point>,
+    pub scale: RwSignal<f64>,
+}
+
+impl NavigationContext {
+    pub(crate)  fn new() -> Self {
+        Self {
+            offset: RwSignal::new(Point::default()),
+            scale: RwSignal::new(1.0),
+        }
+    }
+
+    pub(crate) fn pan(&self, delta: Point) {
+        self.offset.update(|offset| {
+            offset.x += delta.x;
+            offset.y += delta.y;
+        });
+    }
+
+    pub(crate) fn zoom_at(&self, mouse: Point, factor: f64) {
+        let old_scale = self.scale.get();
+        let new_scale = (old_scale * factor).clamp(0.01, 10.0);
+
+        let old_offset = self.offset.get();
+
+        let world_x = (mouse.x - old_offset.x) / old_scale;
+        let world_y = (mouse.y - old_offset.y) / old_scale;
+
+        self.offset.set(Point {
+            x: mouse.x - world_x * new_scale,
+            y: mouse.y - world_y * new_scale,
+        });
+
+        self.scale.set(new_scale);
+    }
+}
+
 #[component]
 fn MouseTracker(children: Children) -> impl IntoView {
     #[cfg(feature = "hydrate")]
     {
         use leptos::{
             ev::{PointerEvent, WheelEvent},
-            *,
+            prelude::*,
         };
         use leptos_use::{
-            use_css_var, use_mouse, use_window_size, UseMouseReturn, UseWindowSizeReturn,
+            use_css_var, use_mouse, use_window_size,
+            UseMouseReturn, UseWindowSizeReturn,
         };
         use wasm_bindgen::JsCast;
 
+        let navigation = expect_context::<NavigationContext>();
+
         let panning = RwSignal::new(false);
-
-        let offset = RwSignal::new(Point::default());
-        let world_origin = RwSignal::new(Point::default());
-        let pan_origin = RwSignal::new(Point::default());
-
         let pointer = RwSignal::new(Point::default());
+        let pan_origin = RwSignal::new(Point::default());
+        let world_origin = RwSignal::new(Point::default());
 
-        let scale = RwSignal::new(1.0_f64);
-
-        let (css_var_scale, set_css_var_scale) = use_css_var("--scale");
+        let (_, set_css_var_scale) = use_css_var("--scale");
 
         Effect::new(move |_| {
-            set_css_var_scale.set(scale.get().to_string());
+            set_css_var_scale.set(navigation.scale.get().to_string());
         });
 
         let UseMouseReturn {
@@ -320,53 +373,49 @@ fn MouseTracker(children: Children) -> impl IntoView {
             ..
         } = use_mouse();
 
-        let UseWindowSizeReturn { width, height } = use_window_size();
+        let UseWindowSizeReturn { .. } = use_window_size();
 
         let on_wheel = move |ev: WheelEvent| {
             ev.prevent_default();
 
-            let old_scale = scale.get();
+            let mouse = Point {
+                x: mouse_x.get(),
+                y: mouse_y.get(),
+            };
 
-            let zoom_factor = if ev.delta_y() < 0.0 { 1.1_f64 } else { 0.9_f64 };
+            let factor = if ev.delta_y() < 0.0 {
+                1.1
+            } else {
+                0.9
+            };
 
-            let new_scale = (old_scale * zoom_factor).clamp(0.01, 10.0);
-
-            let old_offset = offset.get();
-
-            let world_x = (mouse_x.get() - old_offset.x) / old_scale;
-            let world_y = (mouse_y.get() - old_offset.y) / old_scale;
-
-            offset.set(Point {
-                x: mouse_x.get() - world_x * new_scale,
-                y: mouse_y.get() - world_y * new_scale,
-            });
-
-            scale.set(new_scale);
+            navigation.zoom_at(mouse, factor);
         };
 
         let on_pointer_down = move |ev: PointerEvent| {
             ev.prevent_default();
 
-            // Middle mouse button
-            if ev.button() == 1 {
-                if let Some(target) = ev.current_target() {
-                    let element: web_sys::Element = target.unchecked_into();
-
-                    let _ = element.set_pointer_capture(ev.pointer_id());
-                }
-
-                let pos = Point {
-                    x: ev.client_x() as f64,
-                    y: ev.client_y() as f64,
-                };
-
-                pointer.set(pos);
-
-                panning.set(true);
-
-                world_origin.set(offset.get());
-                pan_origin.set(pos);
+            // Middle mouse button.
+            if ev.button() != 1 {
+                return;
             }
+
+            if let Some(target) = ev.current_target() {
+                let element: web_sys::Element = target.unchecked_into();
+
+                let _ = element.set_pointer_capture(ev.pointer_id());
+            }
+
+            let position = Point {
+                x: ev.client_x() as f64,
+                y: ev.client_y() as f64,
+            };
+
+            pointer.set(position);
+            pan_origin.set(position);
+            world_origin.set(navigation.offset.get());
+
+            panning.set(true);
         };
 
         let on_pointer_move = move |ev: PointerEvent| {
@@ -399,11 +448,23 @@ fn MouseTracker(children: Children) -> impl IntoView {
             let anchor = pan_origin.get();
             let current = pointer.get();
 
-            offset.set(Point {
-                x: origin.x + (current.x - anchor.x),
-                y: origin.y + (current.y - anchor.y),
+            navigation.offset.set(Point {
+                x: origin.x + current.x - anchor.x,
+                y: origin.y + current.y - anchor.y,
             });
         });
+
+        let transform = move || {
+            let offset = navigation.offset.get();
+            let scale = navigation.scale.get();
+
+            format!(
+                "translate({:.2}px, {:.2}px) scale({:.4})",
+                offset.x,
+                offset.y,
+                scale,
+            )
+        };
 
         view! {
             <div
@@ -422,14 +483,7 @@ fn MouseTracker(children: Children) -> impl IntoView {
                 on:pointerup=on_pointer_up
                 on:pointercancel=on_pointer_cancel
                 style:position="absolute"
-                style:transform=move || {
-                    format!(
-                        "translate({:.2}px, {:.2}px) scale({:.4})",
-                        offset.get().x,
-                        offset.get().y,
-                        scale.get(),
-                    )
-                }
+                style:transform=transform
                 style:transform-origin="0 0"
                 style:will-change="transform"
             >
@@ -440,6 +494,9 @@ fn MouseTracker(children: Children) -> impl IntoView {
 
     #[cfg(not(feature = "hydrate"))]
     {
+        let navigation = NavigationContext::new();
+        provide_context(navigation);
+
         view! {
             <div class="canvas_overlay" />
             <div style:position="absolute">

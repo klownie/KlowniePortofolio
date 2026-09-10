@@ -115,6 +115,9 @@ main {
     border-radius: 0;
     outline: calc(100vmax / var(--scale)) solid var(--background-color);
   }
+  &.hidden {
+    display: none;
+  }
 }
 
 .obsidian_canvas {

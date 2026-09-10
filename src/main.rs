@@ -1,7 +1,3 @@
-use std::path::{Path, PathBuf};
-
-use image::ImageReader;
-
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
@@ -12,7 +8,7 @@ async fn main() {
     use portfolio_website::app::*;
 
     // resize_canvas_images();
-
+    
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
     let leptos_options = conf.leptos_options;
@@ -49,114 +45,119 @@ fn main() {
   resize_canvas_images();
 }
 
+#[cfg(feature = "resize")]
 fn resize_canvas_images() {
-    let pattern = "public/canvas/Canvas/assets/*/*";
+  use image::ImageReader;
+  use std::path::{Path, PathBuf};
+  let pattern = "public/canvas/Canvas/assets/*/*";
 
-    for entry in glob::glob(pattern).expect("Invalid glob pattern") {
-        let path = match entry {
-            Ok(path) => path,
-            Err(e) => {
-                eprintln!("Failed to read directory entry: {e}");
-                continue;
-            }
-        };
+  for entry in glob::glob(pattern).expect("Invalid glob pattern") {
+      let path = match entry {
+          Ok(path) => path,
+          Err(e) => {
+              eprintln!("Failed to read directory entry: {e}");
+              continue;
+          }
+      };
 
-        // Ignore directories
-        if !path.is_file() {
-            continue;
-        }
+      // Ignore directories
+      if !path.is_file() {
+          continue;
+      }
 
-        // Get extension
-        let extension = path
-            .extension()
-            .and_then(|ext| ext.to_str())
-            .map(|ext| ext.to_ascii_lowercase());
+      // Get extension
+      let extension = path
+          .extension()
+          .and_then(|ext| ext.to_str())
+          .map(|ext| ext.to_ascii_lowercase());
 
-        // Only consider image extensions we care about
-        match extension.as_deref() {
-            Some("jpg") | Some("jpeg") | Some("png") | Some("webp") => {}
-            _ => continue,
-        }
+      // Only consider image extensions we care about
+      match extension.as_deref() {
+          Some("jpg") | Some("jpeg") | Some("png") | Some("webp") | Some("gif") => {}
+          _ => continue,
+      }
 
-        // Don't process files that are already resized
-        if path
-            .file_stem()
-            .and_then(|stem| stem.to_str())
-            .is_some_and(|stem| stem.ends_with("_resized"))
-        {
-            continue;
-        }
+      // Don't process files that are already resized
+      if path
+          .file_stem()
+          .and_then(|stem| stem.to_str())
+          .is_some_and(|stem| stem.ends_with("_resized"))
+      {
+          continue;
+      }
 
-        // Output path
-        let output = resized_path(&path);
+      // Output path
+      let output = resized_path(&path);
 
-        // Already generated → skip
-        if output.exists() {
-            println!("Already exists, skipping {:?}", output);
-            continue;
-        }
+      // Already generated → skip
+      if output.exists() {
+          println!("Already exists, skipping {:?}", output);
+          continue;
+      }
 
-        println!("Processing {:?}", path);
+      println!("Processing {:?}", path);
 
-        // Open image
-        let reader = match ImageReader::open(&path) {
-            Ok(reader) => reader,
+      // Open image
+      let reader = match ImageReader::open(&path) {
+          Ok(reader) => reader,
 
-            Err(e) => {
-                eprintln!("Skipping {:?}: failed to open: {}", path, e);
-                continue;
-            }
-        };
+          Err(e) => {
+              eprintln!("Skipping {:?}: failed to open: {}", path, e);
+              continue;
+          }
+      };
 
-        // Detect the actual format from the file contents
-        let reader = match reader.with_guessed_format() {
-            Ok(reader) => reader,
+      // Detect the actual format from the file contents
+      let reader = match reader.with_guessed_format() {
+          Ok(reader) => reader,
 
-            Err(e) => {
-                eprintln!(
-                    "Skipping {:?}: couldn't determine image format: {}",
-                    path, e
-                );
-                continue;
-            }
-        };
+          Err(e) => {
+              eprintln!(
+                  "Skipping {:?}: couldn't determine image format: {}",
+                  path, e
+              );
+              continue;
+          }
+      };
 
-        // Decode
-        let img = match reader.decode() {
-            Ok(img) => img,
+      // Decode
+      let img = match reader.decode() {
+          Ok(img) => img,
 
-            Err(e) => {
-                eprintln!("Skipping {:?}: failed to decode image: {}", path, e);
-                continue;
-            }
-        };
+          Err(e) => {
+              eprintln!("Skipping {:?}: failed to decode image: {}", path, e);
+              continue;
+          }
+      };
 
-        let max_side = img.width().max(img.height());
+      let max_side = img.width().max(img.height());
 
-        let (width, height) = if max_side >= 480 {
-            let scale = 479.0 / max_side as f32;
-            (
-                (img.width() as f32 * scale) as u32,
-                (img.height() as f32 * scale) as u32,
-            )
-        } else {
-            (img.width(), img.height())
-        };
+      let (width, height) = if max_side >= 480 {
+          let scale = 479.0 / max_side as f32;
+          (
+              (img.width() as f32 * scale) as u32,
+              (img.height() as f32 * scale) as u32,
+          )
+      } else {
+          (img.width(), img.height())
+      };
 
-        let resized = img.resize(width, height, image::imageops::FilterType::Lanczos3);
+      let resized = img.resize(width, height, image::imageops::FilterType::Lanczos3);
 
-        // Save as AVIF
-        if let Err(e) = resized.save_with_format(&output, image::ImageFormat::Avif) {
-            eprintln!("Failed to save AVIF {:?}: {}", output, e);
+      // Save as AVIF
+      if let Err(e) = resized.save_with_format(&output, image::ImageFormat::Avif) {
+          eprintln!("Failed to save AVIF {:?}: {}", output, e);
 
-            continue;
-        }
+          continue;
+      }
 
-        println!("Created {:?}", output);
-    }
+      println!("Created {:?}", output);
+  }
 }
 
+#[cfg(feature = "resize")]
 fn resized_path(path: &Path) -> PathBuf {
+use std::path::{Path, PathBuf};
     let stem = path.file_stem().unwrap().to_string_lossy();
 
     path.with_file_name(format!("{stem}_small.avif"))

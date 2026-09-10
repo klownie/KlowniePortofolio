@@ -1,10 +1,10 @@
 use std::fs;
 
-use crate::app::NodeContext;
-use leptos::{attr::Imagesrcset, html::Hgroup, prelude::*};
+use crate::app::{NodeContext, NodeState};
+use leptos::prelude::*;
 use leptos_md::Markdown;
-use leptos_use::{UseElementBoundingReturn, use_element_bounding};
 use serde::{Deserialize, Serialize};
+
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub(crate) struct Canvas {
@@ -157,21 +157,12 @@ pub(crate) fn render_node(node: Node) -> AnyView {
 }
 
 #[component]
-pub fn ImageNode(
-    file: String,
-    x: isize,
-    y: isize,
-    width: isize,
-    height: isize,
-) -> impl IntoView {
+pub fn ImageNode(file: String, x: isize, y: isize, width: isize, height: isize) -> impl IntoView {
     let node_context = expect_context::<NodeContext>();
     let small_file = {
         let path = std::path::Path::new(&file);
 
-        let stem = path
-            .file_stem()
-            .and_then(|s| s.to_str())
-            .unwrap_or("");
+        let stem = path.file_stem().and_then(|s| s.to_str()).unwrap_or("");
 
         path.with_file_name(format!("{stem}_small.avif"))
             .to_string_lossy()
@@ -191,19 +182,31 @@ pub fn ImageNode(
         let file = file.clone();
 
         move |_| {
-            if node_context.fullscreen.get() {
-                return;
-            }
 
-            node_context.file.set(Some(file.clone()));
-            node_context.position.set(Some((x, y)));
-            node_context.size.set(Some((width, height)));
+          if ! node_context
+              .file
+              .get()
+              .is_some_and(|selected| selected == file)
+          {
+              node_context.state.set(NodeState::Normal);
+          }
+      
+          if matches!(node_context.state.get(), NodeState::Focused) {
+              node_context.state.set(NodeState::Fullscreen);
+              return;
+          }
+      
+          node_context.file.set(Some(file.clone()));
+          node_context.position.set(Some((x, y)));
+          node_context.size.set(Some((width, height)));
+          node_context.state.set(NodeState::Focused);
         }
     };
 
     view! {
+
         <img
-            class:focused=move || node_context.fullscreen.get()
+            class:focused=move || matches!(node_context.state.get(), NodeState::Fullscreen)
             on:click=on_click
             on:mouseenter=on_mouse_enter
             loading="lazy"
@@ -219,7 +222,6 @@ pub fn ImageNode(
         />
     }
 }
-
 
 #[component]
 pub fn MarkDownNode(
@@ -275,7 +277,6 @@ pub fn TextNode(
     height: isize,
     text_align: String,
 ) -> impl IntoView {
-
     view! {
         <hgroup
             style=format!(

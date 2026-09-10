@@ -19,7 +19,7 @@ wasm-bindgen = { version = "0.2.126", optional = true }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0" }
 leptos-bevy-canvas = { version = "0.6" }
-leptos-md = "0.1"
+leptos-md = { git = "https://github.com/epenabella/leptos-md", features = ["simd"] }
 web-sys = { version = "0.3" }
 image = { version = "0.25", features = [
   "avif",
